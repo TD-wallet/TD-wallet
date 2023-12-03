@@ -351,6 +351,99 @@ paths:
           $ref: '#/components/responses/429'
         '500':
           $ref: '#/components/responses/500'
+    
+  /currency:
+    get:
+      tags:
+        - Currency
+      description: get a list of currencies
+      responses:
+        '200':
+          description: return a list of currencies
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  allOf:
+                    - $ref: "#/components/schemas/ResponseBody"
+                      properties:
+                        body:
+                          $ref: "#/components/schemas/currency"
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+
+    post:
+      tags:
+        - Currency
+      description: add new currency value
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/currency"
+      responses:
+        '200':
+          description: Returns the added account
+          content:
+            application/json:
+              schema:
+                allOf:
+                    - $ref: "#/components/schemas/ResponseBody"
+                      properties:
+                        body:
+                          $ref: "#/components/schemas/currency"
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+
+    put:
+      tags:
+        - Currency
+      description: Create or update a currency value
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/currency"
+      responses:
+        '200':
+          description: Returns the added account
+          content:
+            application/json:
+              schema:
+                allOf:
+                    - $ref: "#/components/schemas/ResponseBody"
+                      properties:
+                        body:
+                          $ref: "#/components/schemas/currency"
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
             
 components:
   responses:
