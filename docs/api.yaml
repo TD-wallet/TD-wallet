@@ -240,37 +240,7 @@ paths:
         '500':
           $ref: '#/components/responses/500'
 
-    delete:
-      tags:
-        - Account
-      description: Deletes an account of a specified id
-      parameters:
-        - in: query
-          required: true
-          name: accountId
-          schema:
-            type: number
-      responses:
-        '200':
-          description: Returns the deleted account
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: "#/components/schemas/ResponseBody"
-                properties:
-                  body:
-                    $ref: "#/components/schemas/account"
-        '400':
-          $ref: '#/components/responses/400'
-        '403':
-          $ref: '#/components/responses/403'
-        '404':
-          $ref: '#/components/responses/404'
-        '429':
-          $ref: '#/components/responses/429'
-        '500':
-          $ref: '#/components/responses/500'
+    
 
 components:
   responses:
