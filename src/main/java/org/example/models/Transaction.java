@@ -21,4 +21,20 @@ public class Transaction {
         this.transactionDate = transactionDate;
         this.transactionType = transactionType;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public Timestamp getTransactionDate() {
+        return transactionDate;
+    }
+
+    public TransactionType getTransactionType() {
+        return transactionType;
+    }
 }
