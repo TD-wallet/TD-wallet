@@ -1,0 +1,455 @@
+openapi: 3.0.3
+info:
+  title: TD-Wallet api specs
+  description: Made by STD22081 and STD22049
+  version: 1.0.0
+
+servers:
+  - url: 'https://td-wallet.com/'
+
+tags:
+  - name: User
+  - name: Account
+  - name: Transaction
+  - name: Currency
+
+paths:
+  /user:
+    get:
+      tags:
+        - User
+      description: Gets users
+      responses:
+        '200':
+          description: The list of the users or the user if getting it by id
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - allOf:
+                      - $ref: "#/components/schemas/ResponseBody"
+                    properties:
+                      body:
+                        $ref: "#/components/schemas/user"
+                  - allOf:
+                      - $ref: "#/components/schemas/ResponseBody"
+                    properties:
+                      body:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/user"
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+
+    post:
+      tags:
+        - User
+      description: Add a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/crudUser"
+      responses:
+        '200':
+          description: Returns the newly added user
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/ResponseBody"
+                properties:
+                  body:
+                    $ref: "#/components/schemas/user"
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+
+    put:
+      tags:
+        - User
+      description: Create or update an user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/user"
+      responses:
+        '200':
+          description: Returns the modified or created user
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/ResponseBody"
+                properties:
+                  body:
+                    $ref: "#/components/schemas/user"
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+
+    delete:
+      tags:
+        - User
+      description: Delete an user by specifying it's id
+      parameters:
+        - in: query
+          name: userId
+          schema:
+            description: The id of the user needed to be deleted
+            type: number
+      responses:
+        '200':
+          description: Returns the deleted user
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/ResponseBody"
+                properties:
+                  body:
+                    $ref: "#/components/schemas/user"
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+
+  /account:
+    get:
+      tags:
+        - Account
+      description: Gets accounts
+      responses:
+        '200':
+          description: Returns a list of accounts or one account if getting it by id
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - allOf:
+                      - $ref: "#/components/schemas/ResponseBody"
+                    properties:
+                      body:
+                        $ref: "#/components/schemas/account"
+                  - allOf:
+                      - $ref: "#/components/schemas/ResponseBody"
+                    properties:
+                      body:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/account"
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+
+    post:
+      tags:
+        - Account
+      description: Add a new account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/crudAccount"
+      responses:
+        '200':
+          description: Returns the added account
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/account"
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+
+    put:
+      tags:
+        - Account
+      description: Create or update an account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/account"
+      responses:
+        '200':
+          description: Returns the created or updated account
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/ResponseBody"
+                properties:
+                  body:
+                    $ref: "#/components/schemas/account"
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+
+    delete:
+      tags:
+        - Account
+      description: Deletes an account of a specified id
+      parameters:
+        - in: query
+          required: true
+          name: accountId
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Returns the deleted account
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/ResponseBody"
+                properties:
+                  body:
+                    $ref: "#/components/schemas/account"
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+
+components:
+  responses:
+    ResponseTemplate:
+      description: Base response for each request
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "#/components/schemas/ResponseBody"
+            properties:
+              body:
+                type: object
+
+    400:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/BadRequestException"
+    403:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ForbiddenException"
+    404:
+      description: Not found
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ResourceNotFoundException"
+    429:
+      description: Too many Request
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/TooManyRequestsException"
+    500:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/InternalServerException"
+
+  schemas:
+    ### RESPONSE MAIN LAYOUT
+    ResponseStatus:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+      example:
+        code: 200
+        message: OK
+
+    ResponseBody:
+      type: object
+      properties:
+        status:
+          $ref: "#/components/schemas/ResponseStatus"
+        body:
+          type: object
+
+    ### BODY STRUCTURES
+    crudUser:
+      type: object
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+
+    user:
+      allOf:
+        - $ref: "#/components/schemas/crudUser"
+      type: object
+      properties:
+        id:
+          type: number
+
+    crudAccount:
+      type: object
+      properties:
+        user:
+          $ref: "#/components/schemas/crudUser"
+        accountNumber:
+          type: string
+        balance:
+          type: number
+        currency:
+          $ref: "#/components/schemas/currency"
+
+    account:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/crudAccount"
+      properties:
+        id:
+          type: number
+
+    transactionType:
+      type: string
+      enum:
+        - DEPOSIT
+        - WITHDRAWAL
+
+    crudTransaction:
+      description: "`account` field may be an `account` object or an `id` of an account"
+      type: object
+      properties:
+        account:
+          oneOf:
+            - $ref: "#/components/schemas/account"
+            - type: number
+        amount:
+          type: number
+        transactionDate:
+          type: string
+          format: date-time
+        transactionType:
+          $ref: "#/components/schemas/transactionType"
+
+    currency:
+      type: string
+      enum:
+        - USD
+        - EUR
+        - GBP
+
+        ### EXCEPTIONS
+    BadRequestException:
+      allOf:
+        - $ref: '#/components/schemas/ResponseBody'
+      example:
+        message: BadRequest
+        code: 400
+        body: { }
+
+    NotAuthorizedException:
+      allOf:
+        - $ref: '#/components/schemas/ResponseBody'
+      example:
+        code: 401
+        message: Not authorized
+        body: { }
+
+    ForbiddenException:
+      allOf:
+        - $ref: '#/components/schemas/ResponseBody'
+      example:
+        code: 403
+        message: Forbidden
+        body: { }
+
+    ResourceNotFoundException:
+      allOf:
+        - $ref: '#/components/schemas/ResponseBody'
+      example:
+        code: 404
+        message: ResourceNotFound
+        body: { }
+
+    TooManyRequestsException:
+      allOf:
+        - $ref: '#/components/schemas/ResponseBody'
+      example:
+        code: 429
+        message: TooManyRequests
+        body: { }
+
+    InternalServerException:
+      allOf:
+        - $ref: '#/components/schemas/ResponseBody'
+      example:
+        code: 500
+        type: InternalServerError
+        body: { }
