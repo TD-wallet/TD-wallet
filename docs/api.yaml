@@ -145,6 +145,133 @@ paths:
         '500':
           $ref: '#/components/responses/500'
 
+  /account:
+    get:
+      tags:
+        - Account
+      description: Gets accounts
+      responses:
+        '200':
+          description: Returns a list of accounts or one account if getting it by id
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - allOf:
+                      - $ref: "#/components/schemas/ResponseBody"
+                    properties:
+                      body:
+                        $ref: "#/components/schemas/account"
+                  - allOf:
+                      - $ref: "#/components/schemas/ResponseBody"
+                    properties:
+                      body:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/account"
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+
+    post:
+      tags:
+        - Account
+      description: Add a new account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/crudAccount"
+      responses:
+        '200':
+          description: Returns the added account
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/account"
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+
+    put:
+      tags:
+        - Account
+      description: Create or update an account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/account"
+      responses:
+        '200':
+          description: Returns the created or updated account
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/ResponseBody"
+                properties:
+                  body:
+                    $ref: "#/components/schemas/account"
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+
+    delete:
+      tags:
+        - Account
+      description: Deletes an account of a specified id
+      parameters:
+        - in: query
+          required: true
+          name: accountId
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Returns the deleted account
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/ResponseBody"
+                properties:
+                  body:
+                    $ref: "#/components/schemas/account"
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+
 components:
   responses:
     ResponseTemplate:
