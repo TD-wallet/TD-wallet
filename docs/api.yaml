@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: TD-Wallet api specs
   description: Made by STD22081 and STD22049
-  version: 1.0.0
+  version: 1.4.0
 
 servers:
   - url: 'https://td-wallet.com/'
