@@ -238,6 +238,8 @@ components:
           type: string
         balance:
           type: number
+        currency:
+          $ref: "#/components/schemas/currency"
 
     account:
       type: object
@@ -269,7 +271,14 @@ components:
         transactionType:
           $ref: "#/components/schemas/transactionType"
 
-    ### EXCEPTIONS
+    currency:
+      type: string
+      enum:
+        - USD
+        - EUR
+        - GBP
+
+        ### EXCEPTIONS
     BadRequestException:
       allOf:
         - $ref: '#/components/schemas/ResponseBody'
