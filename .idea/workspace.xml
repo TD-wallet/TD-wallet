@@ -4,20 +4,32 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0098e834-f89a-4717-b5d8-7d79f3c936d0" name="Changes" comment="" />
+    <list default="true" id="0098e834-f89a-4717-b5d8-7d79f3c936d0" name="Changes" comment="chore: modify workspace.xml">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 4
-}]]></component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="2Yyl3KeUj2DJeeUfGnxT2ocwfe7" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -27,7 +39,13 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "td-wallet-std22049-std22081",
+    "last_opened_file_path": "C:/Users/USER/Documents/Java project/library_management/pom.xml",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -40,10 +58,79 @@
       <option name="presentableId" value="Default" />
       <updated>1701505538838</updated>
       <workItem from="1701505540481" duration="84000" />
+      <workItem from="1701508004481" duration="5798000" />
+      <workItem from="1701621429913" duration="4054000" />
     </task>
+    <task id="LOCAL-00001" summary="chore: add JDBC dependency">
+      <option name="closed" value="true" />
+      <created>1701512175440</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1701512175440</updated>
+    </task>
+    <task id="LOCAL-00002" summary="feat: create_database.sql file">
+      <option name="closed" value="true" />
+      <created>1701512552177</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1701512552177</updated>
+    </task>
+    <task id="LOCAL-00003" summary="feat: create_table_user.sql file">
+      <option name="closed" value="true" />
+      <created>1701513940147</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1701513940147</updated>
+    </task>
+    <task id="LOCAL-00004" summary="feat: create_table_bank_account.sql file">
+      <option name="closed" value="true" />
+      <created>1701515426667</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1701515426667</updated>
+    </task>
+    <task id="LOCAL-00005" summary="feat: create_table_transaction.sql file">
+      <option name="closed" value="true" />
+      <created>1701516009918</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1701516009918</updated>
+    </task>
+    <task id="LOCAL-00006" summary="feat: create_table_currency.sql file">
+      <option name="closed" value="true" />
+      <created>1701516353270</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1701516353270</updated>
+    </task>
+    <task id="LOCAL-00007" summary="chore: modify workspace.xml">
+      <option name="closed" value="true" />
+      <created>1701624143148</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1701624143148</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="chore: add JDBC dependency" />
+    <MESSAGE value="feat: create_database.sql file" />
+    <MESSAGE value="feat: create_table_user.sql file" />
+    <MESSAGE value="feat: create_table_bank_account.sql file" />
+    <MESSAGE value="feat: create_table_transaction.sql file" />
+    <MESSAGE value="feat: create_table_currency.sql file" />
+    <MESSAGE value="chore: modify workspace.xml" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore: modify workspace.xml" />
   </component>
 </project>
