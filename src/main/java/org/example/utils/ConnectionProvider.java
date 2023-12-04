@@ -11,7 +11,7 @@ public class ConnectionProvider {
         String username = System.getenv("PG_USERNAME");
         String password = System.getenv("PG_PASSWORD");
         String databaseUrl = System.getenv("PG_DATABASE_URL");
-        if(connection == null) {
+        if (connection == null) {
             try {
                 connection = DriverManager.getConnection(
                         String.format("jdbc:postgresql://%s", databaseUrl),

@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: TD-Wallet api specs
   description: Made by STD22081 and STD22049
-  version: 1.0.0
+  version: 1.4.0
 
 servers:
   - url: 'https://td-wallet.com/'
@@ -233,8 +233,218 @@ paths:
         '500':
           $ref: '#/components/responses/500'
 
-    
+  /transaction:
+    get:
+      tags:
+        - Transaction
+      description: get transactions
+      responses:
+        '200':
+          description: Returns a list of accounts or one account if getting it by id
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - allOf:
+                      - $ref: "#/components/schemas/ResponseBody"
+                    properties:
+                      body:
+                        $ref: "#/components/schemas/transaction"
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+    post:
+      tags:
+        - Transaction
+      description: Add a new transaction
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/crudTransaction"
+      responses:
+        '200':
+          description: Returns the added account
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/transaction"
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
 
+    put:
+      tags:
+        - Transaction
+      description: create or update a transaction
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/transaction"
+      responses:
+        '200':
+          description: Returns the created or updated account
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/ResponseBody"
+                properties:
+                  body:
+                    $ref: "#/components/schemas/transaction"
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+
+    delete:
+      tags:
+        - Transaction
+      description: delete a transaction by specifying its id
+      parameters:
+        - in: query
+          name: transactionId
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Return the deleted transaction
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - allOf:
+                      - $ref: "#/components/schemas/ResponseBody"
+                    properties:
+                      body:
+                        $ref: "#/components/schemas/transaction"
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+    
+  /currency:
+    get:
+      tags:
+        - Currency
+      description: get a list of currencies
+      responses:
+        '200':
+          description: return a list of currencies
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  allOf:
+                    - $ref: "#/components/schemas/ResponseBody"
+                      properties:
+                        body:
+                          $ref: "#/components/schemas/currency"
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+
+    post:
+      tags:
+        - Currency
+      description: add new currency value
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/currency"
+      responses:
+        '200':
+          description: Returns the added account
+          content:
+            application/json:
+              schema:
+                allOf:
+                    - $ref: "#/components/schemas/ResponseBody"
+                      properties:
+                        body:
+                          $ref: "#/components/schemas/currency"
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+
+    put:
+      tags:
+        - Currency
+      description: Create or update a currency value
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/currency"
+      responses:
+        '200':
+          description: Returns the added account
+          content:
+            application/json:
+              schema:
+                allOf:
+                    - $ref: "#/components/schemas/ResponseBody"
+                      properties:
+                        body:
+                          $ref: "#/components/schemas/currency"
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+            
 components:
   responses:
     ResponseTemplate:
@@ -344,6 +554,13 @@ components:
       enum:
         - DEPOSIT
         - WITHDRAWAL
+    transaction:
+      allOf:
+        - $ref: "#/components/schemas/crudTransaction"
+      properties:
+        id:
+          type: integer
+
 
     crudTransaction:
       description: "`account` field may be an `account` object or an `id` of an account"

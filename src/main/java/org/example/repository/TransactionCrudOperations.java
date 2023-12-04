@@ -25,15 +25,15 @@ public class TransactionCrudOperations implements CrudOperations<Transaction> {
     @Override
     public List<Transaction> findAll() {
         return qt.executeQuery(
-                "SELECT * FROM transaction",
+                "SELECT * FROM transaction ORDER BY id DESC",
                 this::getResult
         );
     }
 
     @Override
     public List<Transaction> saveAll(List<Transaction> toSave) {
-        for(Transaction transaction: toSave) {
-            if(isNotSaved(transaction)) {
+        for (Transaction transaction : toSave) {
+            if (isNotSaved(transaction)) {
                 return null;
             }
         }
@@ -61,18 +61,19 @@ public class TransactionCrudOperations implements CrudOperations<Transaction> {
                 rs.getInt("amount"),
                 rs.getTimestamp("transaction_date"),
                 TransactionType.valueOf(
-                        rs.getString("transaction_type")
+                        rs.getString("transaction_type").toUpperCase()
                 )
         );
     }
 
     private boolean isNotSaved(Transaction toSave) {
         return qt.executeUpdate(
-                "INSERT INTO transaction (amount, transaction_date, transaction_type) VALUES (?,?,?)",
+                "INSERT INTO transaction (id, amount, transaction_date, transaction_type) VALUES (?,?,?,?)",
                 ps -> {
-                    ps.setInt(1, toSave.getAmount());
-                    ps.setTimestamp(2, toSave.getTransactionDate());
-                    ps.setString(3, toSave.getTransactionType().toString());
+                    ps.setInt(1, this.findAll().get(0).getId() + 1);
+                    ps.setInt(2, toSave.getAmount());
+                    ps.setTimestamp(3, toSave.getTransactionDate());
+                    ps.setString(4, toSave.getTransactionType().toString());
                 }
         ) == 0;
     }

@@ -37,4 +37,14 @@ public class Transaction {
     public TransactionType getTransactionType() {
         return transactionType;
     }
+
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "id=" + id +
+                ", amount=" + amount +
+                ", transactionDate=" + transactionDate +
+                ", transactionType=" + transactionType +
+                '}';
+    }
 }

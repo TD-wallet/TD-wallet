@@ -12,7 +12,7 @@ public class AccountCrudOperations implements CrudOperations<Account> {
 
     @Override
     public Account findById(Integer id) {
-        return qt.executeSingleQuery("SELECT * FROM account WHERE id=?", ps -> {
+        return qt.executeSingleQuery("SELECT * FROM bank_account WHERE id=?", ps -> {
                     ps.setInt(1, id);
                 },
                 this::getResult
@@ -21,15 +21,15 @@ public class AccountCrudOperations implements CrudOperations<Account> {
 
     @Override
     public List<Account> findAll() {
-        return qt.executeQuery("SELECT * FROM account",
+        return qt.executeQuery("SELECT * FROM bank_account ORDER BY id DESC",
                 this::getResult
         );
     }
 
     @Override
     public List<Account> saveAll(List<Account> toSave) {
-        for (Account account: toSave) {
-            if(isNotSaved(account)) {
+        for (Account account : toSave) {
+            if (isNotSaved(account)) {
                 return null;
             }
         }
@@ -44,7 +44,7 @@ public class AccountCrudOperations implements CrudOperations<Account> {
     @Override
     public Account delete(Account toDelete) {
         return qt.executeUpdate(
-                "DELETE FROM account WHERE id=?",
+                "DELETE FROM bank_account WHERE id=?",
                 ps -> {
                     ps.setInt(1, toDelete.getId());
                 }
@@ -52,7 +52,7 @@ public class AccountCrudOperations implements CrudOperations<Account> {
     }
 
     private Account getResult(ResultSet rs) throws SQLException {
-         return new Account(
+        return new Account(
                 rs.getInt("id"),
                 rs.getString("account_number"),
                 rs.getInt("balance")
@@ -60,11 +60,12 @@ public class AccountCrudOperations implements CrudOperations<Account> {
     }
 
     private boolean isNotSaved(Account toSave) {
-        return qt.executeUpdate("INSERT INTO account (account_number, balance) VALUES (?,?)",
-            ps -> {
-                ps.setString(1, toSave.getAccountNumber());
-                ps.setInt(2, toSave.getBalance());
-            }
+        return qt.executeUpdate("INSERT INTO bank_account (id, account_number, balance) VALUES (?,?,?)",
+                ps -> {
+                    ps.setInt(1, this.findAll().get(0).getId() + 1);
+                    ps.setString(2, toSave.getAccountNumber());
+                    ps.setInt(3, toSave.getBalance());
+                }
         ) == 0;
     }
 }
