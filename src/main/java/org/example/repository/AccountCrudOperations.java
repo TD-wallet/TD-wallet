@@ -21,7 +21,7 @@ public class AccountCrudOperations implements CrudOperations<Account> {
 
     @Override
     public List<Account> findAll() {
-        return qt.executeQuery("SELECT * FROM bank_account",
+        return qt.executeQuery("SELECT * FROM bank_account ORDER BY id DESC",
                 this::getResult
         );
     }
@@ -60,10 +60,11 @@ public class AccountCrudOperations implements CrudOperations<Account> {
     }
 
     private boolean isNotSaved(Account toSave) {
-        return qt.executeUpdate("INSERT INTO bank_account (account_number, balance) VALUES (?,?)",
+        return qt.executeUpdate("INSERT INTO bank_account (id, account_number, balance) VALUES (?,?,?)",
             ps -> {
-                ps.setString(1, toSave.getAccountNumber());
-                ps.setInt(2, toSave.getBalance());
+                ps.setInt(1, this.findAll().get(0).getId()+1);
+                ps.setString(2, toSave.getAccountNumber());
+                ps.setInt(3, toSave.getBalance());
             }
         ) == 0;
     }
