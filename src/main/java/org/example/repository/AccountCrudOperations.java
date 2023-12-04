@@ -12,7 +12,7 @@ public class AccountCrudOperations implements CrudOperations<Account> {
 
     @Override
     public Account findById(Integer id) {
-        return qt.executeSingleQuery("SELECT * FROM account WHERE id=?", ps -> {
+        return qt.executeSingleQuery("SELECT * FROM bank_account WHERE id=?", ps -> {
                     ps.setInt(1, id);
                 },
                 this::getResult
@@ -21,7 +21,7 @@ public class AccountCrudOperations implements CrudOperations<Account> {
 
     @Override
     public List<Account> findAll() {
-        return qt.executeQuery("SELECT * FROM account",
+        return qt.executeQuery("SELECT * FROM bank_account",
                 this::getResult
         );
     }
@@ -44,7 +44,7 @@ public class AccountCrudOperations implements CrudOperations<Account> {
     @Override
     public Account delete(Account toDelete) {
         return qt.executeUpdate(
-                "DELETE FROM account WHERE id=?",
+                "DELETE FROM bank_account WHERE id=?",
                 ps -> {
                     ps.setInt(1, toDelete.getId());
                 }
@@ -60,7 +60,7 @@ public class AccountCrudOperations implements CrudOperations<Account> {
     }
 
     private boolean isNotSaved(Account toSave) {
-        return qt.executeUpdate("INSERT INTO account (account_number, balance) VALUES (?,?)",
+        return qt.executeUpdate("INSERT INTO bank_account (account_number, balance) VALUES (?,?)",
             ps -> {
                 ps.setString(1, toSave.getAccountNumber());
                 ps.setInt(2, toSave.getBalance());
