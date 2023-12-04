@@ -28,8 +28,8 @@ public class AccountCrudOperations implements CrudOperations<Account> {
 
     @Override
     public List<Account> saveAll(List<Account> toSave) {
-        for (Account account: toSave) {
-            if(isNotSaved(account)) {
+        for (Account account : toSave) {
+            if (isNotSaved(account)) {
                 return null;
             }
         }
@@ -52,7 +52,7 @@ public class AccountCrudOperations implements CrudOperations<Account> {
     }
 
     private Account getResult(ResultSet rs) throws SQLException {
-         return new Account(
+        return new Account(
                 rs.getInt("id"),
                 rs.getString("account_number"),
                 rs.getInt("balance")
@@ -61,11 +61,11 @@ public class AccountCrudOperations implements CrudOperations<Account> {
 
     private boolean isNotSaved(Account toSave) {
         return qt.executeUpdate("INSERT INTO bank_account (id, account_number, balance) VALUES (?,?,?)",
-            ps -> {
-                ps.setInt(1, this.findAll().get(0).getId()+1);
-                ps.setString(2, toSave.getAccountNumber());
-                ps.setInt(3, toSave.getBalance());
-            }
+                ps -> {
+                    ps.setInt(1, this.findAll().get(0).getId() + 1);
+                    ps.setString(2, toSave.getAccountNumber());
+                    ps.setInt(3, toSave.getBalance());
+                }
         ) == 0;
     }
 }

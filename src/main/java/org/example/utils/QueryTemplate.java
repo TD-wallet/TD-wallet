@@ -77,7 +77,7 @@ public class QueryTemplate {
 
     public Integer executeUpdate(String query) {
         try {
-            Statement statement =  connection
+            Statement statement = connection
                     .createStatement();
             Integer affectedRows =
                     statement.executeUpdate(query);
@@ -85,12 +85,12 @@ public class QueryTemplate {
             return affectedRows;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-        };
+        }
 
         return 0;
     }
 
-    public Integer executeUpdate( String insertStatement, PreparedStatementSetter pss) {
+    public Integer executeUpdate(String insertStatement, PreparedStatementSetter pss) {
         try {
             PreparedStatement ps = connection.prepareStatement(insertStatement);
             pss.setStatement(ps);
