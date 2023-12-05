@@ -1,6 +1,6 @@
 CREATE TABLE  IF NOT EXISTS transaction(
     id int primary key ,
-    amount int not null,
+    amount double precision not null,
     transaction_date timestamp not null,
     transaction_type varchar(50) not null
 );

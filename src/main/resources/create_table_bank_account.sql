@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS  bank_account(
     id int primary key ,
     account_number varchar(100) not null unique,
-    balance int not null
+    balance double precision not null
 );
 
 INSERT INTO bank_account (id,account_number, balance)
