@@ -71,7 +71,7 @@ public class TransactionCrudOperations implements CrudOperations<Transaction> {
                 "INSERT INTO transaction (id, amount, transaction_date, transaction_type) VALUES (?,?,?,?)",
                 ps -> {
                     ps.setInt(1, this.findAll().get(0).getId() + 1);
-                    ps.setInt(2, toSave.getAmount());
+                    ps.setDouble(2, toSave.getAmount());
                     ps.setTimestamp(3, toSave.getTransactionDate());
                     ps.setString(4, toSave.getTransactionType().toString());
                 }

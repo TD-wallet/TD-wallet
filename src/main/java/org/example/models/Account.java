@@ -3,9 +3,9 @@ package org.example.models;
 public class Account {
     private final int id;
     private String accountNumber;
-    private int balance;
+    private double balance;
 
-    public Account(int id, String accountNumber, int balance) {
+    public Account(int id, String accountNumber, double balance) {
         this.id = id;
         this.accountNumber = accountNumber;
         this.balance = balance;
@@ -29,11 +29,11 @@ public class Account {
         this.accountNumber = accountNumber;
     }
 
-    public int getBalance() {
+    public double getBalance() {
         return balance;
     }
 
-    public void setBalance(int balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
     }
 

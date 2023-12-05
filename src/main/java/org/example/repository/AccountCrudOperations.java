@@ -55,7 +55,7 @@ public class AccountCrudOperations implements CrudOperations<Account> {
         return new Account(
                 rs.getInt("id"),
                 rs.getString("account_number"),
-                rs.getInt("balance")
+                rs.getDouble("balance")
         );
     }
 
@@ -64,7 +64,7 @@ public class AccountCrudOperations implements CrudOperations<Account> {
                 ps -> {
                     ps.setInt(1, this.findAll().get(0).getId() + 1);
                     ps.setString(2, toSave.getAccountNumber());
-                    ps.setInt(3, toSave.getBalance());
+                    ps.setDouble(3, toSave.getBalance());
                 }
         ) == 0;
     }
