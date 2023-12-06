@@ -4,18 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0098e834-f89a-4717-b5d8-7d79f3c936d0" name="Changes" comment="chore: modify workspace.xml">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="0098e834-f89a-4717-b5d8-7d79f3c936d0" name="Changes" comment="feat: updated User model" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="td-wallet-std22081" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -39,7 +44,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "td-wallet-std22049-std22081",
+    "git-widget-placeholder": "td-wallet-std22081",
     "last_opened_file_path": "C:/Users/USER/Documents/Java project/library_management/pom.xml",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -117,11 +122,62 @@
       <option name="project" value="LOCAL" />
       <updated>1701624143148</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="feat: updated Account model">
+      <option name="closed" value="true" />
+      <created>1701871096409</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1701871096409</updated>
+    </task>
+    <task id="LOCAL-00009" summary="chore: renamed methods">
+      <option name="closed" value="true" />
+      <created>1701871133183</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1701871133184</updated>
+    </task>
+    <task id="LOCAL-00010" summary="feat: updated Currency model">
+      <option name="closed" value="true" />
+      <created>1701871153116</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1701871153116</updated>
+    </task>
+    <task id="LOCAL-00011" summary="feat: updated TransactionType">
+      <option name="closed" value="true" />
+      <created>1701871169983</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1701871169983</updated>
+    </task>
+    <task id="LOCAL-00012" summary="feat: updated User model">
+      <option name="closed" value="true" />
+      <created>1701871179288</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1701871179288</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="chore: add JDBC dependency" />
@@ -131,6 +187,11 @@
     <MESSAGE value="feat: create_table_transaction.sql file" />
     <MESSAGE value="feat: create_table_currency.sql file" />
     <MESSAGE value="chore: modify workspace.xml" />
-    <option name="LAST_COMMIT_MESSAGE" value="chore: modify workspace.xml" />
+    <MESSAGE value="feat: updated Account model" />
+    <MESSAGE value="chore: renamed methods" />
+    <MESSAGE value="feat: updated Currency model" />
+    <MESSAGE value="feat: updated TransactionType" />
+    <MESSAGE value="feat: updated User model" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: updated User model" />
   </component>
 </project>
