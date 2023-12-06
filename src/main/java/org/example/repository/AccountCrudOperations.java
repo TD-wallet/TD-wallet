@@ -63,7 +63,7 @@ public class AccountCrudOperations implements CrudOperations<Account> {
         return qt.executeUpdate("INSERT INTO bank_account (id, account_number, balance) VALUES (?,?,?)",
                 ps -> {
                     ps.setInt(1, this.findAll().get(0).getId() + 1);
-                    ps.setString(2, toSave.getAccountNumber());
+                    ps.setString(2, toSave.getRef());
                     ps.setDouble(3, toSave.getBalance());
                 }
         ) == 0;
