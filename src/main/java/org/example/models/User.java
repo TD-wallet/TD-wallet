@@ -1,46 +1,22 @@
 package org.example.models;
 
-import java.util.List;
-
 public class User {
     private int id;
     private String username;
     private String email;
     private String password;
-    private final List<Account> accounts;
-
-    public User(int id, String username, String email, String password, List<Account> accounts) {
-        this.id = id;
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.accounts = accounts;
-    }
-
-    public User(String username, String email, String password, List<Account> accounts) {
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.accounts = accounts;
-    }
 
     public User(int id, String username, String email, String password) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
-        this.accounts = List.of();
     }
 
     public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
         this.password = password;
-        this.accounts = List.of();
-    }
-
-    public List<Account> getAccounts() {
-        return accounts;
     }
 
     public int getId() {
@@ -82,8 +58,6 @@ public class User {
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", accounts=" + accounts +
                 '}';
     }
-
 }
