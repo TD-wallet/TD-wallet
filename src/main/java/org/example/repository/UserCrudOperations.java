@@ -8,10 +8,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserCrudOperations {
+public class UserCrudOperations implements CrudOperations<User> {
     private QueryTemplate qt = new QueryTemplate();
-    private AccountCrudOperations accountRepo = new AccountCrudOperations();
-
+    @Override
     public User findById(Integer id) {
         return qt.executeSingleQuery(
                 "SELECT * FROM \"user\" WHERE id=?",
@@ -22,6 +21,7 @@ public class UserCrudOperations {
         );
     }
 
+    @Override
     public List<User> findAll() {
         return qt.executeQuery(
                 "SELECT * FROM \"user\" ORDER BY id DESC",
@@ -29,6 +29,7 @@ public class UserCrudOperations {
         );
     }
 
+    @Override
     public List<User> saveAll(List<User> toSave) {
         ArrayList<User> saved = new ArrayList<>();
         for(User user : toSave) {
@@ -41,6 +42,7 @@ public class UserCrudOperations {
         return saved;
     }
 
+    @Override
     public User save(User toSave) {
         if (toSave.getId() == 0) {
             return isSaved(toSave) ? findAll().get(0) : null;
@@ -58,6 +60,7 @@ public class UserCrudOperations {
         return null;
     }
 
+    @Override
     public User delete(User toDelete) {
         User toBeDeleted = findById(toDelete.getId());
         if (toBeDeleted == null) {
@@ -88,8 +91,7 @@ public class UserCrudOperations {
                 rs.getInt("id"),
                 rs.getString("username"),
                 rs.getString("email"),
-                rs.getString("password"),
-                accountRepo.findByUserId(rs.getInt("id"))
+                rs.getString("password")
         );
     }
 }
