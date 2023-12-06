@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0098e834-f89a-4717-b5d8-7d79f3c936d0" name="Changes" comment="refactor: renamed Transaction fields">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/repository/UserCrudOperations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/models/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/models/Account.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/models/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/models/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repository/AccountCrudOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repository/AccountCrudOperations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repository/TransactionCrudOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repository/TransactionCrudOperations.java" afterDir="false" />
-    </list>
+    <list default="true" id="0098e834-f89a-4717-b5d8-7d79f3c936d0" name="Changes" comment="chore: workspace update" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -82,7 +74,7 @@
       <workItem from="1701505540481" duration="84000" />
       <workItem from="1701508004481" duration="5798000" />
       <workItem from="1701621429913" duration="6049000" />
-      <workItem from="1701886011528" duration="829000" />
+      <workItem from="1701886011528" duration="1930000" />
     </task>
     <task id="LOCAL-00001" summary="chore: add JDBC dependency">
       <option name="closed" value="true" />
@@ -196,7 +188,47 @@
       <option name="project" value="LOCAL" />
       <updated>1701881643472</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="feat: save method optimizations">
+      <option name="closed" value="true" />
+      <created>1701887747242</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1701887747242</updated>
+    </task>
+    <task id="LOCAL-00016" summary="feat: created User repository">
+      <option name="closed" value="true" />
+      <created>1701887770596</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1701887770596</updated>
+    </task>
+    <task id="LOCAL-00017" summary="feat: removed User filed to avoid redundancy">
+      <option name="closed" value="true" />
+      <created>1701887875218</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1701887875218</updated>
+    </task>
+    <task id="LOCAL-00018" summary="feat: new constructor and fields">
+      <option name="closed" value="true" />
+      <created>1701887904234</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1701887904234</updated>
+    </task>
+    <task id="LOCAL-00019" summary="chore: workspace update">
+      <option name="closed" value="true" />
+      <created>1701887929136</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1701887929136</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -227,6 +259,11 @@
     <MESSAGE value="feat: updated User model" />
     <MESSAGE value="feat: updated Account model" />
     <MESSAGE value="refactor: renamed Transaction fields" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: renamed Transaction fields" />
+    <MESSAGE value="feat: save method optimizations" />
+    <MESSAGE value="feat: created User repository" />
+    <MESSAGE value="feat: removed User filed to avoid redundancy" />
+    <MESSAGE value="feat: new constructor and fields" />
+    <MESSAGE value="chore: workspace update" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore: workspace update" />
   </component>
 </project>
