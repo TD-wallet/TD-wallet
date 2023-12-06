@@ -72,8 +72,8 @@ public class TransactionCrudOperations implements CrudOperations<Transaction> {
                 ps -> {
                     ps.setInt(1, this.findAll().get(0).getId() + 1);
                     ps.setDouble(2, toSave.getAmount());
-                    ps.setTimestamp(3, toSave.getTransactionDate());
-                    ps.setString(4, toSave.getTransactionType().toString());
+                    ps.setTimestamp(3, toSave.getDate());
+                    ps.setString(4, toSave.getType().toString());
                 }
         ) == 0;
     }
