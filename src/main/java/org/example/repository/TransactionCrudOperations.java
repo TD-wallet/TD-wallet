@@ -6,6 +6,7 @@ import org.example.utils.QueryTemplate;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TransactionCrudOperations implements CrudOperations<Transaction> {
@@ -32,17 +33,33 @@ public class TransactionCrudOperations implements CrudOperations<Transaction> {
 
     @Override
     public List<Transaction> saveAll(List<Transaction> toSave) {
+        ArrayList<Transaction> saved = new ArrayList<>();
         for (Transaction transaction : toSave) {
-            if (isNotSaved(transaction)) {
+            Transaction value = save(transaction);
+            if (value == null) {
                 return null;
             }
+            saved.add(value);
         }
-        return toSave;
+        return saved;
     }
 
     @Override
     public Transaction save(Transaction toSave) {
-        return isNotSaved(toSave) ? null : toSave;
+        if (toSave.getId() == 0) {
+            return isSaved(toSave) ? findAll().get(0) : null;
+        } else if (findById(toSave.getId()) != null) {
+            return qt.executeUpdate(
+                    "UPDATE transaction SET amount=?, date=?, type=?::\"TRANSACTION_TYPE\" WHERE id=?",
+                    ps -> {
+                        ps.setDouble(1, toSave.getAmount());
+                        ps.setTimestamp(2, toSave.getDate());
+                        ps.setString(3, toSave.getType().toString());
+                        ps.setInt(4, toSave.getId());
+                    }
+            ) == 0 ? null : findById(toSave.getId());
+        }
+        return null;
     }
 
     @Override
@@ -59,22 +76,22 @@ public class TransactionCrudOperations implements CrudOperations<Transaction> {
         return new Transaction(
                 rs.getInt("id"),
                 rs.getInt("amount"),
-                rs.getTimestamp("transaction_date"),
+                rs.getTimestamp("date"),
                 TransactionType.valueOf(
-                        rs.getString("transaction_type").toUpperCase()
+                        rs.getString("type").toUpperCase()
                 )
         );
     }
 
-    private boolean isNotSaved(Transaction toSave) {
+    private boolean isSaved(Transaction toSave) {
         return qt.executeUpdate(
-                "INSERT INTO transaction (id, amount, transaction_date, transaction_type) VALUES (?,?,?,?)",
+                "INSERT INTO transaction (id, amount, date, type) VALUES (?,?,?,?::\"TRANSACTION_TYPE\")",
                 ps -> {
                     ps.setInt(1, this.findAll().get(0).getId() + 1);
                     ps.setDouble(2, toSave.getAmount());
                     ps.setTimestamp(3, toSave.getDate());
                     ps.setString(4, toSave.getType().toString());
                 }
-        ) == 0;
+        ) != 0;
     }
 }
