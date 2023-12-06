@@ -8,11 +8,10 @@ public class Account {
     private String ref;
     private double balance;
     private String type = "CASH";
-    private Currency currency;
-    private User user;
-    private List<Transaction> transactions;
+    private final Currency currency;
+    private final List<Transaction> transactions;
 
-    public Account(int id, String accountNumber, double balance, User user) {
+    public Account(int id, String accountNumber, double balance) {
         this.id = id;
         this.ref = accountNumber;
         this.balance = balance;
@@ -23,7 +22,6 @@ public class Account {
                         Locale.getDefault()
                 ).getSymbol()
         );
-        this.user = user;
         this.transactions = List.of();
     }
 
@@ -38,27 +36,24 @@ public class Account {
                         Locale.getDefault()
                 ).getSymbol()
         );
-        this.user = user;
         this.transactions = List.of();
     }
 
-    public Account(String ref, double balance, String type, Currency currency, User user, List<Transaction> transactions) {
+    public Account(String ref, double balance, String type, Currency currency, List<Transaction> transactions) {
         this.id = 0;
         this.ref = ref;
         this.balance = balance;
         this.type = type;
         this.currency = currency;
-        this.user = user;
         this.transactions = transactions;
     }
 
-    public Account(int id, String ref, double balance, String type, Currency currency, User user, List<Transaction> transactions) {
+    public Account(int id, String ref, double balance, String type, Currency currency, List<Transaction> transactions) {
         this.id = id;
         this.ref = ref;
         this.balance = balance;
         this.type = type;
         this.currency = currency;
-        this.user = user;
         this.transactions = transactions;
     }
 
@@ -68,10 +63,6 @@ public class Account {
 
     public Currency getCurrency() {
         return currency;
-    }
-
-    public User getUser() {
-        return user;
     }
 
     public List<Transaction> getTransactions() {
@@ -106,7 +97,6 @@ public class Account {
                 ", balance=" + balance +
                 ", type='" + type + '\'' +
                 ", currency=" + currency +
-                ", user=" + user +
                 ", transactions=" + transactions +
                 '}';
     }
