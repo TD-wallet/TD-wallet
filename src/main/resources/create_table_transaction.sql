@@ -1,15 +1,21 @@
-CREATE TABLE  IF NOT EXISTS transaction(
-    id int primary key ,
-    amount double precision not null,
-    transaction_date timestamp not null,
-    transaction_type varchar(50) not null
+-- Didn't found a way to make type creation idempotent.
+CREATE TYPE "TRANSACTION_TYPE" AS
+ENUM ('DEBIT','CREDIT');
+
+CREATE TABLE IF NOT EXISTS transaction (
+	id integer NOT NULL,
+	amount integer NOT NULL,
+	date timestamp NOT NULL DEFAULT current_timestamp,
+	type "TRANSACTION_TYPE" NOT NULL DEFAULT 'DEBIT',
+	id_account integer NOT NULL,
+	CONSTRAINT transaction_pkey PRIMARY KEY (id)
 );
 
-INSERT INTO transaction (id, amount, transaction_date, transaction_type)
+INSERT INTO transaction (id, amount, date, type, id_account)
 SELECT * FROM(
          VALUES
-              (1, 1000.00, CURRENT_TIMESTAMP, 'Deposit'),
-              (2, 500.50, CURRENT_TIMESTAMP, 'Withdrawal'),
-              (3, 200.25, CURRENT_TIMESTAMP, 'Deposit')
+              (1, 1000.00, CURRENT_TIMESTAMP, 'CREDIT'::"TRANSACTION_TYPE", 2),
+              (2, 500.50, CURRENT_TIMESTAMP, 'DEBIT'::"TRANSACTION_TYPE", 2),
+              (3, 200.25, CURRENT_TIMESTAMP, 'CREDIT'::"TRANSACTION_TYPE", 2)
       ) AS new_transaction
 WHERE NOT EXISTS (SELECT 1 FROM transaction WHERE transaction.id = new_transaction.column1);

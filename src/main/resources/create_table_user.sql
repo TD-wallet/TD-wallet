@@ -1,8 +1,10 @@
 CREATE TABLE IF NOT EXISTS "user" (
-    id INT PRIMARY KEY ,
-    username VARCHAR(50) NOT NULL ,
-    email VARCHAR(50) NOT NULL UNIQUE ,
-    password VARCHAR(50) NOT NULL
+	id integer NOT NULL,
+	username character varying(50) NOT NULL,
+	email character varying(70) NOT NULL,
+	password character varying(50) NOT NULL,
+	CONSTRAINT user_pkey PRIMARY KEY (id),
+	CONSTRAINT user_email_key UNIQUE (email)
 );
 
 INSERT INTO "user" (id, username, email, password)
