@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0098e834-f89a-4717-b5d8-7d79f3c936d0" name="Changes" comment="feat: updated User model" />
+    <list default="true" id="0098e834-f89a-4717-b5d8-7d79f3c936d0" name="Changes" comment="refactor: renamed Transaction fields">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/repository/UserCrudOperations.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/models/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/models/Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/models/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/models/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repository/AccountCrudOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repository/AccountCrudOperations.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repository/TransactionCrudOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repository/TransactionCrudOperations.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -45,15 +53,24 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "td-wallet-std22081",
+    "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/USER/Documents/Java project/library_management/pom.xml",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-17.0.9-corretto-17.0.9-3183f394aec4-86fc8109" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -65,6 +82,7 @@
       <workItem from="1701505540481" duration="84000" />
       <workItem from="1701508004481" duration="5798000" />
       <workItem from="1701621429913" duration="6049000" />
+      <workItem from="1701886011528" duration="829000" />
     </task>
     <task id="LOCAL-00001" summary="chore: add JDBC dependency">
       <option name="closed" value="true" />
@@ -162,7 +180,23 @@
       <option name="project" value="LOCAL" />
       <updated>1701871179288</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="feat: updated Account model">
+      <option name="closed" value="true" />
+      <created>1701881457595</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1701881457595</updated>
+    </task>
+    <task id="LOCAL-00014" summary="refactor: renamed Transaction fields">
+      <option name="closed" value="true" />
+      <created>1701881643472</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1701881643472</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -187,11 +221,12 @@
     <MESSAGE value="feat: create_table_transaction.sql file" />
     <MESSAGE value="feat: create_table_currency.sql file" />
     <MESSAGE value="chore: modify workspace.xml" />
-    <MESSAGE value="feat: updated Account model" />
     <MESSAGE value="chore: renamed methods" />
     <MESSAGE value="feat: updated Currency model" />
     <MESSAGE value="feat: updated TransactionType" />
     <MESSAGE value="feat: updated User model" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: updated User model" />
+    <MESSAGE value="feat: updated Account model" />
+    <MESSAGE value="refactor: renamed Transaction fields" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: renamed Transaction fields" />
   </component>
 </project>
