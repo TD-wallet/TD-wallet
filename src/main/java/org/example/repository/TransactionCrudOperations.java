@@ -75,7 +75,7 @@ public class TransactionCrudOperations implements CrudOperations<Transaction> {
     private Transaction getResult(ResultSet rs) throws SQLException {
         return new Transaction(
                 rs.getInt("id"),
-                rs.getInt("amount"),
+                rs.getDouble("amount"),
                 rs.getTimestamp("date"),
                 TransactionType.valueOf(
                         rs.getString("type").toUpperCase()
