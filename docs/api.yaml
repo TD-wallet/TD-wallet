@@ -113,38 +113,6 @@ paths:
         '500':
           $ref: '#/components/responses/500'
 
-    delete:
-      tags:
-        - User
-      description: Delete an user by specifying it's id
-      parameters:
-        - in: query
-          name: userId
-          schema:
-            description: The id of the user needed to be deleted
-            type: number
-      responses:
-        '200':
-          description: Returns the deleted user
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: "#/components/schemas/ResponseBody"
-                properties:
-                  body:
-                    $ref: "#/components/schemas/user"
-        '400':
-          $ref: '#/components/responses/400'
-        '403':
-          $ref: '#/components/responses/403'
-        '404':
-          $ref: '#/components/responses/404'
-        '429':
-          $ref: '#/components/responses/429'
-        '500':
-          $ref: '#/components/responses/500'
-
   /account:
     get:
       tags:
@@ -367,9 +335,9 @@ paths:
                 items:
                   allOf:
                     - $ref: "#/components/schemas/ResponseBody"
-                      properties:
-                        body:
-                          $ref: "#/components/schemas/currency"
+                  properties:
+                    body:
+                      $ref: "#/components/schemas/currency"
         '400':
           $ref: '#/components/responses/400'
         '403':
@@ -399,9 +367,9 @@ paths:
               schema:
                 allOf:
                     - $ref: "#/components/schemas/ResponseBody"
-                      properties:
-                        body:
-                          $ref: "#/components/schemas/currency"
+                properties:
+                  body:
+                    $ref: "#/components/schemas/currency"
         '400':
           $ref: '#/components/responses/400'
         '403':
@@ -431,9 +399,9 @@ paths:
               schema:
                 allOf:
                     - $ref: "#/components/schemas/ResponseBody"
-                      properties:
-                        body:
-                          $ref: "#/components/schemas/currency"
+                properties:
+                  body:
+                    $ref: "#/components/schemas/currency"
         '400':
           $ref: '#/components/responses/400'
         '403':
