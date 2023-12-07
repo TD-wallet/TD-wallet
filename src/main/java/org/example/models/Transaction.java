@@ -5,21 +5,21 @@ import java.sql.Timestamp;
 public class Transaction {
     private final int id;
     private final double amount;
-    private final Timestamp transactionDate;
-    private final TransactionType transactionType;
+    private final Timestamp date;
+    private final TransactionType type;
 
-    public Transaction(int id, double amount, Timestamp transactionDate, TransactionType transactionType) {
+    public Transaction(int id, double amount, Timestamp date, TransactionType type) {
         this.id = id;
         this.amount = amount;
-        this.transactionDate = transactionDate;
-        this.transactionType = transactionType;
+        this.date = date;
+        this.type = type;
     }
 
     public Transaction(double amount, Timestamp transactionDate, TransactionType transactionType) {
         this.id = 0;
         this.amount = amount;
-        this.transactionDate = transactionDate;
-        this.transactionType = transactionType;
+        this.date = transactionDate;
+        this.type = transactionType;
     }
 
     public int getId() {
@@ -30,12 +30,12 @@ public class Transaction {
         return amount;
     }
 
-    public Timestamp getTransactionDate() {
-        return transactionDate;
+    public Timestamp getDate() {
+        return date;
     }
 
-    public TransactionType getTransactionType() {
-        return transactionType;
+    public TransactionType getType() {
+        return type;
     }
 
     @Override
@@ -43,8 +43,8 @@ public class Transaction {
         return "Transaction{" +
                 "id=" + id +
                 ", amount=" + amount +
-                ", transactionDate=" + transactionDate +
-                ", transactionType=" + transactionType +
+                ", transactionDate=" + date +
+                ", transactionType=" + type +
                 '}';
     }
 }

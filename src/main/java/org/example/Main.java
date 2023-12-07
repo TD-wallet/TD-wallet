@@ -5,6 +5,7 @@ import org.example.models.Transaction;
 import org.example.models.TransactionType;
 import org.example.repository.AccountCrudOperations;
 import org.example.repository.TransactionCrudOperations;
+import org.example.repository.UserCrudOperations;
 
 import java.sql.Timestamp;
 import java.time.Instant;
@@ -55,7 +56,7 @@ public class Main {
         Transaction toSaveTransaction = new Transaction(
                 30_000,
                 Timestamp.from(Instant.now()),
-                TransactionType.TRANSFER
+                TransactionType.CREDIT
         );
 
         if (transactionRepo.findById(4) != null) {
@@ -67,6 +68,12 @@ public class Main {
         Transaction toDeleteTransaction = new Transaction(4, 0, null, null);
 
         System.out.printf("   - deleting transaction id=4 : %s%n", transactionRepo.delete(toDeleteTransaction));
+
+        UserCrudOperations userRepo = new UserCrudOperations();
+
+        System.out.println("Performing tests of user R operation");
+
+        System.out.printf("   - findAll in account : %s%n", userRepo.findAll());
 
     }
 }
