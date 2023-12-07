@@ -5,12 +5,14 @@ import java.sql.Timestamp;
 public class Transaction {
     private final int id;
     private final double amount;
+    private final String label;
     private final Timestamp date;
     private final TransactionType type;
 
     public Transaction(int id, double amount, Timestamp date, TransactionType type) {
         this.id = id;
         this.amount = amount;
+        this.label = "Default";
         this.date = date;
         this.type = type;
     }
@@ -18,8 +20,29 @@ public class Transaction {
     public Transaction(double amount, Timestamp transactionDate, TransactionType transactionType) {
         this.id = 0;
         this.amount = amount;
+        this.label = "Default";
         this.date = transactionDate;
         this.type = transactionType;
+    }
+
+    public Transaction(double amount, Timestamp transactionDate, String label, TransactionType transactionType) {
+        this.id = 0;
+        this.amount = amount;
+        this.label = label;
+        this.date = transactionDate;
+        this.type = transactionType;
+    }
+
+    public Transaction(int id, double amount, Timestamp transactionDate, String label, TransactionType transactionType) {
+        this.id = id;
+        this.amount = amount;
+        this.label = label;
+        this.date = transactionDate;
+        this.type = transactionType;
+    }
+
+    public String getLabel() {
+        return label;
     }
 
     public int getId() {
