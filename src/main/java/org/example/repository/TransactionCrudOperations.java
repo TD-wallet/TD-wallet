@@ -94,4 +94,12 @@ public class TransactionCrudOperations implements CrudOperations<Transaction> {
                 }
         ) != 0;
     }
+
+    public List<Transaction> findByAccountId(int id) {
+        return qt.executeQuery(
+                "SELECT * FROM transaction WHERE id_account=? ORDER BY id DESC",
+                ps -> ps.setInt(1, id),
+                this::getResult
+        );
+    }
 }

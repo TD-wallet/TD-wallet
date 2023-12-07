@@ -10,12 +10,12 @@ import java.util.List;
 
 public class AccountCrudOperations implements CrudOperations<Account> {
     private final QueryTemplate qt = new QueryTemplate();
+    CurrencyCrudOperations currencyRepo = new CurrencyCrudOperations();
+    TransactionCrudOperations transactionRepo = new TransactionCrudOperations();
 
     @Override
     public Account findById(Integer id) {
-        return qt.executeSingleQuery("SELECT * FROM account WHERE id=?", ps -> {
-                    ps.setInt(1, id);
-                },
+        return qt.executeSingleQuery("SELECT * FROM account WHERE id=?", ps -> ps.setInt(1, id),
                 this::getResult
         );
     }
@@ -64,9 +64,7 @@ public class AccountCrudOperations implements CrudOperations<Account> {
         Account toBeDeleted = this.findById(toDelete.getId());
         return qt.executeUpdate(
                 "DELETE FROM account WHERE id=?",
-                ps -> {
-                    ps.setInt(1, toDelete.getId());
-                }
+                ps -> ps.setInt(1, toDelete.getId())
         ) == 0 ? null : toBeDeleted;
     }
 
@@ -74,8 +72,11 @@ public class AccountCrudOperations implements CrudOperations<Account> {
         return new Account(
                 rs.getInt("id"),
                 rs.getString("ref"),
-                rs.getDouble("balance")
-        );
+                rs.getDouble("balance"),
+                rs.getString("type"),
+                currencyRepo.findById(rs.getInt("id_currency")),
+                transactionRepo.findByAccountId(rs.getInt("id"))
+                );
     }
 
     private boolean isSaved(Account toSave) {
@@ -86,5 +87,13 @@ public class AccountCrudOperations implements CrudOperations<Account> {
                     ps.setDouble(3, toSave.getBalance());
                 }
         ) != 0;
+    }
+
+    public List<Account> findByUserId(int id) {
+        return qt.executeQuery(
+                "SELECT * FROM account WHERE id_user=? ORDER BY id DESC",
+                ps -> ps.setInt(1, id),
+                this::getResult
+        );
     }
 }
