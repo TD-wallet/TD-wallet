@@ -50,12 +50,13 @@ public class TransactionCrudOperations implements CrudOperations<Transaction> {
             return isSaved(toSave) ? findAll().get(0) : null;
         } else if (findById(toSave.getId()) != null) {
             return qt.executeUpdate(
-                    "UPDATE transaction SET amount=?, date=?, type=?::\"TRANSACTION_TYPE\" WHERE id=?",
+                    "UPDATE transaction SET amount=?, label=?, date=?, type=?::\"TRANSACTION_TYPE\" WHERE id=?",
                     ps -> {
                         ps.setDouble(1, toSave.getAmount());
-                        ps.setTimestamp(2, toSave.getDate());
-                        ps.setString(3, toSave.getType().toString());
-                        ps.setInt(4, toSave.getId());
+                        ps.setString(2, toSave.getLabel());
+                        ps.setTimestamp(3, toSave.getDate());
+                        ps.setString(4, toSave.getType().toString());
+                        ps.setInt(5, toSave.getId());
                     }
             ) == 0 ? null : findById(toSave.getId());
         }
@@ -77,6 +78,7 @@ public class TransactionCrudOperations implements CrudOperations<Transaction> {
                 rs.getInt("id"),
                 rs.getDouble("amount"),
                 rs.getTimestamp("date"),
+                rs.getString("label"),
                 TransactionType.valueOf(
                         rs.getString("type").toUpperCase()
                 )
@@ -85,12 +87,13 @@ public class TransactionCrudOperations implements CrudOperations<Transaction> {
 
     private boolean isSaved(Transaction toSave) {
         return qt.executeUpdate(
-                "INSERT INTO transaction (id, amount, date, type) VALUES (?,?,?,?::\"TRANSACTION_TYPE\")",
+                "INSERT INTO transaction (id, amount, label, date, type) VALUES (?,?,?,?,?::\"TRANSACTION_TYPE\")",
                 ps -> {
                     ps.setInt(1, this.findAll().get(0).getId() + 1);
                     ps.setDouble(2, toSave.getAmount());
-                    ps.setTimestamp(3, toSave.getDate());
-                    ps.setString(4, toSave.getType().toString());
+                    ps.setString(3, toSave.getLabel());
+                    ps.setTimestamp(4, toSave.getDate());
+                    ps.setString(5, toSave.getType().toString());
                 }
         ) != 0;
     }
