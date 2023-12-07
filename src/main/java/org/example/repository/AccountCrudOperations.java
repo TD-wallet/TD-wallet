@@ -5,6 +5,7 @@ import org.example.utils.QueryTemplate;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AccountCrudOperations implements CrudOperations<Account> {
@@ -28,44 +29,62 @@ public class AccountCrudOperations implements CrudOperations<Account> {
 
     @Override
     public List<Account> saveAll(List<Account> toSave) {
+        ArrayList<Account> savedAccounts = new ArrayList<>();
         for (Account account : toSave) {
-            if (isNotSaved(account)) {
+            Account savedAccount = save(account);
+            if (savedAccount == null) {
                 return null;
+            } else {
+                savedAccounts.add(savedAccount);
             }
         }
-        return toSave;
+        return savedAccounts;
     }
 
     @Override
     public Account save(Account toSave) {
-        return isNotSaved(toSave) ? null : toSave;
+        if (toSave.getId() == 0) {
+            return isSaved(toSave) ? null : findAll().get(0);
+        } else if (this.findById(toSave.getId()) != null) {
+            return qt.executeUpdate(
+                    "UPDATE account SET ref=?, type=?, balance=? WHERE id=?",
+                    ps -> {
+                        ps.setString(1, toSave.getRef());
+                        ps.setString(2, toSave.getType());
+                        ps.setDouble(3, toSave.getBalance());
+                        ps.setInt(4, toSave.getId());
+                    }
+            ) == 0 ? null : this.findById(toSave.getId());
+        }
+        return null;
     }
 
     @Override
     public Account delete(Account toDelete) {
+        Account toBeDeleted = this.findById(toDelete.getId());
         return qt.executeUpdate(
                 "DELETE FROM account WHERE id=?",
                 ps -> {
                     ps.setInt(1, toDelete.getId());
                 }
-        ) == 0 ? null : toDelete;
+        ) == 0 ? null : toBeDeleted;
     }
 
     private Account getResult(ResultSet rs) throws SQLException {
         return new Account(
                 rs.getInt("id"),
-                rs.getString("account_number"),
+                rs.getString("ref"),
                 rs.getDouble("balance")
         );
     }
 
-    private boolean isNotSaved(Account toSave) {
-        return qt.executeUpdate("INSERT INTO account (id, account_number, balance) VALUES (?,?,?)",
+    private boolean isSaved(Account toSave) {
+        return qt.executeUpdate("INSERT INTO account (id, ref, balance) VALUES (?,?,?)",
                 ps -> {
                     ps.setInt(1, this.findAll().get(0).getId() + 1);
                     ps.setString(2, toSave.getRef());
                     ps.setDouble(3, toSave.getBalance());
                 }
-        ) == 0;
+        ) != 0;
     }
 }
