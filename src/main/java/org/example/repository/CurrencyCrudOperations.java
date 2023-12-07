@@ -3,16 +3,14 @@ package org.example.repository;
 import org.example.models.Currency;
 import org.example.utils.QueryTemplate;
 
-import java.security.cert.CRLReason;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CurrencyCrudOperations implements CrudOperations<Currency> {
+public class CurrencyCrudOperations {
     private QueryTemplate qt = new QueryTemplate();
 
-    @Override
     public Currency findById(Integer id) {
         return qt.executeSingleQuery(
                 "SELECT * FROM currency WHERE id=?",
@@ -23,14 +21,12 @@ public class CurrencyCrudOperations implements CrudOperations<Currency> {
         );
     }
 
-    @Override
     public List<Currency> findAll() {
         return qt.executeQuery("SELECT * FROM currency ORDER BY id DESC",
                 this::getResult
         );
     }
 
-    @Override
     public List<Currency> saveAll(List<Currency> toSave) {
         ArrayList<Currency> toBeSaved = new ArrayList<>();
         for (Currency currency: toSave) {
@@ -44,7 +40,6 @@ public class CurrencyCrudOperations implements CrudOperations<Currency> {
         return toBeSaved;
     }
 
-    @Override
     public Currency save(Currency toSave) {
         if(toSave.getId() == 0 && isSaved(toSave)) {
                 return findAll().get(0);
@@ -62,7 +57,6 @@ public class CurrencyCrudOperations implements CrudOperations<Currency> {
         return null;
     }
 
-    @Override
     public Currency delete(Currency toDelete) {
         return null;
     }

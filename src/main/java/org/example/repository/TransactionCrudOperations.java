@@ -32,10 +32,11 @@ public class TransactionCrudOperations implements CrudOperations<Transaction> {
     }
 
     @Override
-    public List<Transaction> saveAll(List<Transaction> toSave) {
+    public List<Transaction> saveAll(List<Transaction> toSave, List<Integer> accountIds) {
         ArrayList<Transaction> saved = new ArrayList<>();
-        for (Transaction transaction : toSave) {
-            Transaction value = save(transaction);
+        for (int i = 0; i < toSave.size(); i++) {
+            Transaction transaction = toSave.get(i);
+            Transaction value = save(transaction, accountIds.get(i));
             if (value == null) {
                 return null;
             }
@@ -45,9 +46,9 @@ public class TransactionCrudOperations implements CrudOperations<Transaction> {
     }
 
     @Override
-    public Transaction save(Transaction toSave) {
+    public Transaction save(Transaction toSave, int accountId) {
         if (toSave.getId() == 0) {
-            return isSaved(toSave) ? findAll().get(0) : null;
+            return isSaved(toSave, accountId) ? findAll().get(0) : null;
         } else if (findById(toSave.getId()) != null) {
             return qt.executeUpdate(
                     "UPDATE transaction SET amount=?, label=?, date=?, type=?::\"TRANSACTION_TYPE\" WHERE id=?",
@@ -85,15 +86,17 @@ public class TransactionCrudOperations implements CrudOperations<Transaction> {
         );
     }
 
-    private boolean isSaved(Transaction toSave) {
+    private boolean isSaved(Transaction toSave, int accountId) {
         return qt.executeUpdate(
-                "INSERT INTO transaction (id, amount, label, date, type) VALUES (?,?,?,?,?::\"TRANSACTION_TYPE\")",
+                "INSERT INTO transaction (id, amount, label, date, type, id_account) " +
+                        "VALUES (?,?,?,?,?::\"TRANSACTION_TYPE\",?)",
                 ps -> {
                     ps.setInt(1, this.findAll().get(0).getId() + 1);
                     ps.setDouble(2, toSave.getAmount());
                     ps.setString(3, toSave.getLabel());
                     ps.setTimestamp(4, toSave.getDate());
                     ps.setString(5, toSave.getType().toString());
+                    ps.setInt(6, accountId);
                 }
         ) != 0;
     }

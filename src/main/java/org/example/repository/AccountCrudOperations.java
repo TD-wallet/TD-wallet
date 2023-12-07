@@ -28,10 +28,11 @@ public class AccountCrudOperations implements CrudOperations<Account> {
     }
 
     @Override
-    public List<Account> saveAll(List<Account> toSave) {
+    public List<Account> saveAll(List<Account> toSave, List<Integer> userIds) {
         ArrayList<Account> savedAccounts = new ArrayList<>();
-        for (Account account : toSave) {
-            Account savedAccount = save(account);
+        for (int i = 0; i < toSave.size(); i++) {
+            Account account = toSave.get(i);
+            Account savedAccount = save(account, userIds.get(i));
             if (savedAccount == null) {
                 return null;
             } else {
@@ -42,9 +43,9 @@ public class AccountCrudOperations implements CrudOperations<Account> {
     }
 
     @Override
-    public Account save(Account toSave) {
+    public Account save(Account toSave, int userId) {
         if (toSave.getId() == 0) {
-            return isSaved(toSave) ? null : findAll().get(0);
+            return isSaved(toSave, userId) ? null : findAll().get(0);
         } else if (this.findById(toSave.getId()) != null) {
             return qt.executeUpdate(
                     "UPDATE account SET ref=?, type=?, balance=? WHERE id=?",
@@ -79,12 +80,13 @@ public class AccountCrudOperations implements CrudOperations<Account> {
                 );
     }
 
-    private boolean isSaved(Account toSave) {
-        return qt.executeUpdate("INSERT INTO account (id, ref, balance) VALUES (?,?,?)",
+    private boolean isSaved(Account toSave, int userId) {
+        return qt.executeUpdate("INSERT INTO account (id, ref, balance, id_user) VALUES (?,?,?,?)",
                 ps -> {
                     ps.setInt(1, this.findAll().get(0).getId() + 1);
                     ps.setString(2, toSave.getRef());
                     ps.setDouble(3, toSave.getBalance());
+                    ps.setInt(4, userId);
                 }
         ) != 0;
     }
