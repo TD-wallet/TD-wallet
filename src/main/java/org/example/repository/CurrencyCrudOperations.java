@@ -70,8 +70,8 @@ public class CurrencyCrudOperations implements CrudOperations<Currency> {
     private Currency getResult(ResultSet rs) throws SQLException {
         return new Currency(
                 rs.getInt("id"),
-                rs.getString("code"),
                 rs.getString("name"),
+                rs.getString("code"),
                 rs.getString("symbol")
         );
     }
