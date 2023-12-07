@@ -10,6 +10,8 @@ target/
 /.idea/jpa-buddy.xml
 /recommanded_format.json
 .idea/shelf
+.idea/misc.xml
+.idea/workspace.xml
 .idea/sqldialects.xml
 .idea/swagger-settings.xml
 .idea/uiDesigner.xml
