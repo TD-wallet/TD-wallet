@@ -5,9 +5,9 @@ ENUM ('DEBIT','CREDIT');
 CREATE TABLE IF NOT EXISTS transaction (
 	id integer NOT NULL,
 	amount integer NOT NULL,
-    label varchar(70),
+    label varchar(70) NOT NULL DEFAULT 'Default',
 	date timestamp NOT NULL DEFAULT current_timestamp,
-	type "TRANSACTION_TYPE" NOT NULL DEFAULT 'DEBIT',
+	type "TRANSACTION_TYPE" NOT NULL DEFAULT 'DEBIT'::"TRANSACTION_TYPE",
 	id_account integer NOT NULL,
 	CONSTRAINT transaction_pkey PRIMARY KEY (id)
 );
