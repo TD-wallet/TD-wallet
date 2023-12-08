@@ -27,18 +27,18 @@ public class Main {
                 accountRepo.findById(idToGet)
         );
 
-        Account toInsertAccount = new Account(4, "HIJ456", 0);
+        // Account toInsertAccount = new Account(4, "HIJ456", 0);
         if (accountRepo.findById(4) != null) {
             System.out.println("    - save account : account already exists");
         } else {
-            System.out.printf("   - save account : %s%n", accountRepo.save(toInsertAccount));
+            // System.out.printf("   - save account : %s%n", accountRepo.save(toInsertAccount));
         }
 
-        Account toDeleteAccount = new Account(4, null, 0);
-        System.out.printf("   - deleting account id=%d : %s%n%n",
-                toDeleteAccount.getId(),
-                accountRepo.delete(toDeleteAccount)
-        );
+        // Account toDeleteAccount = new Account(4, null, 0);
+//        System.out.printf("   - deleting account id=%d : %s%n%n",
+//                toDeleteAccount.getId(),
+//                accountRepo.delete(toDeleteAccount)
+//        );
 
         TransactionCrudOperations transactionRepo = new TransactionCrudOperations();
 
@@ -62,7 +62,7 @@ public class Main {
         if (transactionRepo.findById(4) != null) {
             System.out.println("    - save transaction : transaction already exists");
         } else {
-            System.out.printf("   - save transaction : %s%n", transactionRepo.save(toSaveTransaction));
+            // System.out.printf("   - save transaction : %s%n", transactionRepo.save(toSaveTransaction));
         }
 
         Transaction toDeleteTransaction = new Transaction(4, 0, null, null);
