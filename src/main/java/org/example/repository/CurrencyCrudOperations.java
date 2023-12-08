@@ -78,6 +78,6 @@ public class CurrencyCrudOperations {
                     ps.setString(2, currency.getName());
                     ps.setString(3, currency.getSymbol());
                 }
-        ) == 0;
+        ) != 0;
     }
 }
