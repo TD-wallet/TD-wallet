@@ -77,7 +77,7 @@ public class TransactionCrudOperations implements CrudOperations<Transaction> {
     private Transaction getResult(ResultSet rs) throws SQLException {
         return new Transaction(
                 rs.getInt("id"),
-                rs.getInt("amount"),
+                rs.getDouble("amount"),
                 rs.getTimestamp("date"),
                 rs.getString("label"),
                 TransactionType.valueOf(
@@ -99,5 +99,13 @@ public class TransactionCrudOperations implements CrudOperations<Transaction> {
                     ps.setInt(6, accountId);
                 }
         ) != 0;
+    }
+
+    public List<Transaction> findByAccountId(int id) {
+        return qt.executeQuery(
+                "SELECT * FROM transaction WHERE id_account=? ORDER BY id DESC",
+                ps -> ps.setInt(1, id),
+                this::getResult
+        );
     }
 }
