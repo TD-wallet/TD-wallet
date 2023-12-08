@@ -64,8 +64,8 @@ public class CurrencyCrudOperations {
     private Currency getResult(ResultSet rs) throws SQLException {
         return new Currency(
                 rs.getInt("id"),
-                rs.getString("name"),
                 rs.getString("code"),
+                rs.getString("name"),
                 rs.getString("symbol")
         );
     }
