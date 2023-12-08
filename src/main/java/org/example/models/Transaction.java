@@ -1,6 +1,8 @@
 package org.example.models;
 
 import java.sql.Timestamp;
+import java.time.Instant;
+import java.time.ZoneOffset;
 
 public class Transaction {
     private final int id;
@@ -40,6 +42,15 @@ public class Transaction {
         this.date = transactionDate;
         this.type = transactionType;
     }
+
+    public Transaction(double amount, String label, TransactionType transactionType) {
+        this.id = 0;
+        this.amount = amount;
+        this.label = label;
+        this.date = Timestamp.from(Instant.now());
+        this.type = transactionType;
+    }
+
 
     public String getLabel() {
         return label;
