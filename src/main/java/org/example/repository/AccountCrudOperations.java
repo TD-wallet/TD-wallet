@@ -1,6 +1,7 @@
 package org.example.repository;
 
 import org.example.models.Account;
+import org.example.models.Columns;
 import org.example.utils.QueryTemplate;
 
 import java.sql.ResultSet;
@@ -72,13 +73,13 @@ public class AccountCrudOperations implements CrudOperations<Account> {
 
     private Account getResult(ResultSet rs) throws SQLException {
         return new Account(
-                rs.getInt("id"),
-                rs.getString("ref"),
-                balanceRepo.findByAccountId(rs.getInt("id")),
-                rs.getString("type"),
-                currencyRepo.findById(rs.getInt("id_currency")),
-                transactionRepo.findByAccountId(rs.getInt("id")),
-                rs.getString("name")
+                rs.getInt(Columns.ID),
+                rs.getString(Columns.REF),
+                balanceRepo.findByAccountId(rs.getInt(Columns.ID)),
+                rs.getString(Columns.TYPE),
+                currencyRepo.findById(rs.getInt(Columns.ID_CURRENCY)),
+                transactionRepo.findByAccountId(rs.getInt(Columns.ID)),
+                rs.getString(Columns.NAME)
         );
     }
 
