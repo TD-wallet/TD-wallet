@@ -1,6 +1,7 @@
 package org.example.repository;
 
 import org.example.models.Account;
+import org.example.models.Balance;
 import org.example.utils.QueryTemplate;
 
 import java.sql.ResultSet;
@@ -12,6 +13,7 @@ public class AccountCrudOperations implements CrudOperations<Account> {
     private final QueryTemplate qt = new QueryTemplate();
     CurrencyCrudOperations currencyRepo = new CurrencyCrudOperations();
     TransactionCrudOperations transactionRepo = new TransactionCrudOperations();
+    BalanceCrudOperations balanceRepo = new BalanceCrudOperations();
 
     @Override
     public Account findById(Integer id) {
@@ -45,15 +47,14 @@ public class AccountCrudOperations implements CrudOperations<Account> {
     @Override
     public Account save(Account toSave, int userId) {
         if (toSave.getId() == 0) {
-            return isSaved(toSave, userId) ? null : findAll().get(0);
+            return isSaved(toSave, userId) ? findAll().get(0) : null;
         } else if (this.findById(toSave.getId()) != null) {
             return qt.executeUpdate(
-                    "UPDATE account SET ref=?, type=?, balance=? WHERE id=?",
+                    "UPDATE account SET ref=?, type=? WHERE id=?",
                     ps -> {
                         ps.setString(1, toSave.getRef());
                         ps.setString(2, toSave.getType());
-                        ps.setDouble(3, toSave.getBalance());
-                        ps.setInt(4, toSave.getId());
+                        ps.setInt(3, toSave.getId());
                     }
             ) == 0 ? null : this.findById(toSave.getId());
         }
@@ -73,7 +74,7 @@ public class AccountCrudOperations implements CrudOperations<Account> {
         return new Account(
                 rs.getInt("id"),
                 rs.getString("ref"),
-                rs.getDouble("balance"),
+                balanceRepo.findByAccountId(rs.getInt("id")),
                 rs.getString("type"),
                 currencyRepo.findById(rs.getInt("id_currency")),
                 transactionRepo.findByAccountId(rs.getInt("id"))
@@ -81,12 +82,11 @@ public class AccountCrudOperations implements CrudOperations<Account> {
     }
 
     private boolean isSaved(Account toSave, int userId) {
-        return qt.executeUpdate("INSERT INTO account (id, ref, balance, id_user) VALUES (?,?,?,?)",
+        return qt.executeUpdate("INSERT INTO account (id, ref, id_user) VALUES (?,?,?)",
                 ps -> {
                     ps.setInt(1, this.findAll().get(0).getId() + 1);
                     ps.setString(2, toSave.getRef());
-                    ps.setDouble(3, toSave.getBalance());
-                    ps.setInt(4, userId);
+                    ps.setInt(3, userId);
                 }
         ) != 0;
     }

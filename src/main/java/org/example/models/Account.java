@@ -6,12 +6,12 @@ import java.util.Locale;
 public class Account {
     private final int id;
     private String ref;
-    private double balance;
+    private List<Balance> balance;
     private String type = "CASH";
     private final Currency currency;
     private final List<Transaction> transactions;
 
-    public Account(int id, String accountNumber, double balance) {
+    public Account(int id, String accountNumber, List<Balance> balance) {
         this.id = id;
         this.ref = accountNumber;
         this.balance = balance;
@@ -28,7 +28,7 @@ public class Account {
     public Account(String accountNumber, User user) {
         this.id = 0;
         this.ref = accountNumber;
-        this.balance = 0;
+        this.balance = List.of();
         this.currency = new Currency(
                 Locale.getDefault().getDisplayName(),
                 Locale.getDefault().getISO3Country(),
@@ -39,7 +39,7 @@ public class Account {
         this.transactions = List.of();
     }
 
-    public Account(String ref, double balance, String type, Currency currency, List<Transaction> transactions) {
+    public Account(String ref, List<Balance> balance, String type, Currency currency, List<Transaction> transactions) {
         this.id = 0;
         this.ref = ref;
         this.balance = balance;
@@ -48,7 +48,7 @@ public class Account {
         this.transactions = transactions;
     }
 
-    public Account(int id, String ref, double balance, String type, Currency currency, List<Transaction> transactions) {
+    public Account(int id, String ref, List<Balance> balance, String type, Currency currency, List<Transaction> transactions) {
         this.id = id;
         this.ref = ref;
         this.balance = balance;
@@ -81,12 +81,8 @@ public class Account {
         this.ref = ref;
     }
 
-    public double getBalance() {
+    public List<Balance> getBalance() {
         return balance;
-    }
-
-    public void setBalance(double balance) {
-        this.balance = balance;
     }
 
     @Override
