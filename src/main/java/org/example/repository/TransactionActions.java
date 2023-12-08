@@ -8,9 +8,9 @@ import org.example.utils.QueryTemplate;
 
 public class TransactionActions {
     private QueryTemplate qt = new QueryTemplate();
-    private TransactionCrudOperations transactionRepo = new TransactionCrudOperations();
-    private AccountCrudOperations accountRepo = new AccountCrudOperations();
-    private BalanceCrudOperations balanceRepo = new BalanceCrudOperations();
+    private final TransactionCrudOperations transactionRepo = new TransactionCrudOperations();
+    private final AccountCrudOperations accountRepo = new AccountCrudOperations();
+    private final BalanceCrudOperations balanceRepo = new BalanceCrudOperations();
 
     public Account debit(Account account, double amount, String label) {
         Account acToDebit = accountRepo.findById(account.getId());
