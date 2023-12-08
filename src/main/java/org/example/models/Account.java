@@ -1,72 +1,26 @@
 package org.example.models;
 
 import java.util.List;
-import java.util.Locale;
 
 public class Account {
     private final int id;
     private String ref;
-    private List<Balance> balance;
+    private double balance;
     private String type = "CASH";
-    private final Currency currency;
-    private final List<Transaction> transactions;
+    private Currency currency;
+    private User user;
+    private List<Transaction> transactions;
 
-    public Account(int id, String accountNumber, List<Balance> balance) {
+    public Account(int id, String accountNumber, double balance) {
         this.id = id;
         this.ref = accountNumber;
         this.balance = balance;
-        this.currency = new Currency(
-                Locale.getDefault().getDisplayName(),
-                Locale.getDefault().getISO3Country(),
-                java.util.Currency.getInstance(
-                        Locale.getDefault()
-                ).getSymbol()
-        );
-        this.transactions = List.of();
     }
 
-    public Account(String accountNumber, User user) {
+    public Account(String accountNumber) {
         this.id = 0;
         this.ref = accountNumber;
-        this.balance = List.of();
-        this.currency = new Currency(
-                Locale.getDefault().getDisplayName(),
-                Locale.getDefault().getISO3Country(),
-                java.util.Currency.getInstance(
-                        Locale.getDefault()
-                ).getSymbol()
-        );
-        this.transactions = List.of();
-    }
-
-    public Account(String ref, List<Balance> balance, String type, Currency currency, List<Transaction> transactions) {
-        this.id = 0;
-        this.ref = ref;
-        this.balance = balance;
-        this.type = type;
-        this.currency = currency;
-        this.transactions = transactions;
-    }
-
-    public Account(int id, String ref, List<Balance> balance, String type, Currency currency, List<Transaction> transactions) {
-        this.id = id;
-        this.ref = ref;
-        this.balance = balance;
-        this.type = type;
-        this.currency = currency;
-        this.transactions = transactions;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public Currency getCurrency() {
-        return currency;
-    }
-
-    public List<Transaction> getTransactions() {
-        return transactions;
+        this.balance = 0;
     }
 
     public int getId() {
@@ -81,8 +35,12 @@ public class Account {
         this.ref = ref;
     }
 
-    public List<Balance> getBalance() {
+    public double getBalance() {
         return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 
     @Override
@@ -92,8 +50,6 @@ public class Account {
                 ", ref='" + ref + '\'' +
                 ", balance=" + balance +
                 ", type='" + type + '\'' +
-                ", currency=" + currency +
-                ", transactions=" + transactions +
                 '}';
     }
 }
