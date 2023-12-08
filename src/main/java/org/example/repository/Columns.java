@@ -1,4 +1,4 @@
-package org.example.models;
+package org.example.repository;
 
 public class Columns {
     public static final String ID = "id";

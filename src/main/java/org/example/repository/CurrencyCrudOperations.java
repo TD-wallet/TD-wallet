@@ -1,6 +1,5 @@
 package org.example.repository;
 
-import org.example.models.Columns;
 import org.example.models.Currency;
 import org.example.utils.QueryTemplate;
 
