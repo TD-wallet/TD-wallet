@@ -91,4 +91,12 @@ public class AccountCrudOperations implements CrudOperations<Account> {
                 }
         ) != 0;
     }
+
+    public List<Account> getByUserId(int userId) {
+        return qt.executeQuery(
+                "SELECT * FROM account WHERE id_user=?",
+                ps -> ps.setInt(1, userId),
+                this::getResult
+        );
+    }
 }
