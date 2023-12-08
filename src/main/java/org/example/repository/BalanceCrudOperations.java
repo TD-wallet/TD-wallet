@@ -1,7 +1,6 @@
 package org.example.repository;
 
 import org.example.models.Balance;
-import org.example.models.Columns;
 import org.example.utils.QueryTemplate;
 
 import java.sql.ResultSet;
