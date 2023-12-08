@@ -7,7 +7,6 @@ public class Columns {
     public static final String TYPE ="type";
     public static final String DATE = "date";
     public static final String AMOUNT = "amount";
-    public static final String BALANCE = "balance";
     public static final String CODE = "code";
     public static final String SYMBOL = "symbol";
     public static final String USERNAME = "username";
