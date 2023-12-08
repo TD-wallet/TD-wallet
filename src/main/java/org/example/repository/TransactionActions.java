@@ -48,7 +48,7 @@ public class TransactionActions {
                         TransactionType.CREDIT
                 ), toCreditAccount.getId()
         );
-p
+
         return accountRepo.save(toCreditAccount, qt.executeSingleQuery(
                         "SELECT id_user FROM account WHERE id=?",
                         ps -> ps.setInt(1, toCreditAccount.getId()),
