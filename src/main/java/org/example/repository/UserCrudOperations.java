@@ -10,7 +10,6 @@ import java.util.List;
 
 public class UserCrudOperations implements CrudOperations<User> {
     private QueryTemplate qt = new QueryTemplate();
-    private AccountCrudOperations accountRepo = new AccountCrudOperations();
     @Override
     public User findById(Integer id) {
         return qt.executeSingleQuery(
@@ -92,8 +91,7 @@ public class UserCrudOperations implements CrudOperations<User> {
                 rs.getInt("id"),
                 rs.getString("username"),
                 rs.getString("email"),
-                rs.getString("password"),
-                accountRepo.findByUserId(rs.getInt("id"))
+                rs.getString("password")
         );
     }
 }
