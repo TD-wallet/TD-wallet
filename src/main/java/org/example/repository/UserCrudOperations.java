@@ -1,7 +1,5 @@
 package org.example.repository;
 
-import org.example.models.Account;
-import org.example.models.Columns;
 import org.example.models.User;
 import org.example.utils.QueryTemplate;
 
