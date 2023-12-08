@@ -1,5 +1,6 @@
 package org.example.repository;
 
+import org.example.models.Columns;
 import org.example.models.Transaction;
 import org.example.models.TransactionType;
 import org.example.utils.QueryTemplate;
@@ -76,12 +77,12 @@ public class TransactionCrudOperations implements CrudOperations<Transaction> {
 
     private Transaction getResult(ResultSet rs) throws SQLException {
         return new Transaction(
-                rs.getInt("id"),
-                rs.getDouble("amount"),
-                rs.getTimestamp("date"),
-                rs.getString("label"),
+                rs.getInt(Columns.ID),
+                rs.getDouble(Columns.AMOUNT),
+                rs.getTimestamp(Columns.DATE),
+                rs.getString(Columns.LABEL),
                 TransactionType.valueOf(
-                        rs.getString("type").toUpperCase()
+                        rs.getString(Columns.TYPE).toUpperCase()
                 )
         );
     }

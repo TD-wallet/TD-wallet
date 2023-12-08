@@ -1,6 +1,7 @@
 package org.example.repository;
 
 import org.example.models.Balance;
+import org.example.models.Columns;
 import org.example.utils.QueryTemplate;
 
 import java.sql.ResultSet;
@@ -63,9 +64,9 @@ public class BalanceCrudOperations implements CrudOperations<Balance> {
 
     private Balance getResult(ResultSet rs) throws SQLException {
         return new Balance(
-                rs.getInt("id"),
-                rs.getTimestamp("date"),
-                rs.getDouble("amount")
+                rs.getInt(Columns.ID),
+                rs.getTimestamp(Columns.DATE),
+                rs.getDouble(Columns.AMOUNT)
         );
     }
 

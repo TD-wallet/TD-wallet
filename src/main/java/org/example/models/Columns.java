@@ -16,4 +16,5 @@ public class Columns {
     public static final String ID_CURRENCY = "id_currency";
     public static final String ID_ACCOUNT = "id_account";
     public static final String ID_USER = "id_user";
+    public static final String LABEL = "label";
 }

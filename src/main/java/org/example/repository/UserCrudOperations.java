@@ -1,6 +1,7 @@
 package org.example.repository;
 
 import org.example.models.Account;
+import org.example.models.Columns;
 import org.example.models.User;
 import org.example.utils.QueryTemplate;
 
@@ -86,11 +87,11 @@ public class UserCrudOperations {
 
     private User getUser(ResultSet rs) throws SQLException {
         return new User(
-                rs.getInt("id"),
-                rs.getString("username"),
-                rs.getString("email"),
-                rs.getString("password"),
-                accountRepo.getByUserId(rs.getInt("id"))
+                rs.getInt(Columns.ID),
+                rs.getString(Columns.USERNAME),
+                rs.getString(Columns.EMAIL),
+                rs.getString(Columns.PASSWORD),
+                accountRepo.getByUserId(rs.getInt(Columns.ID_USER))
         );
     }
 }

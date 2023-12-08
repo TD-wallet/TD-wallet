@@ -1,5 +1,6 @@
 package org.example.repository;
 
+import org.example.models.Columns;
 import org.example.models.Currency;
 import org.example.utils.QueryTemplate;
 
@@ -63,10 +64,10 @@ public class CurrencyCrudOperations {
 
     private Currency getResult(ResultSet rs) throws SQLException {
         return new Currency(
-                rs.getInt("id"),
-                rs.getString("code"),
-                rs.getString("name"),
-                rs.getString("symbol")
+                rs.getInt(Columns.ID),
+                rs.getString(Columns.CODE),
+                rs.getString(Columns.NAME),
+                rs.getString(Columns.SYMBOL)
         );
     }
 
