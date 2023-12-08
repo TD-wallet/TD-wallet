@@ -1,5 +1,6 @@
 package org.example.repository;
 
+import org.example.models.Account;
 import org.example.models.User;
 import org.example.utils.QueryTemplate;
 
@@ -8,9 +9,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserCrudOperations implements CrudOperations<User> {
-    private QueryTemplate qt = new QueryTemplate();
-    @Override
+public class UserCrudOperations {
+    private final QueryTemplate qt = new QueryTemplate();
+    private final AccountCrudOperations accountRepo = new AccountCrudOperations();
+
     public User findById(Integer id) {
         return qt.executeSingleQuery(
                 "SELECT * FROM \"user\" WHERE id=?",
@@ -21,7 +23,6 @@ public class UserCrudOperations implements CrudOperations<User> {
         );
     }
 
-    @Override
     public List<User> findAll() {
         return qt.executeQuery(
                 "SELECT * FROM \"user\" ORDER BY id DESC",
@@ -29,7 +30,6 @@ public class UserCrudOperations implements CrudOperations<User> {
         );
     }
 
-    @Override
     public List<User> saveAll(List<User> toSave) {
         ArrayList<User> saved = new ArrayList<>();
         for(User user : toSave) {
@@ -42,7 +42,6 @@ public class UserCrudOperations implements CrudOperations<User> {
         return saved;
     }
 
-    @Override
     public User save(User toSave) {
         if (toSave.getId() == 0) {
             return isSaved(toSave) ? findAll().get(0) : null;
@@ -60,7 +59,6 @@ public class UserCrudOperations implements CrudOperations<User> {
         return null;
     }
 
-    @Override
     public User delete(User toDelete) {
         User toBeDeleted = findById(toDelete.getId());
         if (toBeDeleted == null) {
@@ -91,7 +89,8 @@ public class UserCrudOperations implements CrudOperations<User> {
                 rs.getInt("id"),
                 rs.getString("username"),
                 rs.getString("email"),
-                rs.getString("password")
+                rs.getString("password"),
+                accountRepo.getByUserId(rs.getInt("id"))
         );
     }
 }
