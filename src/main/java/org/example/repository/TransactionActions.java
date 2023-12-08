@@ -1,13 +1,10 @@
 package org.example.repository;
 
-import org.example.models.Account;
-import org.example.models.Balance;
-import org.example.models.Transaction;
-import org.example.models.TransactionType;
+import org.example.models.*;
 import org.example.utils.QueryTemplate;
 
 public class TransactionActions {
-    private QueryTemplate qt = new QueryTemplate();
+    private final QueryTemplate qt = new QueryTemplate();
     private final TransactionCrudOperations transactionRepo = new TransactionCrudOperations();
     private final AccountCrudOperations accountRepo = new AccountCrudOperations();
     private final BalanceCrudOperations balanceRepo = new BalanceCrudOperations();
@@ -31,7 +28,7 @@ public class TransactionActions {
         return accountRepo.save(acToDebit, qt.executeSingleQuery(
                 "SELECT id_user FROM account WHERE id=?",
                 ps -> ps.setInt(1, acToDebit.getId()),
-                rs -> rs.getInt("id_user")
+                rs -> rs.getInt(Columns.ID_USER)
         ));
     }
 
@@ -52,7 +49,7 @@ public class TransactionActions {
         return accountRepo.save(toCreditAccount, qt.executeSingleQuery(
                         "SELECT id_user FROM account WHERE id=?",
                         ps -> ps.setInt(1, toCreditAccount.getId()),
-                        rs -> rs.getInt("id_user")
+                        rs -> rs.getInt(Columns.ID_USER)
                 )
         );
     }
