@@ -1,4 +1,4 @@
-package td.wallet.repository;
+package td.wallet.service;
 
 import td.wallet.models.Account;
 import td.wallet.models.Balance;
@@ -9,7 +9,7 @@ import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.List;
 
-public class AccountOperations {
+public class AccountService {
     private final QueryTemplate qt = new QueryTemplate();
 
     public Double getBalanceAtDate(Account account, Timestamp date) {
