@@ -14,11 +14,21 @@ ALTER TABLE account
         ON DELETE RESTRICT ON UPDATE CASCADE;
 
 ALTER TABLE transaction
-    ADD CONSTRAINT account_fk FOREIGN KEY (id_account)
+    ADD CONSTRAINT account_transaction_fk FOREIGN KEY (id_account)
         REFERENCES account (id) MATCH FULL
         ON DELETE RESTRICT ON UPDATE CASCADE;
 
 ALTER TABLE balance
     ADD CONSTRAINT balance_fk FOREIGN KEY (id_account)
+        REFERENCES account (id) MATCH FULL
+        ON DELETE RESTRICT ON UPDATE CASCADE;
+
+ALTER TABLE transfer
+    ADD CONSTRAINT debited_transfer_fk FOREIGN KEY (id_debited)
+        REFERENCES account (id) MATCH FULL
+        ON DELETE RESTRICT ON UPDATE CASCADE;
+
+ALTER TABLE transfer
+    ADD CONSTRAINT credited_transfer_fk FOREIGN KEY (id_credited)
         REFERENCES account (id) MATCH FULL
         ON DELETE RESTRICT ON UPDATE CASCADE;

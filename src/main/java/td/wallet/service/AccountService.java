@@ -1,14 +1,15 @@
-package org.example.repository;
+package td.wallet.service;
 
-import org.example.models.Account;
-import org.example.models.Balance;
-import org.example.utils.QueryTemplate;
+import td.wallet.models.Account;
+import td.wallet.models.Balance;
+import td.wallet.repository.utils.Columns;
+import td.wallet.utils.QueryTemplate;
 
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.List;
 
-public class AccountOperations {
+public class AccountService {
     private final QueryTemplate qt = new QueryTemplate();
 
     public Double getBalanceAtDate(Account account, Timestamp date) {

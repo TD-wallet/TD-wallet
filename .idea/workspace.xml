@@ -4,14 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0098e834-f89a-4717-b5d8-7d79f3c936d0" name="Changes" comment="refactor: renamed Transaction fields">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/repository/UserCrudOperations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="0098e834-f89a-4717-b5d8-7d79f3c936d0" name="Changes" comment="feat: add transfer sql">
+      <change afterPath="$PROJECT_DIR$/src/main/java/td/wallet/repository/TranferCrudOperations.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/models/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/models/Account.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/models/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/models/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repository/AccountCrudOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repository/AccountCrudOperations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repository/TransactionCrudOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repository/TransactionCrudOperations.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/td/wallet/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/models/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/td/wallet/models/Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/models/Balance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/td/wallet/models/Balance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/models/Currency.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/td/wallet/models/Currency.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/models/Transaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/td/wallet/models/Transaction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/models/TransactionType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/td/wallet/models/TransactionType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/models/Transfer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/td/wallet/models/Transfer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/models/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/td/wallet/models/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repository/AccountCrudOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/td/wallet/repository/AccountCrudOperations.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repository/AccountOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/td/wallet/repository/AccountOperations.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repository/BalanceCrudOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/td/wallet/repository/BalanceCrudOperations.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repository/Columns.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/td/wallet/repository/utils/Columns.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repository/CrudOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/td/wallet/repository/CrudOperations.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repository/CurrencyCrudOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/td/wallet/repository/CurrencyCrudOperations.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repository/TransactionActions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/td/wallet/service/TransactionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repository/TransactionCrudOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/td/wallet/repository/TransactionCrudOperations.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repository/UserCrudOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/td/wallet/repository/UserCrudOperations.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/utils/ConnectionProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/td/wallet/utils/ConnectionProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/utils/QueryTemplate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/td/wallet/utils/QueryTemplate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/utils/lambdas/ObjectMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/td/wallet/utils/lambdas/ObjectMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/utils/lambdas/PreparedStatementSetter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/td/wallet/utils/lambdas/PreparedStatementSetter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/utils/lambdas/RowMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/td/wallet/utils/lambdas/RowMapper.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +38,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Record" />
         <option value="Class" />
       </list>
     </option>
@@ -32,6 +50,7 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -49,12 +68,14 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Java Scratch.Main.executor": "Run",
+    "Java Scratch.Unnamed.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "td-wallet-std22081",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/USER/Documents/Java project/library_management/pom.xml",
+    "last_opened_file_path": "/home/kirisaki-vk/IdeaProjects/TD-wallet/src/main/java/td/wallet/Main.java",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -64,10 +85,31 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java/org/example/models" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Java Scratch" nameIsGenerated="true">
+      <envs>
+        <env name="PG_USERNAME" value="postgres" />
+        <env name="PG_PASSWORD" value="1234" />
+        <env name="PG_DATABASE_URL" value="localhost/wallet" />
+      </envs>
+      <option name="MAIN_CLASS_NAME" value="td.wallet.Main" />
+      <module name="TD-wallet" />
+      <option name="SCRATCH_FILE_URL" value="file://$PROJECT_DIR$/src/main/java/td/wallet/Main.java" />
+      <shortenClasspath name="NONE" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="jdk-17.0.9-corretto-17.0.9-3183f394aec4-86fc8109" />
+        <option value="jdk-20.0.2-corretto-20.0.2.1-3183f394aec4-bc38cd27" />
       </set>
     </attachedChunks>
   </component>
@@ -83,6 +125,13 @@
       <workItem from="1701508004481" duration="5798000" />
       <workItem from="1701621429913" duration="6049000" />
       <workItem from="1701886011528" duration="829000" />
+      <workItem from="1702014759269" duration="5101000" />
+      <workItem from="1702022326545" duration="18000" />
+      <workItem from="1702026846501" duration="2364000" />
+      <workItem from="1702034502746" duration="5739000" />
+      <workItem from="1702042300341" duration="2287000" />
+      <workItem from="1702351943179" duration="7000" />
+      <workItem from="1702464971706" duration="2743000" />
     </task>
     <task id="LOCAL-00001" summary="chore: add JDBC dependency">
       <option name="closed" value="true" />
@@ -196,7 +245,95 @@
       <option name="project" value="LOCAL" />
       <updated>1701881643472</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="feat: added findTransaction by accountId">
+      <option name="closed" value="true" />
+      <created>1702011005920</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1702011005920</updated>
+    </task>
+    <task id="LOCAL-00016" summary="fix: account missing fields">
+      <option name="closed" value="true" />
+      <created>1702017036793</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1702017036793</updated>
+    </task>
+    <task id="LOCAL-00017" summary="fix: fix user">
+      <option name="closed" value="true" />
+      <created>1702018113657</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1702018113657</updated>
+    </task>
+    <task id="LOCAL-00018" summary="feat: added magic numbers for columns">
+      <option name="closed" value="true" />
+      <created>1702027645368</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1702027645368</updated>
+    </task>
+    <task id="LOCAL-00019" summary="feat: impl example of magic numbers">
+      <option name="closed" value="true" />
+      <created>1702027694857</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1702027694857</updated>
+    </task>
+    <task id="LOCAL-00020" summary="chore: moved column packages">
+      <option name="closed" value="true" />
+      <created>1702035258691</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1702035258691</updated>
+    </task>
+    <task id="LOCAL-00021" summary="feat: added AccountOperations">
+      <option name="closed" value="true" />
+      <created>1702037618609</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1702037618609</updated>
+    </task>
+    <task id="LOCAL-00022" summary="fix: account column">
+      <option name="closed" value="true" />
+      <created>1702038404735</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1702038404735</updated>
+    </task>
+    <task id="LOCAL-00023" summary="feat: added Transfer entity">
+      <option name="closed" value="true" />
+      <created>1702042537322</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1702042537322</updated>
+    </task>
+    <task id="LOCAL-00024" summary="fix: database insert">
+      <option name="closed" value="true" />
+      <created>1702044576235</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1702044576235</updated>
+    </task>
+    <task id="LOCAL-00025" summary="feat: add transfer sql">
+      <option name="closed" value="true" />
+      <created>1702466971020</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1702466971020</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -227,6 +364,25 @@
     <MESSAGE value="feat: updated User model" />
     <MESSAGE value="feat: updated Account model" />
     <MESSAGE value="refactor: renamed Transaction fields" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: renamed Transaction fields" />
+    <MESSAGE value="feat: added findTransaction by accountId" />
+    <MESSAGE value="fix: account missing fields" />
+    <MESSAGE value="fix: fix user" />
+    <MESSAGE value="feat: added magic numbers for columns" />
+    <MESSAGE value="feat: impl example of magic numbers" />
+    <MESSAGE value="chore: moved column packages" />
+    <MESSAGE value="feat: added AccountOperations" />
+    <MESSAGE value="fix: account column" />
+    <MESSAGE value="feat: added Transfer entity" />
+    <MESSAGE value="fix: database insert" />
+    <MESSAGE value="feat: add transfer sql" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: add transfer sql" />
   </component>
+  <component name="WfRunsListSearchHistory"><![CDATA[{
+  "history": [
+    {
+    }
+  ],
+  "lastFilter": {
+  }
+}]]></component>
 </project>
