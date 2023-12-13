@@ -1,4 +1,4 @@
-package org.example.models;
+package td.wallet.models;
 
 import java.sql.Timestamp;
 
@@ -6,22 +6,22 @@ public class Transfer {
     private final int id;
     private final Account debited;
     private final Account credited;
-    private final Transaction transaction;
+    private final double amount;
     private final Timestamp date;
 
-    public Transfer(int id, Account debited, Account credited, Transaction transaction, Timestamp date) {
+    public Transfer(int id, Account debited, Account credited, double amount, Timestamp date) {
         this.id = id;
         this.debited = debited;
         this.credited = credited;
-        this.transaction = transaction;
+        this.amount = amount;
         this.date = date;
     }
 
-    public Transfer(Account debited, Account credited, Transaction transaction, Timestamp date) {
+    public Transfer(Account debited, Account credited, double amount, Timestamp date) {
         this.id = 0;
         this.debited = debited;
         this.credited = credited;
-        this.transaction = transaction;
+        this.amount = amount;
         this.date = date;
     }
 
@@ -37,8 +37,8 @@ public class Transfer {
         return credited;
     }
 
-    public Transaction getTransaction() {
-        return transaction;
+    public double getAmount() {
+        return amount;
     }
 
     public Timestamp getDate() {
@@ -51,7 +51,6 @@ public class Transfer {
                 "id=" + id +
                 ", debited=" + debited +
                 ", credited=" + credited +
-                ", transaction=" + transaction +
                 ", date=" + date +
                 '}';
     }

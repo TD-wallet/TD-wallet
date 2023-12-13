@@ -1,7 +1,8 @@
-package org.example.repository;
+package td.wallet.repository;
 
-import org.example.models.Currency;
-import org.example.utils.QueryTemplate;
+import td.wallet.models.Currency;
+import td.wallet.repository.utils.Columns;
+import td.wallet.utils.QueryTemplate;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

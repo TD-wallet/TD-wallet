@@ -1,9 +1,16 @@
-package org.example.repository;
+package td.wallet.service;
 
-import org.example.models.*;
-import org.example.utils.QueryTemplate;
+import td.wallet.models.Account;
+import td.wallet.models.Balance;
+import td.wallet.models.Transaction;
+import td.wallet.repository.AccountCrudOperations;
+import td.wallet.repository.BalanceCrudOperations;
+import td.wallet.repository.TransactionCrudOperations;
+import td.wallet.repository.utils.Columns;
+import td.wallet.utils.QueryTemplate;
+import td.wallet.models.TransactionType;
 
-public class TransactionActions {
+public class TransactionService {
     private final QueryTemplate qt = new QueryTemplate();
     private final TransactionCrudOperations transactionRepo = new TransactionCrudOperations();
     private final AccountCrudOperations accountRepo = new AccountCrudOperations();

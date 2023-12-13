@@ -1,4 +1,4 @@
-package org.example.models;
+package td.wallet.models;
 
 public enum TransactionType {
     CREDIT,
