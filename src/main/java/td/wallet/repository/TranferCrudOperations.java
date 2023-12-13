@@ -35,7 +35,7 @@ public class TranferCrudOperations {
 
     public Transfer save(Transfer toSave) {
         if(toSave.getId() == 0) {
-            return isSaved(toSave) ? findAll().get(0) : null
+            return isSaved(toSave) ? findAll().get(0) : null;
         } else if(findById(toSave.getId()) != null) {
             return qt.executeUpdate(
                     "UPDATE transfer SET amount=? WHERE id=?",
