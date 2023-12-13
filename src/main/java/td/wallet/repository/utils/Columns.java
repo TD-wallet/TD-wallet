@@ -1,4 +1,4 @@
-package org.example.repository;
+package td.wallet.repository.utils;
 
 public class Columns {
     public static final String ID = "id";

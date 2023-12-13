@@ -1,4 +1,4 @@
-package org.example.repository;
+package td.wallet.repository;
 
 import java.util.List;
 

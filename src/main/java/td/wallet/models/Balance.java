@@ -1,4 +1,4 @@
-package org.example.models;
+package td.wallet.models;
 
 import java.sql.Timestamp;
 import java.time.Instant;

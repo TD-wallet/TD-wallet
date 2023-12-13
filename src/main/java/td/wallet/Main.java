@@ -1,11 +1,10 @@
-package org.example;
+package td.wallet;
 
-import org.example.models.Account;
-import org.example.models.Transaction;
-import org.example.models.TransactionType;
-import org.example.repository.AccountCrudOperations;
-import org.example.repository.TransactionCrudOperations;
-import org.example.repository.UserCrudOperations;
+import td.wallet.models.Transaction;
+import td.wallet.models.TransactionType;
+import td.wallet.repository.AccountCrudOperations;
+import td.wallet.repository.TransactionCrudOperations;
+import td.wallet.repository.UserCrudOperations;
 
 import java.sql.Timestamp;
 import java.time.Instant;
