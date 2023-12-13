@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TransferCrudOperations {
+    public TransferCrudOperations() {
+    }
     private final QueryTemplate qt = new QueryTemplate();
     private final AccountCrudOperations accountRepo = new AccountCrudOperations();
 

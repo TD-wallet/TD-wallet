@@ -1,10 +1,8 @@
 package td.wallet.service;
 
 import td.wallet.models.Account;
-import td.wallet.models.Transaction;
 import td.wallet.models.Transfer;
 import td.wallet.repository.AccountCrudOperations;
-import td.wallet.repository.TransactionCrudOperations;
 import td.wallet.repository.TransferCrudOperations;
 import td.wallet.utils.ConnectionProvider;
 import td.wallet.utils.QueryTemplate;
