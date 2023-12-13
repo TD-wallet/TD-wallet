@@ -3,6 +3,7 @@ CREATE TABLE IF NOT EXISTS transfer
     id          serial primary key,
     id_debited  integer          not null,
     id_credited integer          not null,
+    date        timestamp        not null default current_timestamp,
     amount      double precision not null check ( amount > 0 )
 );
 
