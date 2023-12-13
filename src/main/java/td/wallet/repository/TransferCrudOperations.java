@@ -11,7 +11,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TranferCrudOperations {
+public class TransferCrudOperations {
     private final QueryTemplate qt = new QueryTemplate();
     private final AccountCrudOperations accountRepo = new AccountCrudOperations();
 
