@@ -23,7 +23,7 @@ public class TransactionService {
         } else {
             double oldBalance = acToDebit.getBalance().isEmpty() ? 0 : acToDebit.getBalance().get(0).getAmount();
             if (acToDebit.getType().equals("BANK") && oldBalance - amount < 0) return null;
-            double newBalance = oldBalance + amount;
+            double newBalance = oldBalance - amount;
             balanceRepo.save(new Balance(newBalance), acToDebit.getId());
             transactionRepo.save(new Transaction(
                     amount,
