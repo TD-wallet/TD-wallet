@@ -48,30 +48,33 @@ public class QueryTemplate {
     }
 
     public <T> T executeSingleQuery(String query, RowMapper<T> rowMapper) {
+        T result = null;
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                return rowMapper.mapRow(resultSet);
+                result = rowMapper.mapRow(resultSet);
             }
+            statement.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        return null;
+        return result;
     }
 
     public <T> T executeSingleQuery(String query, PreparedStatementSetter pss, RowMapper<T> rowMapper) {
+        T result = null;
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             pss.setStatement(statement);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                return rowMapper.mapRow(resultSet);
+                result = rowMapper.mapRow(resultSet);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        return null;
+        return result;
     }
 
     public Integer executeUpdate(String query) {
