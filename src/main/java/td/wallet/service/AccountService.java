@@ -16,7 +16,7 @@ public class AccountService {
         Balance lastBalance = qt.executeSingleQuery(
                 "SELECT * FROM balance WHERE id_account=? AND date <= ? ORDER BY date DESC LIMIT 1",
                 ps -> {
-                    ps.setInt(1, account.getId());
+                    ps.setLong(1, account.getId());
                     ps.setTimestamp(2, date);
                 },
                 rs -> new Balance(
@@ -36,7 +36,7 @@ public class AccountService {
         return qt.executeQuery(
                 "SELECT * FROM balance WHERE id_account=? AND date BETWEEN ? AND ?",
                 ps -> {
-                    ps.setInt(1, account.getId());
+                    ps.setLong(1, account.getId());
                     ps.setTimestamp(2, start);
                     ps.setTimestamp(3, end);
                 },

@@ -3,13 +3,13 @@ package td.wallet.models;
 import java.util.List;
 
 public class User {
-    private int id;
+    private long id;
     private String username;
     private String email;
     private String password;
     private List<Account> accounts;
 
-    public User(int id, String username, String email, String password) {
+    public User(long id, String username, String email, String password) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -24,7 +24,7 @@ public class User {
         this.password = password;
     }
 
-    public User(int id, String username, String email, String password, List<Account> accounts) {
+    public User(long id, String username, String email, String password, List<Account> accounts) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -32,7 +32,7 @@ public class User {
         this.accounts = accounts;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

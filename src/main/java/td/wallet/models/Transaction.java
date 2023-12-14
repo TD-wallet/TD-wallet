@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 import java.time.Instant;
 
 public class Transaction {
-    private final int id;
+    private final long id;
     private final double amount;
     private final String label;
     private final Timestamp date;
@@ -34,7 +34,7 @@ public class Transaction {
         this.type = transactionType;
     }
 
-    public Transaction(int id, double amount, Timestamp transactionDate, String label, TransactionType transactionType) {
+    public Transaction(long id, double amount, Timestamp transactionDate, String label, TransactionType transactionType) {
         this.id = id;
         this.amount = amount;
         this.label = label;
@@ -55,7 +55,7 @@ public class Transaction {
         return label;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

@@ -3,13 +3,13 @@ package td.wallet.models;
 import java.sql.Timestamp;
 
 public class Transfer {
-    private final int id;
+    private final long id;
     private final Account debited;
     private final Account credited;
     private final double amount;
     private final Timestamp date;
 
-    public Transfer(int id, Account debited, Account credited, double amount, Timestamp date) {
+    public Transfer(long id, Account debited, Account credited, double amount, Timestamp date) {
         this.id = id;
         this.debited = debited;
         this.credited = credited;
@@ -25,7 +25,7 @@ public class Transfer {
         this.date = date;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

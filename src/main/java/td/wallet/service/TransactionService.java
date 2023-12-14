@@ -34,8 +34,8 @@ public class TransactionService {
 
         return accountRepo.save(acToDebit, qt.executeSingleQuery(
                 "SELECT id_user FROM account WHERE id=?",
-                ps -> ps.setInt(1, acToDebit.getId()),
-                rs -> rs.getInt(Columns.ID_USER)
+                ps -> ps.setLong(1, acToDebit.getId()),
+                rs -> rs.getLong(Columns.ID_USER)
         ));
     }
 
@@ -63,8 +63,8 @@ public class TransactionService {
 
         return accountRepo.save(toCreditAccount, qt.executeSingleQuery(
                         "SELECT id_user FROM account WHERE id=?",
-                        ps -> ps.setInt(1, toCreditAccount.getId()),
-                        rs -> rs.getInt(Columns.ID_USER)
+                        ps -> ps.setLong(1, toCreditAccount.getId()),
+                        rs -> rs.getLong(Columns.ID_USER)
                 )
         );
     }

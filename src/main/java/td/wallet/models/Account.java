@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Account {
-    private final int id;
+    private final long id;
     private String name;
     private String ref;
     private List<Balance> balance;
@@ -46,7 +46,7 @@ public class Account {
         this.transactions = transactions;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
