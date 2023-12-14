@@ -32,3 +32,13 @@ ALTER TABLE transfer
     ADD CONSTRAINT credited_transfer_fk FOREIGN KEY (id_credited)
         REFERENCES account (id) MATCH FULL
         ON DELETE RESTRICT ON UPDATE CASCADE;
+
+ALTER TABLE currency_value
+    ADD CONSTRAINT source_fk FOREIGN KEY (id_source_currency)
+        REFERENCES currency (id) MATCH FULL
+        ON DELETE RESTRICT ON UPDATE CASCADE;
+
+ALTER TABLE currency_value
+    ADD CONSTRAINT destination_fk FOREIGN KEY (id_destination_currency)
+        REFERENCES currency (id) MATCH FULL
+        ON DELETE RESTRICT ON UPDATE CASCADE;
