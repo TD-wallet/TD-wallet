@@ -58,10 +58,6 @@ public class Account {
         return ref;
     }
 
-    public void setRef(String ref) {
-        this.ref = ref;
-    }
-
     public List<Balance> getBalance() {
         return balance;
     }
@@ -74,9 +70,12 @@ public class Account {
     public String toString() {
         return "Account{" +
                 "id=" + id +
+                ", name='" + name + '\'' +
                 ", ref='" + ref + '\'' +
                 ", balance=" + balance +
                 ", type='" + type + '\'' +
+                ", currency=" + currency +
+                ", transactions=" + transactions +
                 '}';
     }
 
