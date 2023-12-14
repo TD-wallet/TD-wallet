@@ -31,7 +31,7 @@ public class TransferService {
                         amount,
                         "Transfer to " + toCredit.getRef()
                 );
-                Account receiverTrans = transactionService.credit(
+                Account receiverTrans = transactionService.transfer(
                         toCredit,
                         amount,
                         "Transfer from " + toDebit.getRef()

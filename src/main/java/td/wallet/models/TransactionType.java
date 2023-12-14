@@ -2,5 +2,6 @@ package td.wallet.models;
 
 public enum TransactionType {
     CREDIT,
-    DEBIT
+    DEBIT,
+    TRANSFER
 }
