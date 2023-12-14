@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 import java.time.Instant;
 
 public class Balance {
-    private int id;
+    private long id;
     private Timestamp date;
     private double amount;
 
@@ -26,7 +26,7 @@ public class Balance {
         this.amount = amount;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

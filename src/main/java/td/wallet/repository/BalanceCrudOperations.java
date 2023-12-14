@@ -13,10 +13,10 @@ public class BalanceCrudOperations implements CrudOperations<Balance> {
     private QueryTemplate qt = new QueryTemplate();
 
     @Override
-    public Balance findById(Integer id) {
+    public Balance findById(long id) {
         return qt.executeSingleQuery(
                 "SELECT * FROM balance WHERE id=?",
-                ps -> ps.setInt(1, id),
+                ps -> ps.setLong(1, id),
                 this::getResult
         );
     }
@@ -41,7 +41,7 @@ public class BalanceCrudOperations implements CrudOperations<Balance> {
     }
 
     @Override
-    public Balance save(Balance toSave, int relId) {
+    public Balance save(Balance toSave, long relId) {
         if(toSave.getId() == 0){
             return isSaved(toSave, relId) ? this.findAll().get(0) : null;
         } else if (this.findById(toSave.getId()) != null) {
@@ -50,7 +50,7 @@ public class BalanceCrudOperations implements CrudOperations<Balance> {
                     ps -> {
                         ps.setTimestamp(1, toSave.getDate());
                         ps.setDouble(2, toSave.getAmount());
-                        ps.setInt(3, toSave.getId());
+                        ps.setLong(3, toSave.getId());
                     }
             ) == 0 ? null : this.findById(toSave.getId());
         }
@@ -70,21 +70,21 @@ public class BalanceCrudOperations implements CrudOperations<Balance> {
         );
     }
 
-    private Boolean isSaved(Balance toSave, int relId) {
+    private Boolean isSaved(Balance toSave, long relId) {
         return qt.executeUpdate(
                 "INSERT INTO balance (date, amount, id_account) VALUES (?,?,?)",
                 ps -> {
                     ps.setTimestamp(1, toSave.getDate());
                     ps.setDouble(2, toSave.getAmount());
-                    ps.setInt(3, relId);
+                    ps.setLong(3, relId);
                 }
         ) != 0;
     }
 
-    public List<Balance> findByAccountId(int accountId) {
+    public List<Balance> findByAccountId(long accountId) {
         return qt.executeQuery(
                 "SELECT * FROM balance WHERE id_account=? ORDER BY id DESC",
-                ps -> ps.setInt(1, accountId),
+                ps -> ps.setLong(1, accountId),
                 this::getResult
         );
     }

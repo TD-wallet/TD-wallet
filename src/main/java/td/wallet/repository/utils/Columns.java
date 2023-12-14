@@ -1,5 +1,7 @@
 package td.wallet.repository.utils;
 
+import java.awt.*;
+
 public class Columns {
     public static final String ID = "id";
     public static final String NAME = "name";
@@ -18,5 +20,6 @@ public class Columns {
     public static final String LABEL = "label";
     public static final String ID_DEBITED = "id_debited";
     public static final String ID_CREDITED = "id_credited";
-
+    public static final String ID_SOURCE_CURR = "id_source_currency";
+    public static final String ID_DEST_CURR = "id_destination_currency";
 }
