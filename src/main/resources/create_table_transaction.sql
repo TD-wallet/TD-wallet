@@ -1,6 +1,6 @@
 -- Didn't found a way to make type creation idempotent.
 CREATE TYPE "TRANSACTION_TYPE" AS
-ENUM ('DEBIT','CREDIT');
+ENUM ('DEBIT','CREDIT','TRANSFER');
 
 CREATE TABLE IF NOT EXISTS transaction (
 	id serial NOT NULL,

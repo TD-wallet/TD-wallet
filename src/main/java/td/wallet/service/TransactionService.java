@@ -40,6 +40,14 @@ public class TransactionService {
     }
 
     public Account credit(Account account, double amount, String label) {
+        return retrieve(account, amount, label, TransactionType.CREDIT);
+    }
+
+    public Account transfer(Account account, double amount, String label) {
+        return retrieve(account, amount, label, TransactionType.TRANSFER);
+    }
+
+    private Account retrieve(Account account, double amount, String label, TransactionType type) {
         Account toCreditAccount = accountRepo.findById(account.getId());
 
         if (toCreditAccount == null) return null;
@@ -49,7 +57,7 @@ public class TransactionService {
         transactionRepo.save(new Transaction(
                         amount,
                         label,
-                        TransactionType.CREDIT
+                        type
                 ), toCreditAccount.getId()
         );
 
