@@ -54,6 +54,14 @@ public class Account {
         return name;
     }
 
+    public Currency getCurrency() {
+        return currency;
+    }
+
+    public List<Transaction> getTransactions() {
+        return transactions;
+    }
+
     public String getRef() {
         return ref;
     }
