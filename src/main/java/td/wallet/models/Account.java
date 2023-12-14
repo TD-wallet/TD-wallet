@@ -74,9 +74,12 @@ public class Account {
     public String toString() {
         return "Account{" +
                 "id=" + id +
+                ", name='" + name + '\'' +
                 ", ref='" + ref + '\'' +
                 ", balance=" + balance +
                 ", type='" + type + '\'' +
+                ", currency=" + currency +
+                ", transactions=" + transactions +
                 '}';
     }
 
