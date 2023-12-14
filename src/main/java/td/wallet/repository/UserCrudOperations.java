@@ -13,11 +13,11 @@ public class UserCrudOperations {
     private final QueryTemplate qt = new QueryTemplate();
     private final AccountCrudOperations accountRepo = new AccountCrudOperations();
 
-    public User findById(Integer id) {
+    public User findById(long id) {
         return qt.executeSingleQuery(
                 "SELECT * FROM \"user\" WHERE id=?",
                 ps -> {
-                    ps.setInt(1, id);
+                    ps.setLong(1, id);
                 },
                 this::getUser
         );
@@ -52,7 +52,7 @@ public class UserCrudOperations {
                          ps.setString(1, toSave.getUsername());
                          ps.setString(2, toSave.getEmail());
                          ps.setString(3, toSave.getPassword());
-                         ps.setInt(4, toSave.getId());
+                         ps.setLong(4, toSave.getId());
                      }
              ) == 0 ? null : toSave;
         }
@@ -67,7 +67,7 @@ public class UserCrudOperations {
             return qt.executeUpdate(
                     "DELETE FROM \"user\" WHERE id=?",
                     ps -> {
-                        ps.setInt(1, toBeDeleted.getId());
+                        ps.setLong(1, toBeDeleted.getId());
                     }
             ) != 0 ? toBeDeleted : null;
         }

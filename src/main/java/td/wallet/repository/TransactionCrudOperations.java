@@ -14,11 +14,11 @@ public class TransactionCrudOperations implements CrudOperations<Transaction> {
     private final QueryTemplate qt = new QueryTemplate();
 
     @Override
-    public Transaction findById(Integer id) {
+    public Transaction findById(long id) {
         return qt.executeSingleQuery(
                 "SELECT * FROM transaction WHERE id=?",
                 ps -> {
-                    ps.setInt(1, id);
+                    ps.setLong(1, id);
                 },
                 this::getResult
         );
@@ -47,7 +47,7 @@ public class TransactionCrudOperations implements CrudOperations<Transaction> {
     }
 
     @Override
-    public Transaction save(Transaction toSave, int accountId) {
+    public Transaction save(Transaction toSave, long accountId) {
         if (toSave.getId() == 0) {
             return isSaved(toSave, accountId) ? findAll().get(0) : null;
         } else if (findById(toSave.getId()) != null) {
@@ -58,7 +58,7 @@ public class TransactionCrudOperations implements CrudOperations<Transaction> {
                         ps.setString(2, toSave.getLabel());
                         ps.setTimestamp(3, toSave.getDate());
                         ps.setString(4, toSave.getType().toString());
-                        ps.setInt(5, toSave.getId());
+                        ps.setLong(5, toSave.getId());
                     }
             ) == 0 ? null : findById(toSave.getId());
         }
@@ -70,7 +70,7 @@ public class TransactionCrudOperations implements CrudOperations<Transaction> {
         return qt.executeUpdate(
                 "DELETE FROM transaction WHERE id=?",
                 ps -> {
-                    ps.setInt(1, toDelete.getId());
+                    ps.setLong(1, toDelete.getId());
                 }
         ) == 0 ? null : toDelete;
     }
@@ -87,17 +87,17 @@ public class TransactionCrudOperations implements CrudOperations<Transaction> {
         );
     }
 
-    private boolean isSaved(Transaction toSave, int accountId) {
+    private boolean isSaved(Transaction toSave, long accountId) {
         return qt.executeUpdate(
                 "INSERT INTO transaction (id, amount, label, date, type, id_account) " +
                         "VALUES (?,?,?,?,?::\"TRANSACTION_TYPE\",?)",
                 ps -> {
-                    ps.setInt(1, this.findAll().get(0).getId() + 1);
+                    ps.setLong(1, this.findAll().get(0).getId() + 1);
                     ps.setDouble(2, toSave.getAmount());
                     ps.setString(3, toSave.getLabel());
                     ps.setTimestamp(4, toSave.getDate());
                     ps.setString(5, toSave.getType().toString());
-                    ps.setInt(6, accountId);
+                    ps.setLong(6, accountId);
                 }
         ) != 0;
     }

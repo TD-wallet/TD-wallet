@@ -17,8 +17,8 @@ public class TransferCrudOperations {
     private final QueryTemplate qt = new QueryTemplate();
     private final AccountCrudOperations accountRepo = new AccountCrudOperations();
 
-    public Transfer findById(Integer id) {
-        return qt.executeSingleQuery("SELECT * FROM transfer WHERE id=?", ps -> ps.setInt(1, id), this::getResult);
+    public Transfer findById(long id) {
+        return qt.executeSingleQuery("SELECT * FROM transfer WHERE id=?", ps -> ps.setLong(1, id), this::getResult);
     }
 
     public List<Transfer> findAll() {
@@ -43,7 +43,7 @@ public class TransferCrudOperations {
                     "UPDATE transfer SET amount=? WHERE id=?",
                     ps -> {
                         ps.setDouble(1, toSave.getAmount());
-                        ps.setInt(2, toSave.getId());
+                        ps.setLong(2, toSave.getId());
                     }
             ) == 0 ? null : findById(toSave.getId());
         }
@@ -61,8 +61,8 @@ public class TransferCrudOperations {
 
     private boolean isSaved(Transfer toSave) {
         return qt.executeUpdate("INSERT INTO transfer (id_debited, id_credited, amount, date) VALUES (?,?,?,?)", ps -> {
-            ps.setInt(1, toSave.getCredited().getId());
-            ps.setInt(2, toSave.getDebited().getId());
+            ps.setLong(1, toSave.getCredited().getId());
+            ps.setLong(2, toSave.getDebited().getId());
             ps.setDouble(3, toSave.getAmount());
             ps.setTimestamp(4, toSave.getDate() == null ? Timestamp.from(Instant.now()) : toSave.getDate());
         }) != 0;

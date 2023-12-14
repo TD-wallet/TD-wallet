@@ -12,7 +12,7 @@ import java.util.List;
 public class CurrencyCrudOperations {
     private QueryTemplate qt = new QueryTemplate();
 
-    public Currency findById(Integer id) {
+    public Currency findById(int id) {
         return qt.executeSingleQuery(
                 "SELECT * FROM currency WHERE id=?",
                 ps -> {
@@ -59,7 +59,12 @@ public class CurrencyCrudOperations {
     }
 
     public Currency delete(Currency toDelete) {
-        return null;
+        return qt.executeUpdate(
+                "DELETE FROM currency WHERE id=?",
+                ps -> {
+                    ps.setLong(1, toDelete.getId());
+                }
+        ) == 0 ? null : toDelete;
     }
 
     private Currency getResult(ResultSet rs) throws SQLException {

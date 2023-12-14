@@ -16,9 +16,9 @@ public class AccountCrudOperations implements CrudOperations<Account> {
     private final CurrencyCrudOperations currencyRepo = new CurrencyCrudOperations();
 
     @Override
-    public Account findById(Integer id) {
+    public Account findById(long id) {
         return qt.executeSingleQuery("SELECT * FROM account WHERE id=?", ps -> {
-                    ps.setInt(1, id);
+                    ps.setLong(1, id);
                 },
                 this::getResult
         );
@@ -43,7 +43,7 @@ public class AccountCrudOperations implements CrudOperations<Account> {
     }
 
     @Override
-    public Account save(Account toSave, int relId) {
+    public Account save(Account toSave, long relId) {
         if(toSave.getId() == 0) {
             if(isSaved(toSave, relId)) {
                 return findAll().get(0);
@@ -54,7 +54,7 @@ public class AccountCrudOperations implements CrudOperations<Account> {
                     "UPDATE account SET name=? WHERE id=?",
                     ps -> {
                         ps.setString(1, toSave.getName());
-                        ps.setInt(2, toSave.getId());
+                        ps.setLong(2, toSave.getId());
                     }
             ) == 0 ? null : findById(toSave.getId());
         }
@@ -66,7 +66,7 @@ public class AccountCrudOperations implements CrudOperations<Account> {
         return qt.executeUpdate(
                 "DELETE FROM account WHERE id=?",
                 ps -> {
-                    ps.setInt(1, toDelete.getId());
+                    ps.setLong(1, toDelete.getId());
                 }
         ) == 0 ? null : toDelete;
     }
@@ -83,20 +83,20 @@ public class AccountCrudOperations implements CrudOperations<Account> {
         );
     }
 
-    private boolean isSaved(Account toSave, int relId) {
+    private boolean isSaved(Account toSave, long relId) {
         return qt.executeUpdate("INSERT INTO account (id, ref, id_user) VALUES (?,?,?)",
                 ps -> {
-                    ps.setInt(1, this.findAll().get(0).getId() + 1);
+                    ps.setLong(1, this.findAll().get(0).getId() + 1);
                     ps.setString(2, toSave.getRef());
                     ps.setDouble(3, relId);
                 }
         ) != 0;
     }
 
-    public List<Account> getByUserId(int userId) {
+    public List<Account> getByUserId(long userId) {
         return qt.executeQuery(
                 "SELECT * FROM account WHERE id_user=?",
-                ps -> ps.setInt(1, userId),
+                ps -> ps.setLong(1, userId),
                 this::getResult
         );
     }

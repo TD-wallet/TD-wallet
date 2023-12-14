@@ -1,8 +1,10 @@
 package td.wallet.service;
 
 import td.wallet.models.Account;
+import td.wallet.models.CurrencyValue;
 import td.wallet.models.Transfer;
 import td.wallet.repository.AccountCrudOperations;
+import td.wallet.repository.CurrencyValueCrudOperations;
 import td.wallet.repository.TransferCrudOperations;
 import td.wallet.utils.ConnectionProvider;
 import td.wallet.utils.QueryTemplate;
@@ -17,6 +19,7 @@ public class TransferService {
     private final TransactionService transactionService = new TransactionService();
     private final TransferCrudOperations transferRepo = new TransferCrudOperations();
     private final AccountCrudOperations accountRepo = new AccountCrudOperations();
+    private final CurrencyValueCrudOperations currencyValueRepo = new CurrencyValueCrudOperations();
     private final QueryTemplate qt = new QueryTemplate();
 
     public Transfer transfer(Account debited, Account credited, double amount) {
@@ -31,9 +34,10 @@ public class TransferService {
                         amount,
                         "Transfer to " + toCredit.getRef()
                 );
+
                 Account receiverTrans = transactionService.transfer(
                         toCredit,
-                        amount,
+                        getConvertedValue(toDebit, toCredit, amount),
                         "Transfer from " + toDebit.getRef()
                 );
                 if (isValidTransfer(senderTrans, receiverTrans)) {
@@ -65,5 +69,19 @@ public class TransferService {
 
     private boolean isValidTransfer(Account acc1, Account acc2) {
         return acc1 != null && acc2 != null && !acc1.equals(acc2);
+    }
+
+    private double getConvertedValue(Account sender, Account receiver, double amount) throws SQLException {
+        CurrencyValue value = currencyValueRepo.findCurrentValue(sender.getCurrency(), receiver.getCurrency());
+        if (sender.getCurrency().equals(receiver.getCurrency())) return amount;
+        else if (value == null) {
+            throw new SQLException(
+                    new Throwable(
+                            "Current transfer not supported"
+                    )
+            );
+        }
+
+        return amount * value.getAmount();
     }
 }
