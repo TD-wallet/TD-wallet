@@ -22,4 +22,9 @@ public class Columns {
     public static final String ID_SOURCE_CURR = "id_source_currency";
     public static final String ID_DEST_CURR = "id_destination_currency";
     public static final String DISPLAY_NAME = "display_name";
+    public static final String ENTRY_SUM = "entry_sum";
+    public static final String DEBIT_SUM = "debit_sum";
+    public static final String CATEGORY_NAME = "category_name";
+    public static final String TOTAL_AMOUNT = "total_amount";
+
 }

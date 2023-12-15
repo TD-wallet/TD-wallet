@@ -1,11 +1,15 @@
 package td.wallet.service;
 
+import td.wallet.dto.TransactionSum;
+import td.wallet.dto.TransactionSumByCategory;
 import td.wallet.models.*;
 import td.wallet.repository.AccountCrudOperations;
 import td.wallet.repository.BalanceCrudOperations;
 import td.wallet.repository.TransactionCrudOperations;
 import td.wallet.repository.utils.Columns;
 import td.wallet.utils.QueryTemplate;
+
+import java.sql.Timestamp;
 
 public class TransactionService {
     private final QueryTemplate qt = new QueryTemplate();
@@ -66,5 +70,37 @@ public class TransactionService {
                         rs -> rs.getLong(Columns.ID_USER)
                 )
         );
+    }
+
+    public TransactionSum getTransactionSum(Account account, Timestamp startDate, Timestamp endDate) {
+        return qt.executeCall(
+                "{call get_sum_of_transactions(?,?,?)}",
+                ps -> {
+                    ps.setLong(1, account.getId());
+                    ps.setTimestamp(2, startDate);
+                    ps.setTimestamp(3, endDate);
+                },
+                // See RowMapper functional interface to see how dynamic mapping works
+                rs -> new TransactionSum(
+                        rs.getDouble(Columns.ENTRY_SUM),
+                        rs.getDouble(Columns.DEBIT_SUM)
+                )
+        ).get(0);
+    }
+
+    public TransactionSumByCategory getTransactionSumByCategory(Account account, Timestamp startDate, Timestamp endDate) {
+        return qt.executeCall(
+                "{call get_sum_of_transactions_for_each_category(?,?,?)}",
+                ps -> {
+                    ps.setLong(1, account.getId());
+                    ps.setTimestamp(2, startDate);
+                    ps.setTimestamp(3, endDate);
+                },
+                // See RowMapper functional interface to see how dynamic mapping works
+                rs -> new TransactionSumByCategory(
+                        rs.getString(Columns.CATEGORY_NAME),
+                        rs.getDouble(Columns.TOTAL_AMOUNT)
+                )
+        ).get(0);
     }
 }
