@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BalanceCrudOperations implements CrudOperations<Balance> {
-    private QueryTemplate qt = new QueryTemplate();
+    private final QueryTemplate qt = new QueryTemplate();
 
     @Override
     public Balance findById(long id) {
@@ -34,7 +34,7 @@ public class BalanceCrudOperations implements CrudOperations<Balance> {
         ArrayList<Balance> savedBalances = new ArrayList<>();
         for (int i = 0; i < toSave.size(); i++) {
             Balance saved = this.save(toSave.get(i), relId.get(i));
-            if(saved == null) return null;
+            if (saved == null) return null;
             savedBalances.add(saved);
         }
         return savedBalances;
@@ -42,7 +42,7 @@ public class BalanceCrudOperations implements CrudOperations<Balance> {
 
     @Override
     public Balance save(Balance toSave, long relId) {
-        if(toSave.getId() == 0){
+        if (toSave.getId() == 0) {
             return isSaved(toSave, relId) ? this.findAll().get(0) : null;
         } else if (this.findById(toSave.getId()) != null) {
             return qt.executeUpdate(

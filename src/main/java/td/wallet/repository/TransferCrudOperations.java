@@ -14,10 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TransferCrudOperations {
-    public TransferCrudOperations() {
-    }
     private final QueryTemplate qt = new QueryTemplate();
     private final AccountCrudOperations accountRepo = new AccountCrudOperations();
+    public TransferCrudOperations() {
+    }
 
     public Transfer findById(long id) {
         return qt.executeSingleQuery("SELECT * FROM transfer WHERE id=?", ps -> ps.setLong(1, id), this::getResult);
@@ -38,9 +38,9 @@ public class TransferCrudOperations {
     }
 
     public Transfer save(Transfer toSave) {
-        if(toSave.getId() == 0) {
+        if (toSave.getId() == 0) {
             return isSaved(toSave) ? findAll().get(0) : null;
-        } else if(findById(toSave.getId()) != null) {
+        } else if (findById(toSave.getId()) != null) {
             return qt.executeUpdate(
                     "UPDATE transfer SET amount=? WHERE id=?",
                     ps -> {

@@ -1,12 +1,10 @@
 package td.wallet.repository.utils;
 
-import java.awt.*;
-
 public class Columns {
     public static final String ID = "id";
     public static final String NAME = "name";
     public static final String REF = "ref";
-    public static final String TYPE ="type";
+    public static final String TYPE = "type";
     public static final String DATE = "date";
     public static final String AMOUNT = "amount";
     public static final String CODE = "code";

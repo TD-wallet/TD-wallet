@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS balance
 (
-    id         bigserial           NOT NULL,
+    id         bigserial        NOT NULL,
     amount     double precision NOT NULL DEFAULT 0,
     date       timestamp        NOT NULL DEFAULT current_timestamp,
     id_account integer          NOT NULL,

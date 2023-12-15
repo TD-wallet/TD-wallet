@@ -36,7 +36,7 @@ public class AccountCrudOperations implements CrudOperations<Account> {
         ArrayList<Account> savedAccount = new ArrayList<>();
         for (int i = 0; i < toSave.size(); i++) {
             Account saved = save(toSave.get(i), relId.get(i));
-            if(saved == null) return  null;
+            if (saved == null) return null;
             savedAccount.add(saved);
         }
         return savedAccount;
@@ -44,12 +44,12 @@ public class AccountCrudOperations implements CrudOperations<Account> {
 
     @Override
     public Account save(Account toSave, long relId) {
-        if(toSave.getId() == 0) {
-            if(isSaved(toSave, relId)) {
+        if (toSave.getId() == 0) {
+            if (isSaved(toSave, relId)) {
                 return findAll().get(0);
             }
             return null;
-        } else if(findById(toSave.getId()) != null) {
+        } else if (findById(toSave.getId()) != null) {
             return qt.executeUpdate(
                     "UPDATE account SET name=? WHERE id=?",
                     ps -> {

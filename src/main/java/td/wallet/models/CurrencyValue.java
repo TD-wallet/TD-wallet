@@ -7,8 +7,8 @@ public class CurrencyValue {
     private final long id;
     private final Currency source;
     private final Currency destination;
-    private double amount;
-    private Timestamp date;
+    private final double amount;
+    private final Timestamp date;
 
     public CurrencyValue(Currency source, Currency destination, double amount, Timestamp date) {
         this.id = 0;

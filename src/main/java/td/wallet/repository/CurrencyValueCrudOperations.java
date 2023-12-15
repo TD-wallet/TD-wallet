@@ -41,7 +41,7 @@ public class CurrencyValueCrudOperations implements CrudOperations<CurrencyValue
 
     public List<CurrencyValue> saveAll(List<CurrencyValue> toSave) {
         ArrayList<CurrencyValue> toBeSaved = new ArrayList<>();
-        for (CurrencyValue currency: toSave) {
+        for (CurrencyValue currency : toSave) {
             CurrencyValue saving = this.save(currency);
             if (saving != null) {
                 toBeSaved.add(saving);
@@ -58,7 +58,7 @@ public class CurrencyValueCrudOperations implements CrudOperations<CurrencyValue
     }
 
     public CurrencyValue save(CurrencyValue toSave) {
-        if(toSave.getId() == 0 && isSaved(toSave)) {
+        if (toSave.getId() == 0 && isSaved(toSave)) {
             return findAll().get(0);
         } else if (this.findById(toSave.getId()) != null) {
             return qt.executeUpdate(
