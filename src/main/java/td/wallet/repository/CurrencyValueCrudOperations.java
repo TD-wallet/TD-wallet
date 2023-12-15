@@ -83,12 +83,17 @@ public class CurrencyValueCrudOperations implements CrudOperations<CurrencyValue
     }
 
     public CurrencyValue findCurrentValue(Currency source, Currency destination) {
+        return findValue(source, destination, Timestamp.from(Instant.now()));
+    }
+
+    public CurrencyValue findValue(Currency source, Currency destination, Timestamp date) {
         return qt.executeSingleQuery(
-                "SELECT * FROM currency_value WHERE id_source_currency=? AND id_destination_currency=?" +
+                "SELECT * FROM currency_value WHERE id_source_currency=? AND id_destination_currency=? AND date<=?" +
                         " ORDER BY date DESC LIMIT 1",
                 ps -> {
                     ps.setInt(1, source.getId());
                     ps.setInt(2, destination.getId());
+                    ps.setTimestamp(3, date);
                 },
                 this::getResult
         );

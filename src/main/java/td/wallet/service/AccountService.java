@@ -2,6 +2,11 @@ package td.wallet.service;
 
 import td.wallet.models.Account;
 import td.wallet.models.Balance;
+import td.wallet.models.Transfer;
+import td.wallet.repository.BalanceCrudOperations;
+import td.wallet.repository.CurrencyValueCrudOperations;
+import td.wallet.repository.TransferCrudOperations;
+import td.wallet.repository.utils.AccountTransferRole;
 import td.wallet.repository.utils.Columns;
 import td.wallet.utils.QueryTemplate;
 
@@ -11,6 +16,9 @@ import java.util.List;
 
 public class AccountService {
     private final QueryTemplate qt = new QueryTemplate();
+    private final CurrencyValueCrudOperations currencyValueRepo = new CurrencyValueCrudOperations();
+    private final TransferCrudOperations transferRepo = new TransferCrudOperations();
+    private final BalanceCrudOperations balanceRepo = new BalanceCrudOperations();
 
     public Double getBalanceAtDate(Account account, Timestamp date) {
         Balance lastBalance = qt.executeSingleQuery(
@@ -25,9 +33,10 @@ public class AccountService {
                         rs.getDouble(Columns.AMOUNT)
                 )
         );
-        return lastBalance.getAmount();
+        return lastBalance == null ? 0 : lastBalance.getAmount();
     }
 
+    @Deprecated
     public Double getBalance(Account account) {
         return getBalanceAtDate(account, Timestamp.from(Instant.now()));
     }
@@ -48,4 +57,31 @@ public class AccountService {
         );
     }
 
+    public Balance getBalance2(Account account) {
+        double finalBalance = 0;
+        finalBalance += Math.abs(
+                qt.executeQuery(
+                        "SELECT sum(amount) FROM transaction WHERE id_account=? AND type!='TRANSFER'::\"TRANSACTION_TYPE\" GROUP BY type",
+                        ps -> ps.setLong(1, account.getId()),
+                        rs -> rs.getDouble(Columns.AMOUNT)
+                ).stream().reduce(0d, (a, b) -> a - b)
+        );
+
+        List<Transfer> transfers = transferRepo.findByAccount(account, AccountTransferRole.CREDITED);
+
+        for (Transfer transfer : transfers) {
+            finalBalance += transfer.getAmount() * currencyValueRepo.findValue(
+                    transfer.getDebited().getCurrency(),
+                    transfer.getCredited().getCurrency(),
+                    transfer.getDate()
+            ).getAmount();
+        }
+
+        return balanceRepo.save(
+                new Balance(
+                        finalBalance
+                ),
+                account.getId()
+        );
+    }
 }
