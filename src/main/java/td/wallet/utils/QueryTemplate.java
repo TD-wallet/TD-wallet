@@ -105,4 +105,20 @@ public class QueryTemplate {
 
         return 0;
     }
+
+    public <T> List<T> executeCall(String callStatement, PreparedStatementSetter pss, RowMapper<T> rowMapper) {
+        ArrayList<T> result = new ArrayList<>();
+        try {
+            CallableStatement pc = connection.prepareCall(callStatement);
+            pss.setStatement(pc);
+            ResultSet resultSet = pc.executeQuery();
+            while (resultSet.next()) {
+                result.add(rowMapper.mapRow(resultSet));
+            }
+            pc.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return result;
+    }
 }
