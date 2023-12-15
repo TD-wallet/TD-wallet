@@ -12,6 +12,7 @@ import java.util.List;
 
 public class TransactionCrudOperations implements CrudOperations<Transaction> {
     private final QueryTemplate qt = new QueryTemplate();
+    private final CategoryCrudOperations categoryRepo = new CategoryCrudOperations();
 
     @Override
     public Transaction findById(long id) {
@@ -81,6 +82,7 @@ public class TransactionCrudOperations implements CrudOperations<Transaction> {
                 rs.getDouble(Columns.AMOUNT),
                 rs.getTimestamp(Columns.DATE),
                 rs.getString(Columns.LABEL),
+                categoryRepo.findById(rs.getLong(Columns.ID_CATEGORY)),
                 TransactionType.valueOf(
                         rs.getString(Columns.TYPE).toUpperCase()
                 )
@@ -89,8 +91,8 @@ public class TransactionCrudOperations implements CrudOperations<Transaction> {
 
     private boolean isSaved(Transaction toSave, long accountId) {
         return qt.executeUpdate(
-                "INSERT INTO transaction (id, amount, label, date, type, id_account) " +
-                        "VALUES (?,?,?,?,?::\"TRANSACTION_TYPE\",?)",
+                "INSERT INTO transaction (id, amount, label, date, type, id_account, id_category) " +
+                        "VALUES (?,?,?,?,?::\"TRANSACTION_TYPE\",?, ?)",
                 ps -> {
                     ps.setLong(1, this.findAll().get(0).getId() + 1);
                     ps.setDouble(2, toSave.getAmount());
@@ -98,6 +100,7 @@ public class TransactionCrudOperations implements CrudOperations<Transaction> {
                     ps.setTimestamp(4, toSave.getDate());
                     ps.setString(5, toSave.getType().toString());
                     ps.setLong(6, accountId);
+                    ps.setLong(7, toSave.getCategory().getId());
                 }
         ) != 0;
     }
