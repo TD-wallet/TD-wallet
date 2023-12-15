@@ -1,6 +1,7 @@
 package td.wallet.service;
 
 import td.wallet.models.Account;
+import td.wallet.models.Category;
 import td.wallet.models.CurrencyValue;
 import td.wallet.models.Transfer;
 import td.wallet.repository.AccountCrudOperations;
@@ -22,7 +23,7 @@ public class TransferService {
     private final CurrencyValueCrudOperations currencyValueRepo = new CurrencyValueCrudOperations();
     private final QueryTemplate qt = new QueryTemplate();
 
-    public Transfer transfer(Account debited, Account credited, double amount) {
+    public Transfer transfer(Account debited, Account credited, double amount, Category category) {
         Account toDebit = accountRepo.findById(debited.getId());
         Account toCredit = accountRepo.findById(credited.getId());
 
@@ -32,13 +33,15 @@ public class TransferService {
                 Account senderTrans = transactionService.debit(
                         toDebit,
                         amount,
-                        "Transfer to " + toCredit.getRef()
-                );
+                        "Transfer to " + toCredit.getRef(),
+                        category
+                        );
 
                 Account receiverTrans = transactionService.transfer(
                         toCredit,
                         getConvertedValue(toDebit, toCredit, amount),
-                        "Transfer from " + toDebit.getRef()
+                        "Transfer from " + toDebit.getRef(),
+                        category
                 );
                 if (isValidTransfer(senderTrans, receiverTrans)) {
                     Transfer transfer = transferRepo.save(
