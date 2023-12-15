@@ -1,6 +1,8 @@
 package td.wallet.repository;
 
+import td.wallet.models.Account;
 import td.wallet.models.Transfer;
+import td.wallet.repository.utils.AccountTransferRole;
 import td.wallet.repository.utils.Columns;
 import td.wallet.utils.QueryTemplate;
 
@@ -52,6 +54,26 @@ public class TransferCrudOperations {
     }
 
     public Transfer delete(Transfer toDelete) {
+        return null;
+    }
+
+    public List<Transfer> findByAccount(Account account, AccountTransferRole accountTransferRole) {
+        Account actedAcc = accountRepo.findById(account.getId());
+
+        if (actedAcc == null) return null;
+        if (accountTransferRole == AccountTransferRole.CREDITED) {
+            return qt.executeQuery(
+                    "SELECT * FROM  transfer WHERE id_credited=? ORDER BY date DESC",
+                    ps -> ps.setLong(1, actedAcc.getId()),
+                    this::getResult
+            );
+        } else if (accountTransferRole == AccountTransferRole.DEBITED) {
+            return qt.executeQuery(
+                    "SELECT * FROM  transfer WHERE id_debited=? ORDER BY date DESC",
+                    ps -> ps.setLong(1, actedAcc.getId()),
+                    this::getResult
+            );
+        }
         return null;
     }
 
