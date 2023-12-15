@@ -52,11 +52,11 @@ public class Main {
                 transactionRepo.findById(idToGet)
         );
 
-        Transaction toSaveTransaction = new Transaction(
-                30_000,
-                Timestamp.from(Instant.now()),
-                TransactionType.CREDIT
-        );
+//        Transaction toSaveTransaction = new Transaction(
+//                30_000,
+//                Timestamp.from(Instant.now()),
+//                TransactionType.CREDIT
+//        );
 
         if (transactionRepo.findById(4) != null) {
             System.out.println("    - save transaction : transaction already exists");
@@ -64,7 +64,7 @@ public class Main {
             // System.out.printf("   - save transaction : %s%n", transactionRepo.save(toSaveTransaction));
         }
 
-        Transaction toDeleteTransaction = new Transaction(4, 0, null, null);
+        Transaction toDeleteTransaction = new Transaction(4, 0, null, null, null);
 
         System.out.printf("   - deleting transaction id=4 : %s%n", transactionRepo.delete(toDeleteTransaction));
 
