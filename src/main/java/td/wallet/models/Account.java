@@ -5,9 +5,9 @@ import java.util.Objects;
 
 public class Account {
     private final long id;
-    private String name;
-    private String ref;
-    private List<Balance> balance;
+    private final String name;
+    private final String ref;
+    private final List<Balance> balance;
     private String type = "CASH";
     private Currency currency;
     private List<Transaction> transactions;

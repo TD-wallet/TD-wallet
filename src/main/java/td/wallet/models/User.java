@@ -7,7 +7,7 @@ public class User {
     private String username;
     private String email;
     private String password;
-    private List<Account> accounts;
+    private final List<Account> accounts;
 
     public User(long id, String username, String email, String password) {
         this.id = id;

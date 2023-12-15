@@ -32,9 +32,9 @@ public class UserCrudOperations {
 
     public List<User> saveAll(List<User> toSave) {
         ArrayList<User> saved = new ArrayList<>();
-        for(User user : toSave) {
+        for (User user : toSave) {
             User value = save(user);
-            if(value == null) {
+            if (value == null) {
                 return null;
             }
             saved.add(value);
@@ -46,15 +46,15 @@ public class UserCrudOperations {
         if (toSave.getId() == 0) {
             return isSaved(toSave) ? findAll().get(0) : null;
         } else if (findById(toSave.getId()) != null) {
-             return qt.executeUpdate(
-                     "UPDATE \"user\" SET username=?, password=?, email=? WHERE id=?",
-                     ps -> {
-                         ps.setString(1, toSave.getUsername());
-                         ps.setString(2, toSave.getEmail());
-                         ps.setString(3, toSave.getPassword());
-                         ps.setLong(4, toSave.getId());
-                     }
-             ) == 0 ? null : toSave;
+            return qt.executeUpdate(
+                    "UPDATE \"user\" SET username=?, password=?, email=? WHERE id=?",
+                    ps -> {
+                        ps.setString(1, toSave.getUsername());
+                        ps.setString(2, toSave.getEmail());
+                        ps.setString(3, toSave.getPassword());
+                        ps.setLong(4, toSave.getId());
+                    }
+            ) == 0 ? null : toSave;
         }
         return null;
     }
