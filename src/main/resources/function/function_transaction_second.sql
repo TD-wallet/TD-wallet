@@ -17,10 +17,10 @@ AS
 $$
 BEGIN
     RETURN QUERY
-        SELECT c.name                                                                                                AS category_name,
+        SELECT c.name         AS category_name,
                Case
                    WHEN SUM(t.amount)::double precision IS NOT NULL THEN SUM(t.amount)::double precision
-                   ELSE 0 END                                                                                        AS total_amount
+                   ELSE 0 END AS total_amount
         FROM category c
                  LEFT JOIN
              transaction t ON c.id = t.id_category

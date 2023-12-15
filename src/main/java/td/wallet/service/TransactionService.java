@@ -1,7 +1,7 @@
 package td.wallet.service;
 
+import td.wallet.dto.CategorizedTransactionSum;
 import td.wallet.dto.TransactionSum;
-import td.wallet.dto.TransactionSumByCategory;
 import td.wallet.models.*;
 import td.wallet.repository.AccountCrudOperations;
 import td.wallet.repository.BalanceCrudOperations;
@@ -88,7 +88,7 @@ public class TransactionService {
         ).get(0);
     }
 
-    public TransactionSumByCategory getTransactionSumByCategory(Account account, Timestamp startDate, Timestamp endDate) {
+    public CategorizedTransactionSum getTransactionSumByCategory(Account account, Timestamp startDate, Timestamp endDate) {
         return qt.executeCall(
                 "{call get_sum_of_transactions_for_each_category(?,?,?)}",
                 ps -> {
@@ -97,7 +97,7 @@ public class TransactionService {
                     ps.setTimestamp(3, endDate);
                 },
                 // See RowMapper functional interface to see how dynamic mapping works
-                rs -> new TransactionSumByCategory(
+                rs -> new CategorizedTransactionSum(
                         rs.getString(Columns.CATEGORY_NAME),
                         rs.getDouble(Columns.TOTAL_AMOUNT)
                 )
