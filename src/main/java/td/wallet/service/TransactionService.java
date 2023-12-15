@@ -1,9 +1,6 @@
 package td.wallet.service;
 
-import td.wallet.models.Account;
-import td.wallet.models.Balance;
-import td.wallet.models.Transaction;
-import td.wallet.models.TransactionType;
+import td.wallet.models.*;
 import td.wallet.repository.AccountCrudOperations;
 import td.wallet.repository.BalanceCrudOperations;
 import td.wallet.repository.TransactionCrudOperations;
@@ -16,7 +13,7 @@ public class TransactionService {
     private final AccountCrudOperations accountRepo = new AccountCrudOperations();
     private final BalanceCrudOperations balanceRepo = new BalanceCrudOperations();
 
-    public Account debit(Account account, double amount, String label) {
+    public Account debit(Account account, double amount, String label, Category category) {
         Account acToDebit = accountRepo.findById(account.getId());
         if (acToDebit == null) {
             return null;
@@ -28,6 +25,7 @@ public class TransactionService {
             transactionRepo.save(new Transaction(
                     amount,
                     label,
+                    category,
                     TransactionType.DEBIT
             ), acToDebit.getId());
         }
@@ -39,15 +37,15 @@ public class TransactionService {
         ));
     }
 
-    public Account credit(Account account, double amount, String label) {
-        return retrieve(account, amount, label, TransactionType.CREDIT);
+    public Account credit(Account account, double amount, String label, Category category) {
+        return retrieve(account, amount, label, TransactionType.CREDIT, category);
     }
 
-    public Account transfer(Account account, double amount, String label) {
-        return retrieve(account, amount, label, TransactionType.TRANSFER);
+    public Account transfer(Account account, double amount, String label, Category category) {
+        return retrieve(account, amount, label, TransactionType.TRANSFER, category);
     }
 
-    private Account retrieve(Account account, double amount, String label, TransactionType type) {
+    private Account retrieve(Account account, double amount, String label, TransactionType type, Category category) {
         Account toCreditAccount = accountRepo.findById(account.getId());
 
         if (toCreditAccount == null) return null;
@@ -57,6 +55,7 @@ public class TransactionService {
         transactionRepo.save(new Transaction(
                         amount,
                         label,
+                        category,
                         type
                 ), toCreditAccount.getId()
         );
