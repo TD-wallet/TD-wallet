@@ -3,18 +3,18 @@ package td.wallet.models;
 public class Category {
     private long id;
     private String name;
-    private String display_name;
+    private String displayName;
 
-    public Category(long id, String name, String display_name) {
+    public Category(long id, String name, String displayName) {
         this.id = id;
         this.name = name;
-        this.display_name = display_name;
+        this.displayName = displayName;
     }
 
-    public Category( String name, String display_name) {
+    public Category( String name, String displayName) {
         this.id = 0;
         this.name = name;
-        this.display_name = display_name;
+        this.displayName = displayName;
     }
     public long getId() {
         return id;
@@ -29,7 +29,7 @@ public class Category {
         return "Category{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", display_name='" + display_name + '\'' +
+                ", display_name='" + displayName + '\'' +
                 '}';
     }
 
@@ -41,11 +41,11 @@ public class Category {
         this.name = name;
     }
 
-    public String getDisplay_name() {
-        return display_name;
+    public String getDisplayName() {
+        return displayName;
     }
 
-    public void setDisplay_name(String display_name) {
-        this.display_name = display_name;
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
     }
 }
