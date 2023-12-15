@@ -22,4 +22,5 @@ public class Columns {
     public static final String ID_CREDITED = "id_credited";
     public static final String ID_SOURCE_CURR = "id_source_currency";
     public static final String ID_DEST_CURR = "id_destination_currency";
+    public static final String DISPLAY_NAME = "display_name";
 }
