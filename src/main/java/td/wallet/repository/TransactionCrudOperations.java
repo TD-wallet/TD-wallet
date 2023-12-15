@@ -1,5 +1,8 @@
 package td.wallet.repository;
 
+import td.wallet.dto.CategorizedTransactionSum;
+import td.wallet.dto.TransactionSum;
+import td.wallet.models.Account;
 import td.wallet.models.Transaction;
 import td.wallet.models.TransactionType;
 import td.wallet.repository.utils.Columns;
@@ -7,6 +10,7 @@ import td.wallet.utils.QueryTemplate;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -110,6 +114,52 @@ public class TransactionCrudOperations implements CrudOperations<Transaction> {
                 "SELECT * FROM transaction WHERE id_account=? ORDER BY id DESC",
                 ps -> ps.setInt(1, id),
                 this::getResult
+        );
+    }
+
+    public TransactionSum getTransactionSum(Account account, Timestamp startDate, Timestamp endDate) {
+        return qt.executeSingleQuery(
+                """
+                        SELECT COALESCE(SUM(CASE WHEN type = 'CREDIT' THEN amount ELSE 0 END)::double precision, 0) AS entry_sum,
+                                       COALESCE(SUM(CASE WHEN type = 'DEBIT' THEN amount ELSE 0 END)::double precision, 0)  AS debit_sum
+                                FROM transaction
+                                WHERE id_account = ?
+                                  AND date BETWEEN ? AND ?;""",
+                ps -> {
+                    ps.setLong(1, account.getId());
+                    ps.setTimestamp(2, startDate);
+                    ps.setTimestamp(3, endDate);
+                },
+                rs -> new TransactionSum(
+                        rs.getDouble(Columns.ENTRY_SUM),
+                        rs.getDouble(Columns.DEBIT_SUM)
+                )
+        );
+    }
+
+    public List<CategorizedTransactionSum> getCategorizedTransaction(Account account, Timestamp startDate, Timestamp endDate) {
+        return qt.executeQuery(
+                """
+                        SELECT c.name                                                                                                AS category_name,
+                                       Case
+                                           WHEN SUM(t.amount)::double precision IS NOT NULL THEN SUM(t.amount)::double precision
+                                           ELSE 0 END                                                                                        AS total_amount
+                                FROM category c
+                                         LEFT JOIN
+                                     transaction t ON c.id = t.id_category
+                                         AND t.date BETWEEN ?
+                                                          AND ?
+                                         AND t.id_account = ?
+                                GROUP BY c.name;""",
+                ps -> {
+                    ps.setTimestamp(1, startDate);
+                    ps.setTimestamp(2, endDate);
+                    ps.setLong(3, account.getId());
+                },
+                rs -> new CategorizedTransactionSum(
+                        rs.getString(Columns.CATEGORY_NAME),
+                        rs.getDouble(Columns.TOTAL_AMOUNT)
+                )
         );
     }
 }

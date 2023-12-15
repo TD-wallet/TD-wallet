@@ -1,11 +1,11 @@
 package td.wallet.dto;
 
-public class TransactionSumByCategory {
+public class CategorizedTransactionSum {
     private final String categoryName;
     private final double totalAmount;
 
 
-    public TransactionSumByCategory(String categoryName, double totalAmount) {
+    public CategorizedTransactionSum(String categoryName, double totalAmount) {
         this.categoryName = categoryName;
         this.totalAmount = totalAmount;
     }
