@@ -90,7 +90,7 @@ public class UserCrudOperations {
                 rs.getString(Columns.USERNAME),
                 rs.getString(Columns.EMAIL),
                 rs.getString(Columns.PASSWORD),
-                accountRepo.getByUserId(rs.getInt(Columns.ID_USER))
+                accountRepo.getByUserId(rs.getInt(Columns.ID))
         );
     }
 }

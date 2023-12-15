@@ -84,11 +84,14 @@ public class AccountCrudOperations implements CrudOperations<Account> {
     }
 
     private boolean isSaved(Account toSave, long relId) {
-        return qt.executeUpdate("INSERT INTO account (id, ref, id_user) VALUES (?,?,?)",
+        return qt.executeUpdate("INSERT INTO account (id, ref, name, id_user, type, id_currency) VALUES (?,?,?,?,?,?)",
                 ps -> {
                     ps.setLong(1, this.findAll().get(0).getId() + 1);
                     ps.setString(2, toSave.getRef());
-                    ps.setDouble(3, relId);
+                    ps.setString(3, toSave.getName());
+                    ps.setDouble(4, relId);
+                    ps.setString(5, toSave.getType());
+                    ps.setInt(6, toSave.getCurrency().getId());
                 }
         ) != 0;
     }

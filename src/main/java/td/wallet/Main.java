@@ -1,8 +1,10 @@
 package td.wallet;
 
+import td.wallet.models.Account;
 import td.wallet.models.Transaction;
 import td.wallet.models.TransactionType;
 import td.wallet.repository.AccountCrudOperations;
+import td.wallet.repository.CurrencyCrudOperations;
 import td.wallet.repository.TransactionCrudOperations;
 import td.wallet.repository.UserCrudOperations;
 
@@ -12,7 +14,7 @@ import java.time.Instant;
 public class Main {
     public static void main(String[] args) {
         AccountCrudOperations accountRepo = new AccountCrudOperations();
-        Integer idToGet = 1;
+        int idToGet = 1;
 
         System.out.println("Preforming tests of account CRUD operations");
 
@@ -26,18 +28,21 @@ public class Main {
                 accountRepo.findById(idToGet)
         );
 
-        // Account toInsertAccount = new Account(4, "HIJ456", 0);
+        CurrencyCrudOperations currencyRepo = new CurrencyCrudOperations();
+
+        Account toInsertAccount = new Account( "HIJ456", currencyRepo.findById(1) );
+        System.out.println(toInsertAccount);
         if (accountRepo.findById(4) != null) {
             System.out.println("    - save account : account already exists");
         } else {
-            // System.out.printf("   - save account : %s%n", accountRepo.save(toInsertAccount));
+            System.out.printf("   - save account : %s%n", accountRepo.save(toInsertAccount,1 ));
         }
 
-        // Account toDeleteAccount = new Account(4, null, 0);
-//        System.out.printf("   - deleting account id=%d : %s%n%n",
-//                toDeleteAccount.getId(),
-//                accountRepo.delete(toDeleteAccount)
-//        );
+       Account toDeleteAccount = new Account(4, null, null);
+       System.out.printf("   - deleting account id=%d : %s%n%n",
+                toDeleteAccount.getId(),
+                accountRepo.delete(toDeleteAccount)
+        );
 
         TransactionCrudOperations transactionRepo = new TransactionCrudOperations();
 
