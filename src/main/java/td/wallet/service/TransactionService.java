@@ -3,12 +3,12 @@ package td.wallet.service;
 import td.wallet.models.Account;
 import td.wallet.models.Balance;
 import td.wallet.models.Transaction;
+import td.wallet.models.TransactionType;
 import td.wallet.repository.AccountCrudOperations;
 import td.wallet.repository.BalanceCrudOperations;
 import td.wallet.repository.TransactionCrudOperations;
 import td.wallet.repository.utils.Columns;
 import td.wallet.utils.QueryTemplate;
-import td.wallet.models.TransactionType;
 
 public class TransactionService {
     private final QueryTemplate qt = new QueryTemplate();

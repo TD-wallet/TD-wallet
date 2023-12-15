@@ -1,7 +1,5 @@
 package td.wallet.models;
 
-import java.awt.*;
-
 public class Currency {
     private int id;
     private String name;

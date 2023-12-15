@@ -11,7 +11,7 @@ import java.util.List;
 
 public class CategoryCrudOperations {
 
-    private QueryTemplate qt = new QueryTemplate();
+    private final QueryTemplate qt = new QueryTemplate();
 
     public Category findById(long id) {
         return qt.executeSingleQuery("SELECT * FROM category WHERE id=?", ps -> {

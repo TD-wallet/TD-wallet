@@ -11,11 +11,12 @@ public class Category {
         this.displayName = displayName;
     }
 
-    public Category( String name, String displayName) {
+    public Category(String name, String displayName) {
         this.id = 0;
         this.name = name;
         this.displayName = displayName;
     }
+
     public long getId() {
         return id;
     }

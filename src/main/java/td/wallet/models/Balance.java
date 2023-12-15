@@ -4,9 +4,9 @@ import java.sql.Timestamp;
 import java.time.Instant;
 
 public class Balance {
-    private long id;
-    private Timestamp date;
-    private double amount;
+    private final long id;
+    private final Timestamp date;
+    private final double amount;
 
     public Balance(int id, Timestamp date, double amount) {
         this.id = id;

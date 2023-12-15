@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CurrencyCrudOperations {
-    private QueryTemplate qt = new QueryTemplate();
+    private final QueryTemplate qt = new QueryTemplate();
 
     public Currency findById(int id) {
         return qt.executeSingleQuery(
@@ -30,7 +30,7 @@ public class CurrencyCrudOperations {
 
     public List<Currency> saveAll(List<Currency> toSave) {
         ArrayList<Currency> toBeSaved = new ArrayList<>();
-        for (Currency currency: toSave) {
+        for (Currency currency : toSave) {
             Currency saving = this.save(currency);
             if (saving != null) {
                 toBeSaved.add(saving);
@@ -42,8 +42,8 @@ public class CurrencyCrudOperations {
     }
 
     public Currency save(Currency toSave) {
-        if(toSave.getId() == 0 && isSaved(toSave)) {
-                return findAll().get(0);
+        if (toSave.getId() == 0 && isSaved(toSave)) {
+            return findAll().get(0);
         } else if (this.findById(toSave.getId()) != null) {
             return qt.executeUpdate(
                     "UPDATE currency SET code=?, name=?, symbol=? WHERE id=?",
