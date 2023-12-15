@@ -3,6 +3,7 @@ package td.wallet.repository;
 import td.wallet.models.Currency;
 import td.wallet.models.CurrencyValue;
 import td.wallet.repository.utils.Columns;
+import td.wallet.repository.utils.ValueType;
 import td.wallet.utils.QueryTemplate;
 
 import java.sql.ResultSet;
@@ -10,7 +11,10 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CurrencyValueCrudOperations implements CrudOperations<CurrencyValue> {
     private final QueryTemplate qt = new QueryTemplate();
@@ -97,6 +101,67 @@ public class CurrencyValueCrudOperations implements CrudOperations<CurrencyValue
                 },
                 this::getResult
         );
+    }
+
+    public CurrencyValue findValue(Currency source, Currency dest, Timestamp date, ValueType type) {
+        List<CurrencyValue> dayValues = qt.executeQuery(
+                "SELECT * FROM currency_value WHERE id_source_currency=? AND id_destination_currency=? AND date(date)=date(?)",
+                ps -> {
+                    ps.setInt(1, source.getId());
+                    ps.setInt(2, dest.getId());
+                    ps.setTimestamp(3, date);
+                },
+                this::getResult
+        );
+
+        switch (type) {
+            case MIN -> {
+                return dayValues
+                        .stream()
+                        .min(
+                                Comparator
+                                        .comparing(CurrencyValue::getAmount)
+                        ).orElse(null);
+            }
+            case MAX -> {
+                return dayValues
+                        .stream()
+                        .max(
+                                Comparator.comparing(CurrencyValue::getAmount)
+                        ).orElse(null);
+            }
+            case WEIGHTED_AVERAGE -> {
+                return new CurrencyValue(
+                        source,
+                        dest,
+                        dayValues
+                                .stream()
+                                .mapToDouble(CurrencyValue::getAmount)
+                                .average().orElse(-1),
+                        date
+                );
+            }
+            case MEDIAN -> {
+                List<Double> amounts = dayValues.stream().map(CurrencyValue::getAmount).sorted().toList();
+                int middle = amounts.size() / 2;
+                if (amounts.size() % 2 == 1) {
+                    return new CurrencyValue(
+                            source,
+                            dest,
+                            amounts.get(middle),
+                            date
+                    );
+                } else {
+                    return new CurrencyValue(
+                            source,
+                            dest,
+                            amounts.get(middle - 1) + amounts.get(middle) / 2.0,
+                            date
+                    );
+                }
+            }
+            default -> throw new IllegalArgumentException("Invalid type: " + type);
+        }
     }
 
     private CurrencyValue getResult(ResultSet rs) throws SQLException {
