@@ -8,17 +8,20 @@ public class Transaction {
     private final double amount;
     private final String label;
     private final Timestamp date;
+    private final Category category;
     private final TransactionType type;
 
-    public Transaction(int id, double amount, Timestamp date, TransactionType type) {
+    public Transaction(int id, double amount, Timestamp date, Category category, TransactionType type) {
         this.id = id;
         this.amount = amount;
+        this.category = category;
         this.label = "Default";
         this.date = date;
         this.type = type;
     }
 
-    public Transaction(double amount, Timestamp transactionDate, TransactionType transactionType) {
+    public Transaction(double amount, Timestamp transactionDate, Category category, TransactionType transactionType) {
+        this.category = category;
         this.id = 0;
         this.amount = amount;
         this.label = "Default";
@@ -26,7 +29,8 @@ public class Transaction {
         this.type = transactionType;
     }
 
-    public Transaction(double amount, Timestamp transactionDate, String label, TransactionType transactionType) {
+    public Transaction(double amount, Timestamp transactionDate, String label, Category category, TransactionType transactionType) {
+        this.category = category;
         this.id = 0;
         this.amount = amount;
         this.label = label;
@@ -34,15 +38,17 @@ public class Transaction {
         this.type = transactionType;
     }
 
-    public Transaction(long id, double amount, Timestamp transactionDate, String label, TransactionType transactionType) {
+    public Transaction(long id, double amount, Timestamp transactionDate, String label, Category category, TransactionType transactionType) {
         this.id = id;
         this.amount = amount;
         this.label = label;
         this.date = transactionDate;
+        this.category = category;
         this.type = transactionType;
     }
 
-    public Transaction(double amount, String label, TransactionType transactionType) {
+    public Transaction(double amount, String label, Category category, TransactionType transactionType) {
+        this.category = category;
         this.id = 0;
         this.amount = amount;
         this.label = label;
@@ -65,6 +71,10 @@ public class Transaction {
 
     public Timestamp getDate() {
         return date;
+    }
+
+    public Category getCategory() {
+        return category;
     }
 
     public TransactionType getType() {
