@@ -4,21 +4,23 @@
 --  are not associated with any transactions, then return 0.
 
 CREATE OR REPLACE FUNCTION get_sum_of_transactions_for_each_category(
-    account_id integer,
+    account_id bigint,
     start_date timestamp,
     end_date timestamp
 )
     RETURNS TABLE
             (
                 category_name varchar(60),
-                total_amount  integer
+                total_amount  double precision
             )
 AS
 $$
 BEGIN
     RETURN QUERY
-        SELECT c.name                                                            AS category_name,
-               Case WHEN SUM(t.amount) IS NOT NULL THEN SUM(t.amount) ELSE 0 END AS total_amount
+        SELECT c.name                                                                                                AS category_name,
+               Case
+                   WHEN SUM(t.amount)::double precision IS NOT NULL THEN SUM(t.amount)::double precision
+                   ELSE 0 END                                                                                        AS total_amount
         FROM category c
                  LEFT JOIN
              transaction t ON c.id = t.id_category

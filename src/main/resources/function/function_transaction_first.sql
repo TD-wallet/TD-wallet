@@ -4,21 +4,21 @@
 -- between the given date range
 
 CREATE OR REPLACE FUNCTION get_sum_of_transactions(
-    account_id integer,
+    account_id bigint,
     start_date timestamp,
     end_date timestamp
 )
     RETURNS TABLE
             (
-                entry_sum integer,
-                debit_sum integer
+                entry_sum double precision,
+                debit_sum double precision
             )
 AS
 $$
 BEGIN
     RETURN QUERY
-        SELECT COALESCE(SUM(CASE WHEN type = 'CREDIT' THEN amount ELSE 0 END), 0) AS entry_sum,
-               COALESCE(SUM(CASE WHEN type = 'DEBIT' THEN amount ELSE 0 END), 0)  AS debit_sum
+        SELECT COALESCE(SUM(CASE WHEN type = 'CREDIT' THEN amount ELSE 0 END)::double precision, 0) AS entry_sum,
+               COALESCE(SUM(CASE WHEN type = 'DEBIT' THEN amount ELSE 0 END)::double precision, 0)  AS debit_sum
         FROM transaction
         WHERE id_account = account_id
           AND date BETWEEN start_date AND end_date;
@@ -27,5 +27,4 @@ $$ LANGUAGE plpgsql;
 
 -- EXAMPLE
 
-SELECT *
-FROM get_sum_of_transactions(1, '2023-12-11', '2023-12-12');
+select * from get_sum_of_transactions(1::bigint, '2023-12-11'::timestamp, '2023-12-12'::timestamp);
