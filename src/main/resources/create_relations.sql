@@ -42,3 +42,8 @@ ALTER TABLE currency_value
     ADD CONSTRAINT destination_fk FOREIGN KEY (id_destination_currency)
         REFERENCES currency (id) MATCH FULL
         ON DELETE RESTRICT ON UPDATE CASCADE;
+
+ALTER TABLE transaction
+ADD CONSTRAINT category_fk FOREIGN KEY (id_category)
+    REFERENCES category (id) MATCH FULL
+    ON DELETE RESTRICT ON UPDATE CASCADE;
