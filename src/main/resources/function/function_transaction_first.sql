@@ -27,4 +27,5 @@ $$ LANGUAGE plpgsql;
 
 -- EXAMPLE
 
-select * from get_sum_of_transactions(1::bigint, '2023-12-11'::timestamp, '2023-12-12'::timestamp);
+select *
+from get_sum_of_transactions(1::bigint, '2023-12-11'::timestamp, '2023-12-12'::timestamp);
