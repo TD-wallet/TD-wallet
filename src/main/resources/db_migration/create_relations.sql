@@ -6,9 +6,6 @@ ALTER TABLE account
         ON DELETE RESTRICT ON UPDATE CASCADE;
 
 ALTER TABLE account
-    ADD CONSTRAINT account_uq UNIQUE (id_currency);
-
-ALTER TABLE account
     ADD CONSTRAINT user_fk FOREIGN KEY (id_user)
         REFERENCES "user" (id) MATCH FULL
         ON DELETE RESTRICT ON UPDATE CASCADE;

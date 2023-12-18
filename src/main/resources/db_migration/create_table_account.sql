@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS account
     id          bigserial              NOT NULL,
     name        varchar                NOT NULL,
     ref         character varying(100) NOT NULL,
-    type        varchar                NOT NULL,
+    type        varchar                NOT NULL DEFAULT 'CASH',
     id_currency integer                NOT NULL,
     id_user     integer                NOT NULL,
     CONSTRAINT account_pkey PRIMARY KEY (id),

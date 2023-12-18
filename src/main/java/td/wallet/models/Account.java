@@ -19,11 +19,12 @@ public class Account {
         this.balance = balance;
     }
 
-    public Account(String accountNumber) {
+    public Account(String accountNumber, Currency currency) {
         this.id = 0;
         this.name = "Untitled";
         this.ref = accountNumber;
         this.balance = List.of();
+        this.currency = currency;
     }
 
     public Account(int id, String ref, List<Balance> balance, String type, Currency currency, List<Transaction> transactions) {
