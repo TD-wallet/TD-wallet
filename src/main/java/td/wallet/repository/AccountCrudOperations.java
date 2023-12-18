@@ -63,12 +63,18 @@ public class AccountCrudOperations implements CrudOperations<Account> {
 
     @Override
     public Account delete(Account toDelete) {
-        return qt.executeUpdate(
-                "DELETE FROM account WHERE id=?",
-                ps -> {
-                    ps.setLong(1, toDelete.getId());
-                }
-        ) == 0 ? null : toDelete;
+        Account toBeDeleted = findById(toDelete.getId());
+
+        if(toBeDeleted == null) {
+            return null;
+        } else {
+            return qt.executeUpdate(
+                    "DELETE FROM account WHERE id=?",
+                    ps -> {
+                        ps.setLong(1, toDelete.getId());
+                    }
+            ) == 0 ? null : toBeDeleted;
+        }
     }
 
     private Account getResult(ResultSet rs) throws SQLException {
