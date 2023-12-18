@@ -35,7 +35,7 @@ public class TransferService {
                         amount,
                         "Transfer to " + toCredit.getRef(),
                         category
-                        );
+                );
 
                 Account receiverTrans = transactionService.transfer(
                         toCredit,

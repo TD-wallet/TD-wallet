@@ -2,6 +2,7 @@ package td.wallet.service;
 
 import td.wallet.models.Account;
 import td.wallet.models.Balance;
+import td.wallet.models.CurrencyValue;
 import td.wallet.models.Transfer;
 import td.wallet.repository.BalanceCrudOperations;
 import td.wallet.repository.CurrencyValueCrudOperations;
@@ -70,11 +71,15 @@ public class AccountService {
         List<Transfer> transfers = transferRepo.findByAccount(account, AccountTransferRole.CREDITED);
 
         for (Transfer transfer : transfers) {
-            finalBalance += transfer.getAmount() * currencyValueRepo.findValue(
+            CurrencyValue value = currencyValueRepo.findValue(
                     transfer.getDebited().getCurrency(),
                     transfer.getCredited().getCurrency(),
                     transfer.getDate()
-            ).getAmount();
+            );
+
+            if (value != null) {
+                finalBalance += transfer.getAmount() * value.getAmount();
+            }
         }
 
         return balanceRepo.save(
