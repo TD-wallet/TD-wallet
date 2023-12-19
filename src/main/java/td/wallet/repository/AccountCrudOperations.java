@@ -1,6 +1,7 @@
 package td.wallet.repository;
 
 import td.wallet.models.Account;
+import td.wallet.models.User;
 import td.wallet.repository.utils.Columns;
 import td.wallet.utils.QueryTemplate;
 
@@ -102,10 +103,18 @@ public class AccountCrudOperations implements CrudOperations<Account> {
         ) != 0;
     }
 
-    public List<Account> getByUserId(long userId) {
+    public List<Account> findByUserId(long userId) {
         return qt.executeQuery(
                 "SELECT * FROM account WHERE id_user=?",
                 ps -> ps.setLong(1, userId),
+                this::getResult
+        );
+    }
+
+    public List<Account> findByUser(User user) {
+        return qt.executeQuery(
+                "SELECT * FROM account WHERE id_user=?",
+                ps -> ps.setLong(1, user.getId()),
                 this::getResult
         );
     }
