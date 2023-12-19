@@ -79,7 +79,12 @@ public class TransferCrudOperations {
     }
 
     private Transfer getResult(ResultSet rs) throws SQLException {
-        return new Transfer(rs.getInt(Columns.ID), accountRepo.findById(rs.getInt(Columns.ID_DEBITED)), accountRepo.findById(rs.getInt(Columns.ID_DEBITED)), rs.getDouble(Columns.AMOUNT), rs.getTimestamp(Columns.DATE));
+        return new Transfer(
+                rs.getInt(Columns.ID),
+                accountRepo.findById(rs.getInt(Columns.ID_CREDITED)),
+                accountRepo.findById(rs.getInt(Columns.ID_DEBITED)),
+                rs.getDouble(Columns.AMOUNT), rs.getTimestamp(Columns.DATE)
+        );
     }
 
     private boolean isSaved(Transfer toSave) {
