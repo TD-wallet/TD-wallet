@@ -2,14 +2,10 @@ package td.wallet;
 
 import td.wallet.models.Account;
 import td.wallet.models.Transaction;
-import td.wallet.models.TransactionType;
 import td.wallet.repository.AccountCrudOperations;
 import td.wallet.repository.CurrencyCrudOperations;
 import td.wallet.repository.TransactionCrudOperations;
 import td.wallet.repository.UserCrudOperations;
-
-import java.sql.Timestamp;
-import java.time.Instant;
 
 public class Main {
     public static void main(String[] args) {
@@ -30,16 +26,16 @@ public class Main {
 
         CurrencyCrudOperations currencyRepo = new CurrencyCrudOperations();
 
-        Account toInsertAccount = new Account( "HIJ456", currencyRepo.findById(1) );
+        Account toInsertAccount = new Account("HIJ456", currencyRepo.findById(1));
         System.out.println(toInsertAccount);
         if (accountRepo.findById(4) != null) {
             System.out.println("    - save account : account already exists");
         } else {
-            System.out.printf("   - save account : %s%n", accountRepo.save(toInsertAccount,1 ));
+            System.out.printf("   - save account : %s%n", accountRepo.save(toInsertAccount, 1));
         }
 
-       Account toDeleteAccount = new Account(4, null, null);
-       System.out.printf("   - deleting account id=%d : %s%n%n",
+        Account toDeleteAccount = new Account(4, null, null);
+        System.out.printf("   - deleting account id=%d : %s%n%n",
                 toDeleteAccount.getId(),
                 accountRepo.delete(toDeleteAccount)
         );

@@ -11,10 +11,8 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class CurrencyValueCrudOperations implements CrudOperations<CurrencyValue> {
     private final QueryTemplate qt = new QueryTemplate();

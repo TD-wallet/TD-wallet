@@ -65,7 +65,7 @@ public class AccountCrudOperations implements CrudOperations<Account> {
     public Account delete(Account toDelete) {
         Account toBeDeleted = findById(toDelete.getId());
 
-        if(toBeDeleted == null) {
+        if (toBeDeleted == null) {
             return null;
         } else {
             return qt.executeUpdate(
