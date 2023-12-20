@@ -81,14 +81,14 @@ public class TransferCrudOperations {
     private Transfer getResult(ResultSet rs) throws SQLException {
         return new Transfer(
                 rs.getInt(Columns.ID),
-                accountRepo.findById(rs.getInt(Columns.ID_CREDITED)),
                 accountRepo.findById(rs.getInt(Columns.ID_DEBITED)),
+                accountRepo.findById(rs.getInt(Columns.ID_CREDITED)),
                 rs.getDouble(Columns.AMOUNT), rs.getTimestamp(Columns.DATE)
         );
     }
 
     private boolean isSaved(Transfer toSave) {
-        return qt.executeUpdate("INSERT INTO transfer (id_debited, id_credited, amount, date) VALUES (?,?,?,?)", ps -> {
+        return qt.executeUpdate("INSERT INTO transfer (id_credited, id_debited, amount, date) VALUES (?,?,?,?)", ps -> {
             ps.setLong(1, toSave.getCredited().getId());
             ps.setLong(2, toSave.getDebited().getId());
             ps.setDouble(3, toSave.getAmount());
