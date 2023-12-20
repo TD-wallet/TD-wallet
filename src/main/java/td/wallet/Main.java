@@ -1,11 +1,12 @@
 package td.wallet;
 
-import td.wallet.models.*;
+import td.wallet.models.Account;
+import td.wallet.models.Balance;
+import td.wallet.models.Transfer;
+import td.wallet.models.User;
 import td.wallet.repository.*;
 import td.wallet.service.AccountService;
 import td.wallet.service.TransferService;
-
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
