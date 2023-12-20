@@ -2,6 +2,7 @@ package td.wallet;
 
 import td.wallet.models.*;
 import td.wallet.repository.*;
+import td.wallet.service.AccountService;
 import td.wallet.service.TransferService;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class Main {
 
         // Services
         TransferService transferService = new TransferService();
+        AccountService accountService = new AccountService();
 
         User debitedUser = userRepo.findById(3);
         Account debitedAccount = accountRepo.findByUser(debitedUser).get(0);
@@ -29,5 +31,9 @@ public class Main {
         Transfer transfer = transferService.transfer(debitedAccount, creditedAccount, 1, categoryRepo.findById(10));
 
         System.out.println(transfer);
+
+        Balance balance = accountService.getBalance2(creditedAccount);
+
+        System.out.printf("Balance of credited Account: %s", balance);
     }
 }
