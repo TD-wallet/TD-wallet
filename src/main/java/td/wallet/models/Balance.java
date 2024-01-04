@@ -14,6 +14,11 @@ public class Balance {
         this.amount = amount;
     }
 
+    public Balance(){
+        this.id = 0;
+        this.date = null;
+        this.amount = 0.0;
+    }
     public Balance(Timestamp date, double amount) {
         this.id = 0;
         this.date = date;
