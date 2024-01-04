@@ -26,10 +26,13 @@ public class CategoryCrudOperations {
     }
 
     public List<Category> saveAll(List<Category> toSave) {
-        ArrayList<Category> toBeSaved = new ArrayList<>();
+        List<Category> toBeSaved = new ArrayList<>();
         for (Category category : toSave) {
             Category saving = this.save(category);
-            return null;
+            if (saving == null) {
+                return null;
+            }
+            toBeSaved.add(saving);
         }
         return toBeSaved;
     }
@@ -70,11 +73,10 @@ public class CategoryCrudOperations {
 
     private Boolean isSaved(Category category) {
         return qt.executeUpdate(
-                "INSERT INTO currency (id, name, display_name) VALUES (?,?,?)",
+                "INSERT INTO category ( name, display_name) VALUES (?,?)",
                 ps -> {
-                    ps.setLong(1, category.getId());
-                    ps.setString(2, category.getName());
-                    ps.setString(3, category.getDisplayName());
+                    ps.setString(1, category.getName());
+                    ps.setString(2, category.getDisplayName());
                 }
         ) != 0;
     }
