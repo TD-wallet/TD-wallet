@@ -61,4 +61,9 @@ public class BalanceCrudOperationsTest implements CrudOperationsTest{
         Balance balanceToDelete = balanceCrudOperations.delete(balance);
         assertNull(balanceToDelete);
     }
+    @Test
+    public void testFindByAccountId(){
+        List<Balance> balanceList = balanceCrudOperations.findByAccountId(3);
+        assertNotNull(balanceList);
+    }
 }
