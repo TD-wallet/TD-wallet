@@ -27,6 +27,13 @@ public class Account {
         this.currency = currency;
     }
 
+    public Account(long id,String accountNumber) {
+        this.id = id;
+        this.name = "Untitled";
+        this.ref = accountNumber;
+        this.balance = List.of();
+    }
+
     public Account(int id, String ref, List<Balance> balance, String type, Currency currency, List<Transaction> transactions) {
         this.id = id;
         this.name = "Untitled";
