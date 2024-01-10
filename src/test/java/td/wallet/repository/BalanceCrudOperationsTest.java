@@ -1,20 +1,28 @@
 package td.wallet.repository;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import td.wallet.models.Balance;
+import td.wallet.utils.ConnectionProvider;
 
+import java.sql.Connection;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class BalanceCrudOperationsTest implements CrudOperationsTest{
+public class BalanceCrudOperationsTest implements CrudOperationsTest {
 
     private BalanceCrudOperations balanceCrudOperations;
 
+    @BeforeAll
+    public static void setOriginalConnection() {
+        Connection originalConnection = ConnectionProvider.getConnection();
+    }
+
     @BeforeEach
-    public void setBalanceCrudOperations(){
+    public void setBalanceCrudOperations() {
         balanceCrudOperations = new BalanceCrudOperations();
     }
 
@@ -38,9 +46,9 @@ public class BalanceCrudOperationsTest implements CrudOperationsTest{
     @Override
     public void testSave() {
         Balance balanceToSave = new Balance(6000.0);
-        Balance balanceSaved = balanceCrudOperations.save(balanceToSave,2);
+        Balance balanceSaved = balanceCrudOperations.save(balanceToSave, 2);
         assertNotNull(balanceSaved);
-        assertNotEquals(0,balanceSaved.getId());
+        assertNotEquals(0, balanceSaved.getId());
     }
 
     @Test
@@ -48,10 +56,10 @@ public class BalanceCrudOperationsTest implements CrudOperationsTest{
     public void testSaveAll() {
         Balance balance1 = new Balance(5000.0);
         Balance balance2 = new Balance(3000.0);
-        List<Balance> balanceList = Arrays.asList(balance1,balance2);
-        List<Balance> balanceSaved = balanceCrudOperations.saveAll(balanceList,Arrays.asList(3,3));
+        List<Balance> balanceList = Arrays.asList(balance1, balance2);
+        List<Balance> balanceSaved = balanceCrudOperations.saveAll(balanceList, Arrays.asList(3, 3));
         assertNotNull(balanceSaved);
-        assertEquals(balanceList.size(),balanceSaved.size());
+        assertEquals(balanceList.size(), balanceSaved.size());
     }
 
     @Test
@@ -61,8 +69,9 @@ public class BalanceCrudOperationsTest implements CrudOperationsTest{
         Balance balanceToDelete = balanceCrudOperations.delete(balance);
         assertNull(balanceToDelete);
     }
+
     @Test
-    public void testFindByAccountId(){
+    public void testFindByAccountId() {
         List<Balance> balanceList = balanceCrudOperations.findByAccountId(3);
         assertNotNull(balanceList);
     }

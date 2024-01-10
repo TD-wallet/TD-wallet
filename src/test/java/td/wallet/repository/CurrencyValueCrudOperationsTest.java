@@ -1,22 +1,32 @@
 package td.wallet.repository;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import td.wallet.models.Currency;
 import td.wallet.models.CurrencyValue;
+import td.wallet.utils.ConnectionProvider;
 
+import java.sql.Connection;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class CurrencyValueCrudOperationsTest implements CrudOperationsTest{
+public class CurrencyValueCrudOperationsTest implements CrudOperationsTest {
 
     private CurrencyValueCrudOperations currencyValueCrudOperations;
+
+    @BeforeAll
+    public static void setOriginalConnection() {
+        Connection originalConnection = ConnectionProvider.getConnection();
+    }
+
     @BeforeEach
-    public void setCurrencyCrudOperations(){
+    public void setCurrencyCrudOperations() {
         currencyValueCrudOperations = new CurrencyValueCrudOperations();
     }
+
     @Test
     @Override
     public void testFindById() {
@@ -36,9 +46,9 @@ public class CurrencyValueCrudOperationsTest implements CrudOperationsTest{
     @Test
     @Override
     public void testSave() {
-        Currency currency1 = new Currency(2,null,null,null);
-        Currency currency2 = new Currency(4,null,null,null);
-        CurrencyValue currencyValue = new CurrencyValue(currency1,currency2,100.0,null);
+        Currency currency1 = new Currency(2, null, null, null);
+        Currency currency2 = new Currency(4, null, null, null);
+        CurrencyValue currencyValue = new CurrencyValue(currency1, currency2, 100.0, null);
         CurrencyValue toSave = currencyValueCrudOperations.save(currencyValue);
         assertNotNull(toSave);
     }
@@ -46,14 +56,14 @@ public class CurrencyValueCrudOperationsTest implements CrudOperationsTest{
     @Test
     @Override
     public void testSaveAll() {
-        Currency currency1 = new Currency(2,null,null,null);
-        Currency currency2 = new Currency(4,null,null,null);
-        CurrencyValue currencyValue1 = new CurrencyValue(currency1,currency2,150.0,null);
-        CurrencyValue currencyValue2 = new CurrencyValue(currency1,currency2,90.0,null);
-        List<CurrencyValue> currencyValueList = Arrays.asList(currencyValue1,currencyValue2);
+        Currency currency1 = new Currency(2, null, null, null);
+        Currency currency2 = new Currency(4, null, null, null);
+        CurrencyValue currencyValue1 = new CurrencyValue(currency1, currency2, 150.0, null);
+        CurrencyValue currencyValue2 = new CurrencyValue(currency1, currency2, 90.0, null);
+        List<CurrencyValue> currencyValueList = Arrays.asList(currencyValue1, currencyValue2);
         List<CurrencyValue> toSave = currencyValueCrudOperations.saveAll(currencyValueList);
         assertNotNull(toSave);
-        assertEquals(currencyValueList.size(),toSave.size());
+        assertEquals(currencyValueList.size(), toSave.size());
     }
 
     @Test
@@ -62,6 +72,6 @@ public class CurrencyValueCrudOperationsTest implements CrudOperationsTest{
         CurrencyValue currencyValue = currencyValueCrudOperations.findById(3);
         CurrencyValue toDelete = currencyValueCrudOperations.delete(currencyValue);
         assertNotNull(toDelete);
-        assertEquals(currencyValue.getId(),toDelete.getId());
+        assertEquals(currencyValue.getId(), toDelete.getId());
     }
 }
