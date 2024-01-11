@@ -1,5 +1,6 @@
 package td.wallet.repository;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,34 +11,42 @@ import java.sql.Connection;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 public class UserCrudOperationsTest {
-    private  UserCrudOperations userCrudOperations;
+    private UserCrudOperations userCrudOperations;
 
     @BeforeAll
     public static void setOriginalConnection() {
         Connection originalConnection = ConnectionProvider.getConnection();
     }
+
     @BeforeEach
-    public void setUserCrudOperations(){
-         userCrudOperations = new UserCrudOperations();
+    public void setUserCrudOperations() {
+        userCrudOperations = new UserCrudOperations();
+    }
+
+    @AfterEach
+    public void cleanUpTest() {
+        cleanUpTestData();
     }
 
     @Test
-    public void testFindById(){
+    public void testFindById() {
         User existinguser = userCrudOperations.findById(1);
         // Assert
         assertNotNull(existinguser);
 
     }
+
     @Test
-    public void testFindAll(){
+    public void testFindAll() {
         List<User> userList = userCrudOperations.findAll();
         assertNotNull(userList);
         assertFalse(userList.isEmpty());
     }
 
     @Test
-    public void testSave(){
+    public void testSave() {
         // Arrange
         User userToSave = new User(0, "newUser", "newUser@email.com", "newPassword");
 
@@ -48,12 +57,20 @@ public class UserCrudOperationsTest {
     }
 
     @Test
-    public  void testDelete(){
+    public void testDelete() {
         User userToDelete = userCrudOperations.findById(4);
         User userDeleted = userCrudOperations.delete(userToDelete);
 
         assertNotNull(userDeleted);
-        assertEquals(userToDelete.getId(),userDeleted.getId());
+        assertEquals(userToDelete.getId(), userDeleted.getId());
+    }
+
+
+    private void cleanUpTestData() {
+        User user = userCrudOperations.findById(4);
+        if (user != null) {
+            userCrudOperations.delete(user);
+        }
     }
 
 }

@@ -1,5 +1,6 @@
 package td.wallet.repository;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,6 +26,11 @@ public class CurrencyValueCrudOperationsTest implements CrudOperationsTest {
     @BeforeEach
     public void setCurrencyCrudOperations() {
         currencyValueCrudOperations = new CurrencyValueCrudOperations();
+    }
+
+    @AfterEach
+    public void cleanUpTestSave() {
+        cleanUpTestData();
     }
 
     @Test
@@ -73,5 +79,15 @@ public class CurrencyValueCrudOperationsTest implements CrudOperationsTest {
         CurrencyValue toDelete = currencyValueCrudOperations.delete(currencyValue);
         assertNotNull(toDelete);
         assertEquals(currencyValue.getId(), toDelete.getId());
+    }
+
+    private void cleanUpTestData() {
+        CurrencyValue currencyValue1 = currencyValueCrudOperations.findById(4);
+        CurrencyValue currencyValue2 = currencyValueCrudOperations.findById(5);
+        CurrencyValue currencyValue3 = currencyValueCrudOperations.findById(6);
+
+        if (currencyValue1 != null) {
+            currencyValueCrudOperations.delete(currencyValue1);
+        }
     }
 }
