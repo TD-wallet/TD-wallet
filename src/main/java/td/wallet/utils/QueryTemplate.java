@@ -1,5 +1,6 @@
 package td.wallet.utils;
 
+import org.springframework.stereotype.Component;
 import td.wallet.utils.lambdas.PreparedStatementSetter;
 import td.wallet.utils.lambdas.RowMapper;
 
@@ -7,10 +8,12 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class QueryTemplate {
-    private final Connection connection = ConnectionProvider.getConnection();
+    private final Connection connection;
 
-    public QueryTemplate() {
+    public QueryTemplate(Connection connection) {
+        this.connection = connection;
     }
 
     public <T> List<T> executeQuery(String query, PreparedStatementSetter pss, RowMapper<T> rowMapper) {

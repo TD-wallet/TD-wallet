@@ -1,16 +1,23 @@
 package td.wallet.repository;
 
+import org.springframework.stereotype.Repository;
 import td.wallet.models.Currency;
 import td.wallet.repository.utils.Columns;
 import td.wallet.utils.QueryTemplate;
 
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CurrencyCrudOperations {
-    private final QueryTemplate qt = new QueryTemplate();
+@Repository
+public class CurrencyCrudOperations implements Serializable {
+    private final QueryTemplate qt;
+
+    public CurrencyCrudOperations(QueryTemplate qt) {
+        this.qt = qt;
+    }
 
     public Currency findById(int id) {
         return qt.executeSingleQuery(

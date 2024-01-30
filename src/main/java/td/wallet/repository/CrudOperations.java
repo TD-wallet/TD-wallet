@@ -1,8 +1,9 @@
 package td.wallet.repository;
 
+import java.io.Serializable;
 import java.util.List;
 
-public interface CrudOperations<T> {
+public interface CrudOperations<T> extends Serializable {
     T findById(long id);
 
     List<T> findAll();

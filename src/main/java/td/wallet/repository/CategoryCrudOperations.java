@@ -1,5 +1,6 @@
 package td.wallet.repository;
 
+import org.springframework.stereotype.Repository;
 import td.wallet.models.Category;
 import td.wallet.repository.utils.Columns;
 import td.wallet.utils.QueryTemplate;
@@ -9,9 +10,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class CategoryCrudOperations {
 
-    private final QueryTemplate qt = new QueryTemplate();
+    private final QueryTemplate qt;
+
+    public CategoryCrudOperations(QueryTemplate qt) {
+        this.qt = qt;
+    }
 
     public Category findById(long id) {
         return qt.executeSingleQuery("SELECT * FROM category WHERE id=?", ps -> {

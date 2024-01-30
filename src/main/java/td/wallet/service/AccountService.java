@@ -1,5 +1,6 @@
 package td.wallet.service;
 
+import org.springframework.stereotype.Service;
 import td.wallet.models.Account;
 import td.wallet.models.Balance;
 import td.wallet.models.CurrencyValue;
@@ -15,11 +16,19 @@ import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.List;
 
+@Service
 public class AccountService {
-    private final QueryTemplate qt = new QueryTemplate();
-    private final CurrencyValueCrudOperations currencyValueRepo = new CurrencyValueCrudOperations();
-    private final TransferCrudOperations transferRepo = new TransferCrudOperations();
-    private final BalanceCrudOperations balanceRepo = new BalanceCrudOperations();
+    private final QueryTemplate qt;
+    private final CurrencyValueCrudOperations currencyValueRepo;
+    private final TransferCrudOperations transferRepo;
+    private final BalanceCrudOperations balanceRepo;
+
+    public AccountService(QueryTemplate qt, CurrencyValueCrudOperations currencyValueRepo, TransferCrudOperations transferRepo, BalanceCrudOperations balanceRepo) {
+        this.qt = qt;
+        this.currencyValueRepo = currencyValueRepo;
+        this.transferRepo = transferRepo;
+        this.balanceRepo = balanceRepo;
+    }
 
     public Double getBalanceAtDate(Account account, Timestamp date) {
         Balance lastBalance = qt.executeSingleQuery(

@@ -1,17 +1,25 @@
 package td.wallet.repository;
 
+import org.springframework.stereotype.Repository;
 import td.wallet.models.User;
 import td.wallet.repository.utils.Columns;
 import td.wallet.utils.QueryTemplate;
 
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserCrudOperations {
-    private final QueryTemplate qt = new QueryTemplate();
-    private final AccountCrudOperations accountRepo = new AccountCrudOperations();
+@Repository
+public class UserCrudOperations implements Serializable {
+    private final QueryTemplate qt;
+    private final AccountCrudOperations accountRepo;
+
+    public UserCrudOperations(QueryTemplate qt, AccountCrudOperations accountRepo) {
+        this.qt = qt;
+        this.accountRepo = accountRepo;
+    }
 
     public User findById(long id) {
         return qt.executeSingleQuery(

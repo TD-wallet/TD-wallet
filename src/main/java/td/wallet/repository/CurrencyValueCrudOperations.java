@@ -1,5 +1,6 @@
 package td.wallet.repository;
 
+import org.springframework.stereotype.Repository;
 import td.wallet.models.Currency;
 import td.wallet.models.CurrencyValue;
 import td.wallet.repository.utils.Columns;
@@ -14,9 +15,15 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+@Repository
 public class CurrencyValueCrudOperations implements CrudOperations<CurrencyValue> {
-    private final QueryTemplate qt = new QueryTemplate();
-    private final CurrencyCrudOperations currencyRepo = new CurrencyCrudOperations();
+    private final QueryTemplate qt;
+    private final CurrencyCrudOperations currencyRepo;
+
+    public CurrencyValueCrudOperations(QueryTemplate qt, CurrencyCrudOperations currencyRepo) {
+        this.qt = qt;
+        this.currencyRepo = currencyRepo;
+    }
 
 
     @Override
