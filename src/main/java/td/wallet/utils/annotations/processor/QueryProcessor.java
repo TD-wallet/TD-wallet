@@ -1,6 +1,5 @@
 package td.wallet.utils.annotations.processor;
 
-import lombok.RequiredArgsConstructor;
 import td.wallet.utils.QueryTemplate;
 
 import java.lang.annotation.Annotation;
@@ -10,9 +9,12 @@ import java.util.HashSet;
 import java.util.List;
 
 
-@RequiredArgsConstructor
 public class QueryProcessor<T> {
     private final QueryTemplate qt;
+
+    public QueryProcessor(QueryTemplate qt) {
+        this.qt = qt;
+    }
 
     private List<Field> getAnnotatedFields(Class<T> clazz) {
         return null;
