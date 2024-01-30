@@ -15,12 +15,15 @@ import java.sql.Timestamp;
 @Service
 public class TransactionService {
     private final QueryTemplate qt;
-    private final TransactionCrudOperations transactionRepo = new TransactionCrudOperations();
-    private final AccountCrudOperations accountRepo = new AccountCrudOperations();
-    private final BalanceCrudOperations balanceRepo = new BalanceCrudOperations();
+    private final TransactionCrudOperations transactionRepo;
+    private final AccountCrudOperations accountRepo;
+    private final BalanceCrudOperations balanceRepo;
 
-    public TransactionService(QueryTemplate qt) {
+    public TransactionService(QueryTemplate qt, TransactionCrudOperations transactionRepo, AccountCrudOperations accountRepo, BalanceCrudOperations balanceRepo) {
         this.qt = qt;
+        this.transactionRepo = transactionRepo;
+        this.accountRepo = accountRepo;
+        this.balanceRepo = balanceRepo;
     }
 
     public Account debit(Account account, double amount, String label, Category category) {

@@ -20,14 +20,17 @@ import java.time.Instant;
 public class TransferService {
     private final Connection connection;
     private final TransactionService transactionService;
-    private final TransferCrudOperations transferRepo = new TransferCrudOperations();
-    private final AccountCrudOperations accountRepo = new AccountCrudOperations();
-    private final CurrencyValueCrudOperations currencyValueRepo = new CurrencyValueCrudOperations();
+    private final TransferCrudOperations transferRepo;
+    private final AccountCrudOperations accountRepo;
+    private final CurrencyValueCrudOperations currencyValueRepo;
     private final QueryTemplate qt;
 
-    public TransferService(Connection connection, TransactionService transactionService, QueryTemplate qt) {
+    public TransferService(Connection connection, TransactionService transactionService, TransferCrudOperations transferRepo, AccountCrudOperations accountRepo, CurrencyValueCrudOperations currencyValueRepo, QueryTemplate qt) {
         this.connection = connection;
         this.transactionService = transactionService;
+        this.transferRepo = transferRepo;
+        this.accountRepo = accountRepo;
+        this.currencyValueRepo = currencyValueRepo;
         this.qt = qt;
     }
 
