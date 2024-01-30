@@ -1,5 +1,6 @@
 package td.wallet.service;
 
+import org.springframework.stereotype.Service;
 import td.wallet.models.Account;
 import td.wallet.models.Category;
 import td.wallet.models.CurrencyValue;
@@ -15,13 +16,21 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.Instant;
 
+@Service
 public class TransferService {
-    private final Connection connection = ConnectionProvider.getConnection();
-    private final TransactionService transactionService = new TransactionService();
+    private final Connection connection;
+    private final TransactionService transactionService;
     private final TransferCrudOperations transferRepo = new TransferCrudOperations();
     private final AccountCrudOperations accountRepo = new AccountCrudOperations();
     private final CurrencyValueCrudOperations currencyValueRepo = new CurrencyValueCrudOperations();
-    private final QueryTemplate qt = new QueryTemplate();
+    private final QueryTemplate qt;
+
+    public TransferService(Connection connection, TransactionService transactionService, QueryTemplate qt) {
+        this.connection = connection;
+        this.transactionService = transactionService;
+        this.qt = qt;
+    }
+
 
     public Transfer transfer(Account debited, Account credited, double amount, Category category) {
         Account toDebit = accountRepo.findById(debited.getId());

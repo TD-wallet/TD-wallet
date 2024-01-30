@@ -1,5 +1,6 @@
 package td.wallet.service;
 
+import org.springframework.stereotype.Service;
 import td.wallet.dto.CategorizedTransactionSum;
 import td.wallet.dto.TransactionSum;
 import td.wallet.models.*;
@@ -11,11 +12,16 @@ import td.wallet.utils.QueryTemplate;
 
 import java.sql.Timestamp;
 
+@Service
 public class TransactionService {
-    private final QueryTemplate qt = new QueryTemplate();
+    private final QueryTemplate qt;
     private final TransactionCrudOperations transactionRepo = new TransactionCrudOperations();
     private final AccountCrudOperations accountRepo = new AccountCrudOperations();
     private final BalanceCrudOperations balanceRepo = new BalanceCrudOperations();
+
+    public TransactionService(QueryTemplate qt) {
+        this.qt = qt;
+    }
 
     public Account debit(Account account, double amount, String label, Category category) {
         Account acToDebit = accountRepo.findById(account.getId());

@@ -1,11 +1,13 @@
 package td.wallet.repository;
 
+import org.springframework.stereotype.Repository;
 import td.wallet.models.Account;
 import td.wallet.models.Transfer;
 import td.wallet.repository.utils.AccountTransferRole;
 import td.wallet.repository.utils.Columns;
 import td.wallet.utils.QueryTemplate;
 
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -13,11 +15,14 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TransferCrudOperations {
-    private final QueryTemplate qt = new QueryTemplate();
-    private final AccountCrudOperations accountRepo = new AccountCrudOperations();
+@Repository
+public class TransferCrudOperations implements Serializable {
+    private final QueryTemplate qt;
+    private final AccountCrudOperations accountRepo;
 
-    public TransferCrudOperations() {
+    public TransferCrudOperations(QueryTemplate qt, AccountCrudOperations accountRepo) {
+        this.qt = qt;
+        this.accountRepo = accountRepo;
     }
 
     public Transfer findById(long id) {

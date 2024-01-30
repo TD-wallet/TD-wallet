@@ -1,5 +1,6 @@
 package td.wallet.repository;
 
+import org.springframework.stereotype.Repository;
 import td.wallet.models.Balance;
 import td.wallet.repository.utils.Columns;
 import td.wallet.utils.QueryTemplate;
@@ -9,8 +10,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class BalanceCrudOperations implements CrudOperations<Balance> {
-    private final QueryTemplate qt = new QueryTemplate();
+    private final QueryTemplate qt;
+
+    public BalanceCrudOperations(QueryTemplate qt) {
+        this.qt = qt;
+    }
 
     @Override
     public Balance findById(long id) {

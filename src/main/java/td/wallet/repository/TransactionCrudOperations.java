@@ -1,5 +1,6 @@
 package td.wallet.repository;
 
+import org.springframework.stereotype.Repository;
 import td.wallet.dto.CategorizedTransactionSum;
 import td.wallet.dto.TransactionSum;
 import td.wallet.models.Account;
@@ -14,9 +15,15 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class TransactionCrudOperations implements CrudOperations<Transaction> {
-    private final QueryTemplate qt = new QueryTemplate();
-    private final CategoryCrudOperations categoryRepo = new CategoryCrudOperations();
+    private final QueryTemplate qt;
+    private final CategoryCrudOperations categoryRepo;
+
+    public TransactionCrudOperations(QueryTemplate qt, CategoryCrudOperations categoryRepo) {
+        this.qt = qt;
+        this.categoryRepo = categoryRepo;
+    }
 
     @Override
     public Transaction findById(long id) {

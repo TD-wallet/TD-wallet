@@ -1,5 +1,6 @@
 package td.wallet.repository;
 
+import org.springframework.stereotype.Repository;
 import td.wallet.models.Account;
 import td.wallet.models.User;
 import td.wallet.repository.utils.Columns;
@@ -10,11 +11,19 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class AccountCrudOperations implements CrudOperations<Account> {
-    private final QueryTemplate qt = new QueryTemplate();
-    private final BalanceCrudOperations balanceRepo = new BalanceCrudOperations();
-    private final TransactionCrudOperations transactionRepo = new TransactionCrudOperations();
-    private final CurrencyCrudOperations currencyRepo = new CurrencyCrudOperations();
+    private final QueryTemplate qt;
+    private final BalanceCrudOperations balanceRepo;
+    private final TransactionCrudOperations transactionRepo;
+    private final CurrencyCrudOperations currencyRepo;
+
+    public AccountCrudOperations(QueryTemplate qt, BalanceCrudOperations balanceRepo, TransactionCrudOperations transactionRepo, CurrencyCrudOperations currencyRepo) {
+        this.qt = qt;
+        this.balanceRepo = balanceRepo;
+        this.transactionRepo = transactionRepo;
+        this.currencyRepo = currencyRepo;
+    }
 
     @Override
     public Account findById(long id) {
