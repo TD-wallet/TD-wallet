@@ -5,8 +5,8 @@ import td.wallet.models.Balance;
 import java.util.List;
 
 public class BalanceRequest {
-    private List<Balance> balances;
-    private List<Integer> relId;
+    private final List<Balance> balances;
+    private final List<Integer> relId;
 
     public BalanceRequest(List<Balance> balances, List<Integer> relId) {
         this.balances = balances;
