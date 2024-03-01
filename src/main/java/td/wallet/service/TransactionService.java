@@ -11,6 +11,7 @@ import td.wallet.repository.utils.Columns;
 import td.wallet.utils.QueryTemplate;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Service
 public class TransactionService {
@@ -48,6 +49,46 @@ public class TransactionService {
                 ps -> ps.setLong(1, acToDebit.getId()),
                 rs -> rs.getLong(Columns.ID_USER)
         ));
+    }
+
+    public Transaction findSingleTransaction(long id) {
+        return transactionRepo.findById(id);
+    }
+
+    public List<Transaction> findAllTransactions() {
+        return transactionRepo.findAll();
+    }
+
+    public List<Transaction> findTransactionByAccountId(int id) {
+        return transactionRepo.findByAccountId(id);
+    }
+
+    public TransactionSum findTransactionSum(Account account, Timestamp startDate, Timestamp endDate) {
+        return transactionRepo.getTransactionSum(account, startDate, endDate);
+    }
+
+    public List<CategorizedTransactionSum> findTransactionSumByCategory(Account account, Timestamp startDate, Timestamp endDate) {
+        return transactionRepo.getCategorizedTransaction(account, startDate, endDate);
+    }
+
+    public Transaction saveSingleTransaction(Transaction toSave, long accId) {
+        return transactionRepo.save(toSave, accId);
+    }
+
+    public List<Transaction> saveMultipleTransaction(List<Transaction> toSave, List<Integer> accIds) {
+        return transactionRepo.saveAll(toSave, accIds);
+    }
+
+    public Transaction deleteTransaction(long id) {
+        Transaction toDelete = transactionRepo.findById(id);
+        if (toDelete == null) {
+            throw new IllegalArgumentException("Transaction not found for the provided id: " + id);
+        }
+        try {
+            return transactionRepo.delete(toDelete);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to delete transaction with id: " + id, e);
+        }
     }
 
     public Account credit(Account account, double amount, String label, Category category) {
