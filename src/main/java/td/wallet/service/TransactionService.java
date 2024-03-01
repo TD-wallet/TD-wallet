@@ -63,11 +63,19 @@ public class TransactionService {
         return transactionRepo.findByAccountId(id);
     }
 
-    public TransactionSum findTransactionSum(Account account, Timestamp startDate, Timestamp endDate) {
+    public TransactionSum findTransactionSum(long accountId, Timestamp startDate, Timestamp endDate) {
+        Account account = accountRepo.findById(accountId);
+        if(account == null) {
+            throw new IllegalArgumentException("Failed to find account with id: "+accountId);
+        }
         return transactionRepo.getTransactionSum(account, startDate, endDate);
     }
 
-    public List<CategorizedTransactionSum> findTransactionSumByCategory(Account account, Timestamp startDate, Timestamp endDate) {
+    public List<CategorizedTransactionSum> findTransactionSumByCategory(long accountId, Timestamp startDate, Timestamp endDate) {
+        Account account = accountRepo.findById(accountId);
+        if(account == null) {
+            throw new IllegalArgumentException("Failed to find account with id: "+accountId);
+        }
         return transactionRepo.getCategorizedTransaction(account, startDate, endDate);
     }
 
