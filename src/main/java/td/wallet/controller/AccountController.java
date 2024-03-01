@@ -62,14 +62,17 @@ public class AccountController {
     }
 
 
-    @PostMapping("/new account")
+    @PostMapping("/new")
     public Account postNewAccount(@RequestBody Account toSave, @RequestParam long id) {
         return accountService.saveSingleAccount(toSave, id);
     }
 
-    @PostMapping("/new accounts")
-    public List<Account> postNewAccounts(@RequestBody List<Account> toSave, @RequestParam List<Integer> relId) {
-        return accountService.saveMultipleAccount(toSave, relId);
+    @PostMapping("/news")
+    public List<Account> postNewAccounts(@RequestBody List<Account> toSave, @RequestParam List<Integer> accountId) {
+        if (toSave.size() != accountId.size()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The size of accounts and user IDs must match");
+        }
+        return accountService.saveMultipleAccount(toSave, accountId);
     }
 
     @DeleteMapping("/delete-account/{id}")
