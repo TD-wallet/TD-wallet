@@ -5,6 +5,7 @@ import td.wallet.models.Account;
 import td.wallet.models.Balance;
 import td.wallet.models.CurrencyValue;
 import td.wallet.models.Transfer;
+import td.wallet.repository.AccountCrudOperations;
 import td.wallet.repository.BalanceCrudOperations;
 import td.wallet.repository.CurrencyValueCrudOperations;
 import td.wallet.repository.TransferCrudOperations;
@@ -22,12 +23,14 @@ public class AccountService {
     private final CurrencyValueCrudOperations currencyValueRepo;
     private final TransferCrudOperations transferRepo;
     private final BalanceCrudOperations balanceRepo;
+    private final AccountCrudOperations accountCrudOperations;
 
-    public AccountService(QueryTemplate qt, CurrencyValueCrudOperations currencyValueRepo, TransferCrudOperations transferRepo, BalanceCrudOperations balanceRepo) {
+    public AccountService(QueryTemplate qt, CurrencyValueCrudOperations currencyValueRepo, TransferCrudOperations transferRepo, BalanceCrudOperations balanceRepo, AccountCrudOperations accountCrudOperations) {
         this.qt = qt;
         this.currencyValueRepo = currencyValueRepo;
         this.transferRepo = transferRepo;
         this.balanceRepo = balanceRepo;
+        this.accountCrudOperations = accountCrudOperations;
     }
 
     public Double getBalanceAtDate(Account account, Timestamp date) {
@@ -65,6 +68,31 @@ public class AccountService {
                         rs.getDouble(Columns.AMOUNT)
                 )
         );
+    }
+
+    public Account findAccountById(long id) {
+        return accountCrudOperations.findById(id);
+    }
+
+    public List<Account> findAllAccount() {
+        return accountCrudOperations.findAll();
+    }
+
+    public List<Account> findAccountByUserId(long id) {
+        return accountCrudOperations.findByUserId(id);
+    }
+
+    public Account saveSingleAccount(Account account, long relId) {
+        return accountCrudOperations.save(account, relId);
+    }
+
+    public List<Account> saveMultipleAccount(List<Account> toSave, List<Integer> relId) {
+        return accountCrudOperations.saveAll(toSave, relId);
+    }
+
+    public Account deleteOneAccount(long id) {
+        Account toDelete = accountCrudOperations.findById(id);
+        return accountCrudOperations.delete(toDelete);
     }
 
     public Balance getBalance2(Account account) {
