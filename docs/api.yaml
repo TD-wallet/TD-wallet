@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: TD-Wallet api specs
   description: Made by STD22081 and STD22049
-  version: 1.4.0
+  version: 1.8.2
 
 servers:
   - url: 'https://td-wallet.com/'
@@ -19,9 +19,15 @@ paths:
       tags:
         - User
       description: Gets users
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
       responses:
         '200':
-          description: The list of the users or the user if getting it by id
+          description:  An user gets by his id
           content:
             application/json:
               schema:
@@ -31,13 +37,6 @@ paths:
                     properties:
                       body:
                         $ref: "#/components/schemas/user"
-                  - allOf:
-                      - $ref: "#/components/schemas/ResponseBody"
-                    properties:
-                      body:
-                        type: array
-                        items:
-                          $ref: "#/components/schemas/user"
         '400':
           $ref: '#/components/responses/400'
         '403':
@@ -49,6 +48,38 @@ paths:
         '500':
           $ref: '#/components/responses/500'
 
+  /user/all:
+    get:
+      tags:
+        - User
+      description: get a list of Users
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseBody'
+                properties:
+                  body:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/user"
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+
+
+
+  /user/new user:
     post:
       tags:
         - User
@@ -81,19 +112,22 @@ paths:
         '500':
           $ref: '#/components/responses/500'
 
-    put:
+  /user/new users:
+    post:
       tags:
         - User
-      description: Create or update an user
+      description: Create multiple users
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/user"
+              type: array
+              items:
+                $ref: "#/components/schemas/crudUser"
       responses:
         '200':
-          description: Returns the modified or created user
+          description: Returns the created users
           content:
             application/json:
               schema:
@@ -112,6 +146,41 @@ paths:
           $ref: '#/components/responses/429'
         '500':
           $ref: '#/components/responses/500'
+
+  /user/delete:
+    delete:
+      tags:
+        - User
+      description: delete an user by his id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: return the deleted user
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - allOf:
+                      - $ref: "#/components/schemas/ResponseBody"
+                    properties:
+                      body:
+                        $ref: "#/components/schemas/user"
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+
 
   /account:
     get:
