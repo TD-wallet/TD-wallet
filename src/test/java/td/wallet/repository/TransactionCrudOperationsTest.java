@@ -2,7 +2,6 @@ package td.wallet.repository;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import td.wallet.models.Category;
 import td.wallet.models.Transaction;
@@ -17,17 +16,18 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TransactionCrudOperationsTest implements CrudOperationsTest {
 
-    private TransactionCrudOperations transactionCrudOperations;
+    private final TransactionCrudOperations transactionCrudOperations;
+
+    public TransactionCrudOperationsTest(TransactionCrudOperations transactionCrudOperations) {
+        this.transactionCrudOperations = transactionCrudOperations;
+    }
 
     @BeforeAll
     public static void setOriginalConnection() {
-        Connection originalConnection = ConnectionProvider.getConnection();
+        ConnectionProvider connectionProvider = new ConnectionProvider();
+        Connection connection = connectionProvider.getConnection();
     }
 
-    @BeforeEach
-    public void setTransactionCrudOperations() {
-        transactionCrudOperations = new TransactionCrudOperations();
-    }
 
     @AfterEach
     public void cleanUpTestSave() {
