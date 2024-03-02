@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: TD-Wallet api specs
   description: Made by STD22081 and STD22049
-  version: 1.8.2
+  version: 1.11.4
 
 servers:
   - url: 'https://td-wallet.com/'
@@ -20,11 +20,7 @@ paths:
         - User
       description: Gets users
       parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
+        - $ref: '#/components/parameters/Id'
       responses:
         '200':
           description:  An user gets by his id
@@ -153,11 +149,7 @@ paths:
         - User
       description: delete an user by his id
       parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
+        - $ref: '#/components/parameters/Id'
       responses:
         '200':
           description: return the deleted user
@@ -388,8 +380,37 @@ paths:
           $ref: '#/components/responses/429'
         '500':
           $ref: '#/components/responses/500'
-    
+
   /currency:
+    get:
+      tags:
+        - Currency
+      description: get a currency by his id
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: return the specified currency
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/ResponseBody"
+                properties:
+                  body:
+                    $ref: "#/components/schemas/currency"
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+    
+  /currency/all:
     get:
       tags:
         - Currency
@@ -418,6 +439,7 @@ paths:
         '500':
           $ref: '#/components/responses/500'
 
+  /currency/new:
     post:
       tags:
         - Currency
@@ -427,10 +449,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/currency"
+              $ref: "#/components/schemas/crudCurrency"
       responses:
         '200':
-          description: Returns the added account
+          description: Returns the new currency value
           content:
             application/json:
               schema:
@@ -450,19 +472,51 @@ paths:
         '500':
           $ref: '#/components/responses/500'
 
-    put:
+  /currency/news:
+    post:
       tags:
         - Currency
-      description: Create or update a currency value
+      description: add new multiple currency value
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/currency"
+              type: array
+              items:
+                $ref: "#/components/schemas/crudCurrency"
       responses:
         '200':
-          description: Returns the added account
+          description: Returns the new currencies value
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/ResponseBody"
+                properties:
+                  body:
+                    $ref: "#/components/schemas/currency"
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+
+  /currency/delete:
+    delete:
+      tags:
+        - Currency
+      description: delete a currency
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: Returns the deleted currency
           content:
             application/json:
               schema:
@@ -483,6 +537,14 @@ paths:
           $ref: '#/components/responses/500'
             
 components:
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+
   responses:
     ResponseTemplate:
       description: Base response for each request
@@ -615,12 +677,27 @@ components:
         transactionType:
           $ref: "#/components/schemas/transactionType"
 
+    crudCurrency:
+      type: object
+      properties:
+        name:
+          type: string
+        code:
+          type: string
+          enum:
+            - USD
+            - EUR
+            - GBP
+        symbol:
+          type: string
+
     currency:
-      type: string
-      enum:
-        - USD
-        - EUR
-        - GBP
+      allOf:
+        - $ref: '#/components/schemas/crudCurrency'
+      properties:
+        id:
+          type: integer
+
 
         ### EXCEPTIONS
     BadRequestException:
