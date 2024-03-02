@@ -8,6 +8,7 @@ import td.wallet.models.Transfer;
 import td.wallet.repository.AccountCrudOperations;
 import td.wallet.repository.CurrencyValueCrudOperations;
 import td.wallet.repository.TransferCrudOperations;
+import td.wallet.repository.utils.AccountTransferRole;
 import td.wallet.utils.ConnectionProvider;
 import td.wallet.utils.QueryTemplate;
 
@@ -15,6 +16,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.List;
 
 @Service
 public class TransferService {
@@ -35,6 +37,25 @@ public class TransferService {
     }
 
 
+    public Transfer findSingleTransferById(long id) {
+        return transferRepo.findById(id);
+    }
+
+    public List<Transfer> findAllTransfer() {
+        return transferRepo.findAll();
+    }
+
+    public List<Transfer> findTransferByAccount(Account account, AccountTransferRole accountTransferRole) {
+        return transferRepo.findByAccount(account, accountTransferRole);
+    }
+
+    public Transfer saveSingleTransfer(Transfer toSave) {
+        return transferRepo.save(toSave);
+    }
+
+    public List<Transfer> saveMultipleTransfer(List<Transfer> toSave) {
+        return transferRepo.saveAll(toSave);
+    }
     public Transfer transfer(Account debited, Account credited, double amount, Category category) {
         Account toDebit = accountRepo.findById(debited.getId());
         Account toCredit = accountRepo.findById(credited.getId());
