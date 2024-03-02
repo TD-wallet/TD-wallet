@@ -9,9 +9,6 @@ import td.wallet.repository.AccountCrudOperations;
 import td.wallet.repository.CurrencyValueCrudOperations;
 import td.wallet.repository.TransferCrudOperations;
 import td.wallet.repository.utils.AccountTransferRole;
-import td.wallet.utils.ConnectionProvider;
-import td.wallet.utils.QueryTemplate;
-
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -25,15 +22,13 @@ public class TransferService {
     private final TransferCrudOperations transferRepo;
     private final AccountCrudOperations accountRepo;
     private final CurrencyValueCrudOperations currencyValueRepo;
-    private final QueryTemplate qt;
 
-    public TransferService(Connection connection, TransactionService transactionService, TransferCrudOperations transferRepo, AccountCrudOperations accountRepo, CurrencyValueCrudOperations currencyValueRepo, QueryTemplate qt) {
+    public TransferService(Connection connection, TransactionService transactionService, TransferCrudOperations transferRepo, AccountCrudOperations accountRepo, CurrencyValueCrudOperations currencyValueRepo) {
         this.connection = connection;
         this.transactionService = transactionService;
         this.transferRepo = transferRepo;
         this.accountRepo = accountRepo;
         this.currencyValueRepo = currencyValueRepo;
-        this.qt = qt;
     }
 
 
